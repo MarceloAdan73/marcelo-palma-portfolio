@@ -1,4 +1,4 @@
-# ✨ MARCELO PALMA · Software Development ✨
+# MARCELO PALMA · Software Development
 
 <p align="center">
   <a href="https://marcelo-palma-portfolio.vercel.app"><img src="https://img.shields.io/badge/STATUS-LIVE-00c9b7?style=for-the-badge&labelColor=1e293b"/></a>
