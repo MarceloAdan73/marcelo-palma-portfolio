@@ -1,225 +1,111 @@
-# 👨‍💻 Marcelo Palma - Portfolio Profesional
+<p align="center">✨ MARCELO PALMA · <span style="font-weight:300;">INGENIERÍA DE SOFTWARE</span> ✨</p>
+<p align="center"> <a href="#"><img src="https://img.shields.io/badge/ESTADO-EN%20DIRECTO-00c9b7?style=for-the-badge&labelColor=1e293b"/></a> <a href="#"><img src="https://img.shields.io/badge/VERSIÓN-3.0.0-3b82f6?style=for-the-badge&labelColor=1e293b"/></a> <a href="#"><img src="https://img.shields.io/badge/ENTORNO-PROFESIONAL-f97316?style=for-the-badge&labelColor=1e293b"/></a> </p>
+<div align="center"> <a href="https://marcelo-palma.vercel.app"> <img src="./public/me.jpg" alt="Marcelo Palma" width="180" style="border-radius: 50%; border: 4px solid #3b82f6; box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);" /> </a> <h2>Arquitecto de Experiencias Digitales</h2> <p align="center"> Especialista en <strong>React, Next.js y TypeScript</strong>. Construyendo puentes entre el diseño y la lógica, pixel por pixel. </p> <p align="center"> <a href="https://marcelo-palma.vercel.app">🌐 EXPLORAR DEMO</a> • <a href="#-guía-de-arranque-ultrarrápida">⚡ INICIO RÁPIDO</a> • <a href="#-test-driven-portfolio">🧪 TESTS</a> </p> </div>
+📡 Visión General del Sistema
+Este no es un simple portfolio; es mi vitrina técnica, un laboratorio de UI/UX y una declaración de intenciones. Cada componente está construido con un enfoque obsesivo en el rendimiento, la mantenibilidad y la experiencia de usuario.
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.0.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.x-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Jest](https://img.shields.io/badge/Jest-30.x-C21325?style=for-the-badge&logo=jest)](https://jestjs.io/)
-[![Tests](https://img.shields.io/badge/tests-7%2F7-brightgreen?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/actions)
-[![Accesibilidad](https://img.shields.io/badge/accesibilidad-WCAG%20AA-success?style=for-the-badge)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+"El detalle no es el detalle. El detalle es el diseño." — Charles Eames
 
-<div align="center">
-  <img src="./public/me.jpg" alt="Marcelo Palma" width="200" style="border-radius: 50%; border: 4px solid #3b82f6;" />
-  <h3>Desarrollador Full-Stack | Especialista en React, Next.js y TypeScript</h3>
-  <p>⚡ 86+ tests automatizados · 8 proyectos completados · 15+ tecnologías dominadas</p>
-</div>
+Característica	Tecnología	Propósito
+⚛️ Arquitectura	Next.js 16 (App Router)	Server Components + Rendering híbrido
+🧠 Lenguaje	TypeScript 5.x	Tipado fuerte y autocompletado divino
+🎨 Estilado	TailwindCSS 4.x	Utility-first + Dark mode con clase
+🎭 Interacción	Framer Motion	Animaciones fluidas y naturales
+♿ Accesibilidad	WCAG AA + jest-axe	Inclusivo por diseño, no por accidente
+🧪 Calidad	Jest + RTL	7 tests de integración y 100% cobertura en lógica core
 
-## 📋 **Tabla de Contenidos**
-- [🚀 Demo en Vivo](#-demo-en-vivo)
-- [✨ Características](#-características)
-- [🛠️ Stack Tecnológico](#️-stack-tecnológico)
-- [📁 Estructura del Proyecto](#-estructura-del-proyecto)
-- [🧪 Testing](#-testing)
-- [♿ Accesibilidad](#-accesibilidad)
-- [🚦 Instalación y Uso](#-instalación-y-uso)
-- [📦 Scripts Disponibles](#-scripts-disponibles)
-- [🌐 Internacionalización](#-internacionalización)
-- [🎨 Diseño y UX](#-diseño-y-ux)
-- [📊 Métricas y Logros](#-métricas-y-logros)
-- [🤝 Contacto](#-contacto)
-- [📄 Licencia](#-licencia)
+🧬 Arquitectura del Proyecto
+La estructura está pensada para la escalabilidad y la claridad. El App Router de Next.js organiza las rutas, mientras que los componentes y la lógica de estado viven en capas bien definidas.
 
----
+📂 Estructura de Directorios (Clave)
+bash
+📦 mpa-dev
+├─ 📂 app                    # Núcleo de la aplicación (App Router)
+│  ├─ 📄 layout.tsx          # Layout raíz + Providers globales
+│  ├─ 📄 page.tsx            # Página de inicio (Server Component)
+│  └─ 📄 globals.css         # Estilos base y variables CSS
+├─ 📂 components             # Biblioteca de componentes UI
+│  ├─ 📄 Hero.tsx            # Sección de aterrizaje con partículas
+│  ├─ 📄 Skills.tsx          # Dashboard de habilidades con RadarChart
+│  ├─ 📄 Projects.tsx        # Grid de proyectos con filtros dinámicos
+│  ├─ 📄 FloatingControls.tsx# Control flotante para tema/idioma
+│  └─ 📂 __tests__           # Tests unitarios y de accesibilidad
+├─ 📂 context                # Estado global (tema, idioma)
+│  ├─ 📄 AppContext.tsx      # Contexto con persistencia en localStorage
+│  └─ 📂 __tests__           # Tests de integración del contexto
+├─ 📂 public                 # Assets estáticos (imágenes, iconos)
+└─ ⚙️ Config files           # Jest, Next.js, TypeScript, etc.
 
-## 🚀 **Demo en Vivo**
+🧪 Test-Driven Portfolio
+Creo firmemente en el código que no falla. Por eso, este portfolio no es solo una cara bonita, sino una máquina bien engrasada y verificada.
 
-🔗 **[https://marcelo-palma.vercel.app](https://marcelo-palma.vercel.app)** (pendiente de despliegue)
+Suite de Pruebas
+Tipo de Test	Descripción	Resultado
+🧩 Contexto Global	AppContext.test.tsx	✓ 5/5 tests (100% cobertura)
+♿ Accesibilidad	Accessibility.test.tsx	✓ WCAG AA (Sin violaciones)
+📦 Integración	Header.test.tsx, Footer.test.tsx	✓ 2/2 tests
+Detalle de Cobertura (AppContext)
+bash
+---------------------------|---------|----------|---------|---------|-------------------
+File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+---------------------------|---------|----------|---------|---------|-------------------
+AppContext.tsx             |     100 |       86 |     100 |     100 | 26-28
+---------------------------|---------|----------|---------|---------|-------------------
+86% de cobertura en ramas lógicas, asegurando que el cambio de tema/idioma y la persistencia son robustos.
 
----
-
-## ✨ **Características**
-
-### 🎯 **Core**
-- ✅ **Next.js 16** con App Router y Server Components
-- ✅ **TypeScript** - Tipado estático en toda la aplicación
-- ✅ **TailwindCSS** - Estilizado moderno con modo oscuro
-- ✅ **Framer Motion** - Animaciones fluidas y micro-interacciones
-
-### 🌍 **Internacionalización**
-- ✅ **Español/Inglés** - Cambio dinámico de idioma
-- ✅ **Persistencia** - Preferencias guardadas en `localStorage`
-- ✅ **Cobertura 100%** - Todo el contenido traducido
-
-### 🎨 **Diseño**
-- ✅ **Mobile First** - Breakpoints optimizados (sm, md, lg, xl)
-- ✅ **Glassmorphism** - Efectos de blur en tarjetas y modales
-- ✅ **Modo Oscuro/Claro** - Transiciones suaves entre temas
-- ✅ **Tipografía** - Oswald (títulos) / Poppins (cuerpo)
-
-### 🧪 **Testing**
-- ✅ **Jest + React Testing Library** - Suite completa de tests
-- ✅ **100% cobertura** en lógica de contexto global
-- ✅ **Tests de accesibilidad** con `jest-axe`
-- ✅ **7 tests** que validan funcionalidad crítica
-
----
-
-## 🛠️ **Stack Tecnológico**
-
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| **Next.js** | 16.0.3 | Framework React con App Router y SSR |
-| **React** | 19.2.0 | Biblioteca UI con Server Components |
-| **TypeScript** | 5.x | Tipado estático y type safety |
-| **TailwindCSS** | 4.x | Utility-first styling + modo oscuro |
-| **Framer Motion** | 12.34.3 | Animaciones declarativas |
-| **React Icons** | 5.5.0 | Iconografía vectorial |
-| **Jest** | 30.x | Framework de testing |
-| **React Testing Library** | 16.x | Testing de componentes |
-| **jest-axe** | 10.x | Auditoría de accesibilidad |
-
----
-
-## 📁 **Estructura del Proyecto**
-📦 porfolio-next
-├── 📂 app                    # App Router de Next.js
-│   ├── 📄 layout.tsx         # Layout principal + providers
-│   ├── 📄 page.tsx           # Página principal
-│   └── 📄 globals.css        # Estilos globales
-├── 📂 components             # Componentes reutilizables
-│   ├── 📄 Header.tsx         # Navegación + barra de progreso
-│   ├── 📄 Hero.tsx           # Landing + contadores animados
-│   ├── 📄 About.tsx          # Timeline 3D + métricas
-│   ├── 📄 Skills.tsx         # Dashboard técnico + RadarChart
-│   ├── 📄 Projects.tsx       # Grid con filtros
-│   ├── 📄 Contact.tsx        # Formulario de contacto
-│   ├── 📄 Footer.tsx         # Enlaces + scroll to top
-│   ├── 📄 FloatingControls.tsx # Toggle idioma/tema
-│   └── 📂 __tests__          # Tests de componentes
-├── 📂 context                # Estado global
-│   ├── 📄 AppContext.tsx     # Tema/idioma con localStorage
-│   └── 📂 __tests__          # Tests de contexto
-├── 📂 public                 # Assets estáticos
-│   ├── 📄 me.jpg             # Foto de perfil
-│   └── 📸 capturas/          # Screenshots de proyectos
-├── 📂 types                  # Definiciones de tipos
-└── 📄 configuración          # Jest, Next, TS, etc.
-
-
----
-
-## 🧪 **Testing**
-
-### **Tests Implementados**
-
-#### ✅ **AppContext.test.tsx** - 100% cobertura
-```typescript
-✓ debe proporcionar valores por defecto (es, light)
-✓ debe cambiar el idioma al llamar toggleLanguage
-✓ debe cambiar el tema al llamar toggleTheme
-✓ debe cargar valores guardados en localStorage
-✓ debe lanzar error si useApp se usa fuera de AppProvider
-
-✅ Accessibility.test.tsx - Auditoría WCAG
-✓ Header - sin violaciones de accesibilidad
-✓ Footer - sin violaciones de accesibilidad
-
-Métricas de Cobertura
-Archivo	Statements	Branches	Functions	Lines
-AppContext.tsx	100%	86%	100%	100%
-
-Ejecutar Tests
-# Todos los tests
-npm test
-
-# Modo watch (desarrollo)
+Comandos de Calidad
+bash
+# Modo vigilante (desarrollo)
 npm run test:watch
 
-# Con cobertura
+# Informe de cobertura completo
 npm run test:coverage
 
-♿ Accesibilidad
-Este portfolio ha sido auditado con jest-axe y cumple con las pautas WCAG 2.1 AA:
+# Auditoría de accesibilidad rápida
+npm test -- -t "accessibility"
 
-✅ SVGs con texto alternativo - Todos los iconos tienen aria-label
-✅ Contraste de colores - Verificado en modo claro y oscuro
-✅ Navegación por teclado - Estructura semántica correcta
-✅ ARIA labels - Botones y elementos interactivos etiquetados
-✅ Landmarks - Uso apropiado de <header>, <main>, <footer>
+🚀 Guía de Arranque Ultrarrápida
+Pon el proyecto en marcha en menos de 60 segundos.
 
-🚦 Instalación y Uso
-# Clonar repositorio
+Clonar el universo
+
+bash
 git clone https://github.com/MarceloAdan73/marcelo-palma-portfolio.git
-
-# Entrar al directorio
 cd marcelo-palma-portfolio
+Sembrar dependencias
 
-# Instalar dependencias
+bash
 npm install
+# o si eres audaz:
+yarn
+Ignición
 
-# Ejecutar en desarrollo
+bash
 npm run dev
-
-# Abrir en navegador
-http://localhost:3000
-
-📦 Scripts Disponibles
-Comando	Descripción
-npm run dev	Desarrollo con hot reload
-npm run build	Build para producción
-npm start	Servir build local
-npm run lint	Ejecutar ESLint
-npm test	Ejecutar tests
-npm run test:watch	Tests en modo watch
-npm run test:coverage	Tests con reporte de cobertura
-
-🌐 Internacionalización
-El portfolio soporta español e inglés con persistencia:
-// Estructura de traducciones
-translations = {
-  es: { ... },  // 40+ claves traducidas
-  en: { ... }   // 40+ claves traducidas
-}
-Cambio automático basado en preferencia guardada en localStorage.
-
-🎨 Diseño y UX
-Principios Aplicados
-Mobile First - Diseñado desde móvil hacia desktop
-
-Glassmorphism - Tarjetas con blur y transparencias
-
-Micro-interacciones - Hover, escala, rotación
-
-Jerarquía visual - Tipografía contrastada
-
-Componentes Destacados
-Componente	Características
-Hero	Partículas interactivas, contadores animados
-Skills	Vista dual Grid/Radar, gráfico SVG
-About	Timeline 3D con efecto spotlight
-Projects	Filtrado por categoría, badges técnicos
-
-📊 Métricas y Logros
-const metrics = {
-  proyectos: 8,
-  tests: 86,
-  tecnologias: '15+',
-  stacks: 4,
-  añosExperiencia: 3
-}
-
-🤝 Contacto
-📧 Email: marcelo-palma@live.com
-📱 Teléfono: 0291-4657839
-📍 Ubicación: Bahía Blanca, Argentina
-
-Redes Sociales:
-
-https://img.shields.io/badge/GitHub-MarceloAdan73-181717?style=flat-square&logo=github
-
-https://img.shields.io/badge/LinkedIn-MarceloPalma-0A66C2?style=flat-square&logo=linkedin
+Visitar órbita
+Abre http://localhost:3000 en tu navegador.
 
 
-📄 Licencia
-Este proyecto está bajo la licencia MIT. Ver el archivo LICENSE para más detalles.
+🛠️ La Caja de Herramientas (Tech Stack)
+Aquí está el arsenal utilizado para construir esta experiencia.
 
-<div align="center"> <p>Desarrollado con ❤️ y ☕ por <strong>Marcelo Palma</strong></p> <p> <a href="https://github.com/MarceloAdan73/marcelo-palma-portfolio">📁 Repositorio</a> • <a href="https://marcelo-palma.vercel.app">🚀 Demo</a> • <a href="#-contacto">📧 Contacto</a> </p> <p>⭐ ¡No olvides dejar una estrella si te gusta el proyecto! ⭐</p> </div> ```
+<p align="center"> <img src="https://img.shields.io/badge/Next.js-16.0.3-000000?style=flat-square&logo=next.js" /> <img src="https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react" /> <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript" /> <img src="https://img.shields.io/badge/TailwindCSS-4.x-38B2AC?style=flat-square&logo=tailwind-css" /> <img src="https://img.shields.io/badge/Framer%20Motion-12.34.3-0055FF?style=flat-square&logo=framer" /> <img src="https://img.shields.io/badge/Jest-30.x-C21325?style=flat-square&logo=jest" /> <img src="https://img.shields.io/badge/React%20Icons-5.5.0-E34F26?style=flat-square&logo=react" /> </p>
+
+♿ Accesibilidad como Pilar Fundamental
+La belleza sin inclusión no es belleza. Este portfolio ha sido auditado y construido pensando en todas las personas.
+
+✅ Navegación por teclado: Toda interacción es posible sin un ratón.
+
+✅ Semántica HTML5: Uso correcto de <header>, <main>, <nav>, <section>.
+
+✅ ARIA Labels: Todos los botones e iconos tienen texto descriptivo para lectores de pantalla.
+
+✅ Contraste de color: Verificado en modo claro y oscuro para cumplir WCAG AA.
+
+
+📬 Conectar con el Creador
+¿Interesado en colaborar? ¿Tienes un proyecto en mente? ¿O simplemente quieres decir hola?
+
+<p align="center"> <a href="mailto:marcelo-palma@live.com"><img src="https://img.shields.io/badge/Email-marcelo--palma@live.com-00c9b7?style=for-the-badge&logo=gmail&logoColor=white"/></a> <a href="https://www.linkedin.com/in/marcelo-palma-083b69352/"><img src="https://img.shields.io/badge/LinkedIn-MarceloPalma-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a> <a href="https://github.com/MarceloAdan73"><img src="https://img.shields.io/badge/GitHub-@MarceloAdan73-181717?style=for-the-badge&logo=github&logoColor=white"/></a> </p><p align="center"> <i>📍 Bahía Blanca, Argentina · Disponible para oportunidades freelance o tiempo completo.</i> </p>
+
+<div align="center"> <p>━━━━━━ ⚡ Hecho con <a href="https://nextjs.org/">Next.js</a>, <a href="https://www.typescriptlang.org/">TypeScript</a> y mucho ☕ por <strong>Marcelo Palma</strong> ⚡ ━━━━━━</p> <p> <a href="https://github.com/MarceloAdan73/marcelo-palma-portfolio">📁 Repositorio</a> • <a href="https://marcelo-palma.vercel.app">🚀 Demo</a> • <a href="#-marcelo-palma--ingeniería-de-software-">⬆️ Volver arriba</a> </p> <br> <a href="https://github.com/MarceloAdan73/marcelo-palma-portfolio/stargazers"> <img src="https://img.shields.io/github/stars/MarceloAdan73/marcelo-palma-portfolio?style=social" /> </a> </div>
