@@ -119,11 +119,19 @@ Visitar órbita
 
 Abre http://localhost:3000 en tu navegador.
 ```
+## 🛠️ La Caja de Herramientas (Tech Stack)
 
-🛠️ La Caja de Herramientas (Tech Stack)
 Aquí está el arsenal utilizado para construir esta experiencia.
 
-<p align="center"> <img src="https://img.shields.io/badge/Next.js-16.0.3-000000?style=flat-square&logo=next.js" /> <img src="https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react" /> <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript" /> <img src="https://img.shields.io/badge/TailwindCSS-4.x-38B2AC?style=flat-square&logo=tailwind-css" /> <img src="https://img.shields.io/badge/Framer%20Motion-12.34.3-0055FF?style=flat-square&logo=framer" /> <img src="https://img.shields.io/badge/Jest-30.x-C21325?style=flat-square&logo=jest" /> <img src="https://img.shields.io/badge/React%20Icons-5.5.0-E34F26?style=flat-square&logo=react" /> </p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16.0.3-000000?style=flat-square&logo=next.js" />
+  <img src="https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react" />
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript" />
+  <img src="https://img.shields.io/badge/TailwindCSS-4.x-38B2AC?style=flat-square&logo=tailwind-css" />
+  <img src="https://img.shields.io/badge/Framer%20Motion-12.34.3-0055FF?style=flat-square&logo=framer" />
+  <img src="https://img.shields.io/badge/Jest-30.x-C21325?style=flat-square&logo=jest" />
+  <img src="https://img.shields.io/badge/React%20Icons-5.5.0-E34F26?style=flat-square&logo=react" />
+</p>
 
 ## ♿ Accesibilidad como Pilar Fundamental
 
