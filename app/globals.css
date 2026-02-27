@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------- */
+/* Aplicación de Fuentes Personalizadas */
+/* ---------------------------------------------------- */
+
+/* 1. Poppins (Contenido) */
+body {
+    font-family: var(--font-poppins), sans-serif;
+}
+
+/* 2. Oswald (Títulos) */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-oswald), sans-serif;
+}
+
+/* ---------------------------------------------------- */
+/* Modo Oscuro - Variables CSS */
+/* ---------------------------------------------------- */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --border-color: #e5e7eb;
+}
+
+.dark {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --border-color: #374151;
+}
+
+/* ---------------------------------------------------- */
+/* Transiciones Suaves */
+/* ---------------------------------------------------- */
+* {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+}
+
+/* Excepción para elementos que no queremos que tengan transición */
+.no-transition,
+.no-transition * {
+    transition: none !important;
+}
+
+/* ---------------------------------------------------- */
+/* Scroll Personalizado */
+/* ---------------------------------------------------- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar para modo oscuro */
+.dark ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* ---------------------------------------------------- */
+/* Animaciones */
+/* ---------------------------------------------------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ---------------------------------------------------- */
+/* Utilidades para modo oscuro */
+/* ---------------------------------------------------- */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Gradientes que se adaptan al modo oscuro */
+.dark .bg-gradient-light {
+    background: linear-gradient(to bottom right, #1f2937, #111827);
+}
+
+/* Mejoras de contraste para modo oscuro */
+.dark .text-muted {
+    color: #9ca3af;
+}
+
+.dark .border-subtle {
+    border-color: #374151;
+}
