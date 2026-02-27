@@ -1,4 +1,4 @@
-# ✨ MARCELO PALMA · INGENIERÍA DE SOFTWARE ✨
+# ✨ MARCELO PALMA · Desarrollo de Software ✨
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/ESTADO-EN%20DIRECTO-00c9b7?style=for-the-badge&labelColor=1e293b"/></a>
@@ -8,7 +8,7 @@
 
 <div align="center">
   <img src="./public/me.jpg" alt="Marcelo Palma" width="180" style="border-radius: 50%;" />
-  <h2>Arquitecto de Experiencias Digitales</h2>
+  <h2>Desarrollador Full stack de Experiencias Digitales</h2>
   <p>Especialista en <strong>React, Next.js y TypeScript</strong>. Construyendo puentes entre el diseño y la lógica, pixel por pixel.</p>
   
   [🌐 EXPLORAR DEMO](https://marcelo-palma.vercel.app) •
