@@ -1,7 +1,7 @@
 # ✨ MARCELO PALMA · Desarrollo de Software ✨
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/ESTADO-EN%20DIRECTO-00c9b7?style=for-the-badge&labelColor=1e293b"/></a>
+  <a href="https://marcelo-palma-portfolio.vercel.app"><img src="https://img.shields.io/badge/ESTADO-EN%20DIRECTO-00c9b7?style=for-the-badge&labelColor=1e293b"/></a>
   <a href="#"><img src="https://img.shields.io/badge/VERSIÓN-3.0.0-3b82f6?style=for-the-badge&labelColor=1e293b"/></a>
   <a href="#"><img src="https://img.shields.io/badge/ENTORNO-PROFESIONAL-f97316?style=for-the-badge&labelColor=1e293b"/></a>
 </p>
@@ -11,7 +11,7 @@
   <h2>Desarrollador Full stack de Experiencias Digitales</h2>
   <p>Especialista en <strong>React, Next.js y TypeScript</strong>. Construyendo puentes entre el diseño y la lógica, pixel por pixel.</p>
   
-  [🌐 EXPLORAR DEMO](https://marcelo-palma.vercel.app) •
+  [🌐 EXPLORAR DEMO](https://marcelo-palma-portfolio.vercel.app) •
   [⚡ INICIO RÁPIDO](#-guía-de-arranque-ultrarrápida) •
   [🧪 TESTS](#-test-driven-portfolio)
 </div>
