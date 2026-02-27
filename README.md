@@ -1,43 +1,47 @@
-# ✨ MARCELO PALMA · Desarrollo de Software ✨
+# ✨ MARCELO PALMA · Software Development ✨
 
 <p align="center">
-  <a href="https://marcelo-palma-portfolio.vercel.app"><img src="https://img.shields.io/badge/ESTADO-EN%20DIRECTO-00c9b7?style=for-the-badge&labelColor=1e293b"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/VERSIÓN-3.0.0-3b82f6?style=for-the-badge&labelColor=1e293b"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/ENTORNO-PROFESIONAL-f97316?style=for-the-badge&labelColor=1e293b"/></a>
+  <a href="https://marcelo-palma-portfolio.vercel.app"><img src="https://img.shields.io/badge/STATUS-LIVE-00c9b7?style=for-the-badge&labelColor=1e293b"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/VERSION-3.0.0-3b82f6?style=for-the-badge&labelColor=1e293b"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/ENVIRONMENT-PROFESSIONAL-f97316?style=for-the-badge&labelColor=1e293b"/></a>
 </p>
 
 <div align="center">
-  <img src="./public/me.jpg" alt="Marcelo Palma" width="180" style="border-radius: 50%;" />
-  <h2>Desarrollador Full stack de Experiencias Digitales</h2>
-  <p>Especialista en <strong>React, Next.js y TypeScript</strong>. Construyendo puentes entre el diseño y la lógica, pixel por pixel.</p>
+  <h2>Full Stack Developer of Digital Experiences</h2>
+  <p>Specialized in <strong>React, Next.js, and TypeScript</strong>. Building bridges between design and logic, pixel by pixel.</p>
   
-  [🌐 EXPLORAR DEMO](https://marcelo-palma-portfolio.vercel.app) •
-  [⚡ INICIO RÁPIDO](#-guía-de-arranque-ultrarrápida) •
+  <a href="https://marcelo-palma-portfolio.vercel.app">
+    <img src="https://img.shields.io/badge/🌐_VIEW_LIVE_PORTFOLIO-00c9b7?style=for-the-badge&labelColor=1e293b&color=00c9b7" alt="View Live Portfolio"/>
+  </a>
+  
+  <br/><br/>
+  
+  [⚡ QUICK START](#-quick-start-guide) •
   [🧪 TESTS](#-test-driven-portfolio)
 </div>
 
 ---
 
-## 📡 Visión General del Sistema
+## 📡 System Overview
 
-Este no es un simple portfolio; es mi vitrina técnica, un laboratorio de UI/UX y una declaración de intenciones. Cada componente está construido con un enfoque obsesivo en el rendimiento, la mantenibilidad y la experiencia de usuario.
+This is not just a simple portfolio; it's my technical showcase, a UI/UX laboratory, and a statement of intent. Every component is built with an obsessive focus on performance, maintainability, and user experience.
 
-> *"El detalle no es el detalle. El detalle es el diseño."* — Charles Eames
+> *"The details are not the details. They make the design."* — Charles Eames
 
-| Característica | Tecnología | Propósito |
+| Feature | Technology | Purpose |
 |:---|:---|:---|
-| ⚛️ **Arquitectura** | Next.js 16 (App Router) | Server Components + Rendering híbrido |
-| 🧠 **Lenguaje** | TypeScript 5.x | Tipado fuerte y autocompletado divino |
-| 🎨 **Estilado** | TailwindCSS 4.x | Utility-first + Dark mode con clase |
-| 🎭 **Interacción** | Framer Motion | Animaciones fluidas y naturales |
-| ♿ **Accesibilidad** | WCAG AA + jest-axe | Inclusivo por diseño, no por accidente |
-| 🧪 **Calidad** | Jest + RTL | 7 tests de integración y 100% cobertura en lógica core |
+| ⚛️ **Architecture** | Next.js 16 (App Router) | Server Components + Hybrid Rendering |
+| 🧠 **Language** | TypeScript 5.x | Strong typing & divine autocomplete |
+| 🎨 **Styling** | TailwindCSS 4.x | Utility-first + Class-based Dark Mode |
+| 🎭 **Interaction** | Framer Motion | Fluid, natural animations |
+| ♿ **Accessibility** | WCAG AA + jest-axe | Inclusive by design, not by accident |
+| 🧪 **Quality** | Jest + RTL | 7 integration tests & 100% core coverage |
 
 ---
 
-## 🧬 Arquitectura del Proyecto
+## 🧬 Project Architecture
 
-La estructura está pensada para la **escalabilidad y la claridad**. El `App Router` de Next.js organiza las rutas, mientras que los componentes y la lógica de estado viven en capas bien definidas.
+The structure is designed for **scalability and clarity**. Next.js's `App Router` organizes routes, while components and state logic live in well-defined layers.
 
 ```
 📦 mpa-dev
@@ -62,17 +66,17 @@ La estructura está pensada para la **escalabilidad y la claridad**. El `App Rou
 
 ## 🧪 Test-Driven Portfolio
 
-Creo firmemente en el código que no falla. Por eso, este portfolio no es solo una cara bonita, sino una máquina bien engrasada y verificada.
+I firmly believe in code that doesn't fail. That's why this portfolio is not just a pretty face, but a well-oiled and verified machine.
 
-### Suite de Pruebas
+### Test Suite
 
-| Tipo de Test | Descripción | Resultado |
+| Test Type | Description | Result |
 |:---|:---|:---|
-| 🧩 **Contexto Global** | `AppContext.test.tsx` | ✓ 5/5 tests (100% cobertura) |
-| ♿ **Accesibilidad** | `Accessibility.test.tsx` | ✓ WCAG AA (Sin violaciones) |
-| 📦 **Integración** | `Header.test.tsx`, `Footer.test.tsx` | ✓ 2/2 tests |
+| 🧩 **Global Context** | `AppContext.test.tsx` | ✓ 5/5 tests (100% coverage) |
+| ♿ **Accessibility** | `Accessibility.test.tsx` | ✓ WCAG AA (No violations) |
+| 📦 **Integration** | `Header.test.tsx`, `Footer.test.tsx` | ✓ 2/2 tests |
 
-### Detalle de Cobertura (`AppContext`)
+### Coverage Details (`AppContext`)
 ```
 ---------------------------|---------|----------|---------|---------|-------------------
 File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
@@ -81,9 +85,9 @@ AppContext.tsx             |     100 |       86 |     100 |     100 | 26-28
 ---------------------------|---------|----------|---------|---------|-------------------
 ```
 
-> **86% de cobertura en ramas lógicas**, asegurando que el cambio de tema/idioma y la persistencia son robustos.
+> **86% branch coverage**, ensuring that theme/language switching and persistence are robust.
 
-### Comandos de Calidad
+### Quality Commands
 
 ```bash
 
@@ -96,11 +100,11 @@ npm run test:coverage
 # Auditoría de accesibilidad rápida
 npm test -- -t "accessibility"
 ```
+## 🚀 Quick Start Guide
 
-🚀 Guía de Arranque Ultrarrápida
-Pon el proyecto en marcha en menos de 60 segundos.
+Get the project up and running in less than 60 seconds.
 
-Clonar el universo
+### Clone the universe
 
 ```
 git clone https://github.com/MarceloAdan73/marcelo-palma-portfolio.git
@@ -119,9 +123,9 @@ Visitar órbita
 
 Abre http://localhost:3000 en tu navegador.
 ```
-## 🛠️ La Caja de Herramientas (Tech Stack)
+## 🛠️ The Toolbox (Tech Stack)
 
-Aquí está el arsenal utilizado para construir esta experiencia.
+Here's the arsenal used to build this experience.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Next.js-16.0.3-000000?style=flat-square&logo=next.js" />
@@ -133,24 +137,40 @@ Aquí está el arsenal utilizado para construir esta experiencia.
   <img src="https://img.shields.io/badge/React%20Icons-5.5.0-E34F26?style=flat-square&logo=react" />
 </p>
 
-## ♿ Accesibilidad como Pilar Fundamental
+## ♿ Accessibility as a Fundamental Pillar
 
-La belleza sin inclusión no es belleza. Este portfolio ha sido auditado y construido pensando en **todas** las personas.
+Beauty without inclusion is not beauty. This portfolio has been audited and built with **all** people in mind.
 
-✅ **Navegación por teclado:** Toda interacción es posible sin un ratón.
+✅ **Keyboard navigation:** Every interaction is possible without a mouse.
 
-✅ **Semántica HTML5:** Uso correcto de `<header>`, `<main>`, `<nav>`, `<section>`.
+✅ **HTML5 semantics:** Correct use of `<header>`, `<main>`, `<nav>`, `<section>`.
 
-✅ **ARIA Labels:** Todos los botones e iconos tienen texto descriptivo para lectores de pantalla.
+✅ **ARIA Labels:** All buttons and icons have descriptive text for screen readers.
 
-✅ **Contraste de color:** Verificado en modo claro y oscuro para cumplir WCAG AA.
+✅ **Color contrast:** Verified in light and dark mode to comply with WCAG AA.
 
-📬 Conectar con el Creador
-¿Interesado en colaborar? ¿Tienes un proyecto en mente? ¿O simplemente quieres decir hola?
+## 📬 Connect with the Creator
 
-<p align="center"> <a href="mailto:marcelo-palma@live.com"><img src="https://img.shields.io/badge/Email-marcelo--palma@live.com-00c9b7?style=for-the-badge&logo=gmail&logoColor=white"/></a> <a href="https://www.linkedin.com/in/marcelo-palma-083b69352/"><img src="https://img.shields.io/badge/LinkedIn-MarceloPalma-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a> <a href="https://github.com/MarceloAdan73"><img src="https://img.shields.io/badge/GitHub-@MarceloAdan73-181717?style=for-the-badge&logo=github&logoColor=white"/></a> </p><p align="center"> <i>📍 Bahía Blanca, Argentina · Disponible para oportunidades freelance o tiempo completo.</i> </p>
-<div align="center"> <p>━━━━━━ ⚡ Hecho con <a href="https://nextjs.org/">Next.js</a>, <a href="https://www.typescriptlang.org/">TypeScript</a> y mucho ☕ por <strong>Marcelo Palma</strong> ⚡ ━━━━━━</p> <p> <a href="https://github.com/MarceloAdan73/marcelo-palma-portfolio">📁 Repositorio</a> • <a href="https://marcelo-palma.vercel.app">🚀 Demo</a> • <a href="#-marcelo-palma--ingeniería-de-software-">⬆️ Volver arriba</a> </p>
+Interested in collaborating? Have a project in mind? Or just want to say hello?
 
-[![Stars](https://img.shields.io/github/stars/MarceloAdan73/marcelo-palma-portfolio?style=social)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/stargazers)
+<p align="center">
+  <a href="mailto:marcelo-palma@live.com"><img src="https://img.shields.io/badge/Email-marcelo--palma@live.com-00c9b7?style=for-the-badge&logo=gmail&logoColor=white"/></a>
+  <a href="https://www.linkedin.com/in/marcelo-palma-083b69352/"><img src="https://img.shields.io/badge/LinkedIn-MarceloPalma-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
+  <a href="https://github.com/MarceloAdan73"><img src="https://img.shields.io/badge/GitHub-@MarceloAdan73-181717?style=for-the-badge&logo=github&logoColor=white"/></a>
+</p>
 
+<p align="center">
+  <i>📍 Bahía Blanca, Argentina · Available for freelance or full-time opportunities.</i>
+</p>
+
+<div align="center">
+  <p>━━━━━━ ⚡ Built with <a href="https://nextjs.org/">Next.js</a>, <a href="https://www.typescriptlang.org/">TypeScript</a> and lots of ☕ by <strong>Marcelo Palma</strong> ⚡ ━━━━━━</p>
+  <p>
+    <a href="https://github.com/MarceloAdan73/marcelo-palma-portfolio">📁 Repository</a> •
+    <a href="https://marcelo-palma.vercel.app">🚀 Demo</a> •
+    <a href="#-marcelo-palma--software-development-">⬆️ Back to top</a>
+  </p>
+
+  [![Stars](https://img.shields.io/github/stars/MarceloAdan73/marcelo-palma-portfolio?style=social)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/stargazers)
+</div>
 </div>
