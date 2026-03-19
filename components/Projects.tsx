@@ -63,6 +63,20 @@ const Projects = () => {
       metrics: { tests: 86, docker: true, jwt: true }
     },
     {
+      id: 9,
+      title: 'CodeMp-AI',
+      description: 'Herramienta de análisis de código con ESLint + IA local (Ollama). Sugerencias inteligentes.',
+      descriptionEn: 'Code analysis tool with ESLint + local AI (Ollama). Intelligent suggestions to improve your code.',
+      image: '/codeAI.png',
+      icon: <FaCode className="text-3xl" aria-label="AI Code" />,
+      iconColor: 'from-purple-600 to-blue-600',
+      category: 'fullstack',
+      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'CodeMirror', 'ESLint', 'Ollama', 'Framer Motion'],
+      demoLink: 'https://code-mp-ai.vercel.app',
+      codeLink: 'https://github.com/MarceloAdan73/CodeMp-AI',
+      featured: true,
+    },
+    {
       id: 2,
       title: 'Angular Music Player',
       description: 'Reproductor de música con Angular, RxJS y SCSS.',

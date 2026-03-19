@@ -285,7 +285,7 @@ const Skills: React.FC = () => {
         icon: <SiNextdotjs />,
         color: "from-gray-700 to-gray-900",
         years: 2,
-        projects: ["Task Manager", "DevNotes", "Portfolio"],
+        projects: ["Task Manager", "DevNotes", "Portfolio", "CodeMp-AI"],
       },
       {
         name: "TypeScript",
@@ -293,7 +293,7 @@ const Skills: React.FC = () => {
         icon: <SiTypescript />,
         color: "from-blue-600 to-blue-800",
         years: 2,
-        projects: ["Task Manager", "Angular Music", "Portfolio"],
+        projects: ["Task Manager", "Angular Music", "Portfolio", "CodeMp-AI"],
       },
       {
         name: "React",
@@ -317,7 +317,7 @@ const Skills: React.FC = () => {
         icon: <SiTailwindcss />,
         color: "from-teal-400 to-cyan-500",
         years: 2,
-        projects: ["All Projects"],
+        projects: ["All Projects", "CodeMp-AI"],
       },
       {
         name: "Framer Motion",
@@ -325,7 +325,7 @@ const Skills: React.FC = () => {
         icon: <SiFramer />,
         color: "from-purple-500 to-pink-500",
         years: 1,
-        projects: ["Portfolio"],
+        projects: ["Portfolio", "CodeMp-AI"],
       },
       {
         name: "Angular",
@@ -509,7 +509,7 @@ const Skills: React.FC = () => {
         icon: <SiEslint />,
         color: "from-purple-600 to-blue-600",
         years: 2,
-        projects: ["All Projects"],
+        projects: ["All Projects", "CodeMp-AI"],
       },
       {
         name: "Prettier",

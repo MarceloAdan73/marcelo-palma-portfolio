@@ -57,19 +57,19 @@ const About: React.FC = () => {
   const milestones: Milestone[] = [
     {
       year: '2026',
-      title: 'Task Manager Pro',
-      description: 'Desarrollo de aplicación full-stack con arquitectura limpia, 86 tests automatizados, Docker y JWT.',
-      descriptionEn: 'Full-stack application development with clean architecture, 86 automated tests, Docker and JWT.',
+      title: 'CodeMp-AI & Task Manager Pro',
+      description: 'Desarrollo de herramientas full-stack con IA local (Ollama), arquitectura limpia, 86 tests automatizados, Docker y JWT.',
+      descriptionEn: 'Full-stack development with local AI (Ollama), clean architecture, 86 automated tests, Docker and JWT.',
       icon: <MdTask className="text-2xl" />,
-      color: 'from-blue-600 to-purple-600',
-      technologies: ['Next.js', 'TypeScript', 'Express', 'PostgreSQL', 'Prisma', 'Jest', 'Docker'],
+      color: 'from-purple-600 to-blue-600',
+      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'CodeMirror', 'ESLint', 'Ollama', 'Express', 'PostgreSQL', 'Prisma', 'Jest', 'Docker'],
       achievements: [
+        language === 'es' ? 'IA local con Ollama' : 'Local AI with Ollama',
         language === 'es' ? '86 tests automatizados' : '86 automated tests',
-        language === 'es' ? 'Dockerización completa' : 'Full Dockerization',
-        language === 'es' ? 'Autenticación JWT' : 'JWT Authentication'
+        language === 'es' ? 'Dockerización completa' : 'Full Dockerization'
       ],
       metrics: {
-        projects: 1,
+        projects: 2,
         tests: 86,
         satisfaction: 100
       }
@@ -104,10 +104,10 @@ const About: React.FC = () => {
       color: 'from-orange-500 to-red-500',
       technologies: ['React', 'Node.js', 'JavaScript', 'HTML/CSS', 'Git'],
       achievements: language === 'es'
-        ? ['6 proyectos frontend', 'Bases de backend', 'Control de versiones']
-        : ['6 frontend projects', 'Backend basics', 'Version control'],
+        ? ['2 proyectos frontend', 'Bases de backend', 'Control de versiones']
+        : ['2 frontend projects', 'Backend basics', 'Version control'],
       metrics: {
-        projects: 6,
+        projects: 2,
         tests: 30,
         satisfaction: 90
       }
@@ -322,7 +322,7 @@ const About: React.FC = () => {
                       transition={{ type: "spring", stiffness: 300, delay: 0.5 }}
                       className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                     >
-                      8
+                      9
                     </motion.span>
                   </motion.div>
                   
