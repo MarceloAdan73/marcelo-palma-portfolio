@@ -57,20 +57,20 @@ const About: React.FC = () => {
   const milestones: Milestone[] = [
     {
       year: '2026',
-      title: 'CodeMp-AI & Task Manager Pro',
-      description: 'Desarrollo de herramientas full-stack con IA local (Ollama), arquitectura limpia, 86 tests automatizados, Docker y JWT.',
-      descriptionEn: 'Full-stack development with local AI (Ollama), clean architecture, 86 automated tests, Docker and JWT.',
+      title: 'AI Bots & Full-Stack Tools',
+      description: 'Desarrollo de herramientas con IA (WhatsApp Bot + ShopBot Gemini), arquitectura limpia, 160 tests, Docker y JWT.',
+      descriptionEn: 'AI-powered tools (WhatsApp Bot + ShopBot Gemini), clean architecture, 160 tests, Docker and JWT.',
       icon: <MdTask className="text-2xl" />,
       color: 'from-purple-600 to-blue-600',
-      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'CodeMirror', 'ESLint', 'Ollama', 'Express', 'PostgreSQL', 'Prisma', 'Jest', 'Docker'],
+      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'Baileys', 'Gemini', 'Node.js', 'Express', 'SQLite', 'JWT', 'Docker'],
       achievements: [
-        language === 'es' ? 'IA local con Ollama' : 'Local AI with Ollama',
-        language === 'es' ? '86 tests automatizados' : '86 automated tests',
-        language === 'es' ? 'Dockerización completa' : 'Full Dockerization'
+        language === 'es' ? 'IA con Google Gemini' : 'AI with Google Gemini',
+        language === 'es' ? 'Bots conversacionales' : 'Conversational bots',
+        language === 'es' ? '160 tests automatizados' : '160 automated tests'
       ],
       metrics: {
-        projects: 2,
-        tests: 86,
+        projects: 4,
+        tests: 160,
         satisfaction: 100
       }
     },
@@ -322,7 +322,7 @@ const About: React.FC = () => {
                       transition={{ type: "spring", stiffness: 300, delay: 0.5 }}
                       className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                     >
-                      9
+                      11
                     </motion.span>
                   </motion.div>
                   
@@ -341,7 +341,7 @@ const About: React.FC = () => {
                       transition={{ type: "spring", stiffness: 300, delay: 0.6 }}
                       className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                     >
-                      86+
+                      160+
                     </motion.span>
                   </motion.div>
                   

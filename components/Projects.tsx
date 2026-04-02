@@ -4,11 +4,11 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import { 
   FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaPython, FaAngular, FaVuejs,
-  FaCode, FaServer, FaLayerGroup, FaCrown, FaDocker, FaLock
+  FaCode, FaServer, FaLayerGroup, FaCrown, FaDocker, FaLock, FaRobot, FaWhatsapp
 } from 'react-icons/fa';
 import { 
   SiNextdotjs, SiTypescript, SiExpress, SiPostgresql, SiPrisma, SiJest, 
-  SiTailwindcss, SiElectron, SiFastapi, SiDjango, SiJsonwebtokens
+  SiTailwindcss, SiElectron, SiFastapi, SiDjango, SiJsonwebtokens, SiGooglegemini
 } from 'react-icons/si';
 import { TbTestPipe } from 'react-icons/tb';
 import { useApp } from '@/context/AppContext';
@@ -102,7 +102,7 @@ const Projects = () => {
       technologies: ['React', 'Electron', 'PWA', 'TypeScript'],
       demoLink: 'https://markdown-converter-six.vercel.app/',
       codeLink: 'https://github.com/MarceloAdan73/markdown-converter',
-      featured: true,
+      featured: false,
     },
     {
       id: 4,
@@ -174,6 +174,35 @@ const Projects = () => {
       codeLink: 'https://github.com/MarceloAdan73/frontend-proyects',
       featured: false,
     },
+    {
+      id: 10,
+      title: 'BotWsp Store',
+      description: 'Bot de WhatsApp para e-commerce con panel admin, API REST, notificaciones en tiempo real y gestión de productos.',
+      descriptionEn: 'WhatsApp bot for e-commerce with admin panel, REST API, real-time notifications and product management.',
+      image: '/bot1.png',
+      icon: <FaWhatsapp className="text-3xl" aria-label="WhatsApp" />,
+      iconColor: 'from-green-500 to-green-700',
+      category: 'fullstack',
+      technologies: ['Node.js', 'Express', 'Next.js', 'Baileys', 'SQLite', 'JWT', 'SSE'],
+      demoLink: '',
+      codeLink: 'https://github.com/MarceloAdan73/wsp-bot',
+      featured: false,
+    },
+    {
+      id: 11,
+      title: 'ShopBot AI',
+      description: 'Asistente virtual con IA (Google Gemini) para tiendas de ropa. Chatbot, CRUD, reservas y ventas.',
+      descriptionEn: 'AI-powered virtual assistant (Google Gemini) for clothing stores. Chatbot, CRUD, reservations & sales.',
+      image: '/bot2.png',
+      icon: <SiGooglegemini className="text-3xl" aria-label="Google Gemini" />,
+      iconColor: 'from-blue-500 to-purple-600',
+      category: 'fullstack',
+      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'Gemini', 'SQLite', 'React'],
+      demoLink: '',
+      codeLink: 'https://github.com/MarceloAdan73/botShop-AI',
+      featured: true,
+      metrics: { tests: 74 }
+    },
   ];
 
   const categories: Category[] = [
@@ -184,7 +213,7 @@ const Projects = () => {
   ];
 
   const filteredProjects = filter === 'all' 
-    ? projects 
+    ? [...projects].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
     : projects.filter(p => p.category === filter);
 
   return (

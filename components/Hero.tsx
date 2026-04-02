@@ -204,7 +204,7 @@ const Hero: React.FC = () => {
                 text-lg md:text-xl mb-6
                 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
               `}>
-                {t('hero.role')} · 8 {t('hero.projects')}
+                {t('hero.role')} · 11 {t('hero.projects')}
               </p>
 
               <p className={`
@@ -256,9 +256,9 @@ const Hero: React.FC = () => {
 
               {/* Stats rápidas */}
               <div className="flex gap-6 justify-center md:justify-start">
-                <Counter value={86} label="Tests" />
-                <Counter value={9} label="Proyectos" />
-                <Counter value={4} label="Stacks" />
+                <Counter value={160} label="Tests" />
+                <Counter value={11} label="Proyectos" />
+                <Counter value={5} label="Stacks" />
               </div>
             </motion.div>
 

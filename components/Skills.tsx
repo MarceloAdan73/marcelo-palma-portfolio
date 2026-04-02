@@ -285,7 +285,7 @@ const Skills: React.FC = () => {
         icon: <SiNextdotjs />,
         color: "from-gray-700 to-gray-900",
         years: 2,
-        projects: ["Task Manager", "DevNotes", "Portfolio", "CodeMp-AI"],
+        projects: ["Task Manager", "DevNotes", "Portfolio", "CodeMp-AI", "BotWsp Store", "ShopBot AI"],
       },
       {
         name: "TypeScript",
@@ -293,7 +293,7 @@ const Skills: React.FC = () => {
         icon: <SiTypescript />,
         color: "from-blue-600 to-blue-800",
         years: 2,
-        projects: ["Task Manager", "Angular Music", "Portfolio", "CodeMp-AI"],
+        projects: ["Task Manager", "Angular Music", "Portfolio", "CodeMp-AI", "BotWsp Store", "ShopBot AI"],
       },
       {
         name: "React",
@@ -301,7 +301,7 @@ const Skills: React.FC = () => {
         icon: <SiReact />,
         color: "from-blue-500 to-cyan-500",
         years: 3,
-        projects: ["Markdown Converter", "Weather App", "Mini Projects"],
+        projects: ["Markdown Converter", "Weather App", "Mini Projects", "ShopBot AI"],
       },
       {
         name: "React Query",
@@ -359,7 +359,7 @@ const Skills: React.FC = () => {
         icon: <SiNodedotjs />,
         color: "from-green-500 to-green-700",
         years: 2,
-        projects: ["Task Manager", "Weather API"],
+        projects: ["Task Manager", "Weather API", "BotWsp Store"],
       },
       {
         name: "Express",
@@ -367,7 +367,7 @@ const Skills: React.FC = () => {
         icon: <SiExpress />,
         color: "from-gray-600 to-gray-800",
         years: 2,
-        projects: ["Task Manager"],
+        projects: ["Task Manager", "BotWsp Store"],
       },
       {
         name: "Python",
@@ -391,7 +391,7 @@ const Skills: React.FC = () => {
         icon: <SiJsonwebtokens />,
         color: "from-red-500 to-orange-500",
         years: 2,
-        projects: ["Task Manager", "Modern Blog"],
+        projects: ["Task Manager", "Modern Blog", "BotWsp Store"],
       },
       {
         name: "Prisma",
