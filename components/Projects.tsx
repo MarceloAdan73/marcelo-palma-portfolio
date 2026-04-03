@@ -404,15 +404,27 @@ const Projects = () => {
 
                     {/* Botones */}
                     <div className="flex gap-3">
-                      <a
-                        href={project.demoLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 px-3 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-xl flex items-center justify-center gap-2 hover:shadow-lg transition-all"
-                      >
-                        <FaExternalLinkAlt className="text-xs" aria-label="Enlace externo" />
-                        {t('projects.demo')}
-                      </a>
+                      {project.demoLink ? (
+                        <a
+                          href={project.demoLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 px-3 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-xl flex items-center justify-center gap-2 hover:shadow-lg transition-all"
+                        >
+                          <FaExternalLinkAlt className="text-xs" aria-label="Enlace externo" />
+                          {t('projects.demo')}
+                        </a>
+                      ) : (
+                        <a
+                          href={project.codeLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 px-3 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white text-sm font-medium rounded-xl flex items-center justify-center gap-2 hover:shadow-lg transition-all"
+                        >
+                          <FaRobot className="text-xs" aria-label="Bot" />
+                          {language === 'es' ? 'Ver Bot' : 'View Bot'}
+                        </a>
+                      )}
                       
                       <a
                         href={project.codeLink}

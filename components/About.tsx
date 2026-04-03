@@ -352,7 +352,7 @@ const About: React.FC = () => {
                     transition={{ delay: 0.6 }}
                   >
                     <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {language === 'es' ? 'Tecnologías' : 'Technologies'}
+                      {language === 'es' ? 'Repositorios' : 'Repositories'}
                     </span>
                     <motion.span
                       initial={{ scale: 0 }}
@@ -360,7 +360,7 @@ const About: React.FC = () => {
                       transition={{ type: "spring", stiffness: 300, delay: 0.7 }}
                       className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                     >
-                      15+
+                      19
                     </motion.span>
                   </motion.div>
                 </div>

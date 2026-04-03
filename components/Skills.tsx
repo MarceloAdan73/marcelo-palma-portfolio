@@ -1043,8 +1043,8 @@ const Skills: React.FC = () => {
           >
             {[
               {
-                value: "20+",
-                label: language === "es" ? "Tecnologías" : "Technologies",
+                value: "19",
+                label: language === "es" ? "Repositorios" : "Repositories",
                 icon: <FaCode />,
               },
               {
@@ -1053,7 +1053,7 @@ const Skills: React.FC = () => {
                 icon: <FaChartPie />,
               },
               {
-                value: "86+",
+                value: "160+",
                 label: language === "es" ? "Tests" : "Tests",
                 icon: <SiJest />,
               },
