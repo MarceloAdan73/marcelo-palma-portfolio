@@ -1,15 +1,17 @@
 # Marcelo Palma - Professional Portfolio
 
 <div align="center">
-  
-[![CI](https://img.shields.io/github/actions/workflow/status/MarceloAdan73/marcelo-palma-portfolio/ci.yml?label=CI)
-[![Tests](https://img.shields.io/badge/Tests-18%20passed-brightgreen)
-[![Live Demo](https://img.shields.io/badge/🌐%20View%20Portfolio-00c9b7?style=for-the-badge&labelColor=1e293b)](https://marcelo-palma-portfolio.vercel.app)
-[![Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/MarceloAdan73/marcelo-palma-portfolio)
 
-**Full Stack Developer** | React & Next.js Specialist | Buenos Aires, Argentina
+[![CI](https://img.shields.io/github/actions/workflow/status/MarceloAdan73/marcelo-palma-portfolio/ci.yml?label=CI&style=for-the-badge)
+[![Tests](https://img.shields.io/badge/Tests-18%20passed-2ecc71?style=for-the-badge)
+[![Build](https://img.shields.io/badge/Build-passing-3498db?style=for-the-badge)
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-00c9b7?style=for-the-badge&labelColor=1e293b)](https://marcelo-palma-portfolio.vercel.app)
 
-*Crafting elegant digital experiences with modern web technologies.*
+---
+
+**Full Stack Developer** | React & Next.js Specialist | Bahía Blanca, Argentina
+
+*Building elegant digital experiences with modern web technologies.*
 
 </div>
 
