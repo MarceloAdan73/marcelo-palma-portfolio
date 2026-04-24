@@ -2,6 +2,8 @@
 
 <div align="center">
   
+[![CI](https://img.shields.io/github/actions/workflow/status/MarceloAdan73/marcelo-palma-portfolio/ci.yml?label=CI)
+[![Tests](https://img.shields.io/badge/Tests-18%20passed-brightgreen)
 [![Live Demo](https://img.shields.io/badge/🌐%20View%20Portfolio-00c9b7?style=for-the-badge&labelColor=1e293b)](https://marcelo-palma-portfolio.vercel.app)
 [![Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/MarceloAdan73/marcelo-palma-portfolio)
 
