@@ -8,8 +8,10 @@ import {
 } from 'react-icons/fa';
 import { 
   SiNextdotjs, SiTypescript, SiExpress, SiPostgresql, SiPrisma, SiJest, 
-  SiTailwindcss, SiElectron, SiFastapi, SiDjango, SiJsonwebtokens, SiGooglegemini
+  SiTailwindcss, SiElectron, SiFastapi, SiDjango, SiJsonwebtokens, SiGooglegemini,
+  SiPython, SiStreamlit
 } from 'react-icons/si';
+import { FaUniversity } from 'react-icons/fa';
 import { TbTestPipe } from 'react-icons/tb';
 import { useApp } from '@/context/AppContext';
 
@@ -60,7 +62,7 @@ const Projects = () => {
       demoLink: 'https://task-manager-pro-psi.vercel.app/',
       codeLink: 'https://github.com/MarceloAdan73/task-manager-pro',
       featured: true,
-      metrics: { tests: 86, docker: true, jwt: true }
+      metrics: { tests: 94, docker: true, jwt: true }
     },
     {
       id: 9,
@@ -187,6 +189,7 @@ const Projects = () => {
       demoLink: '',
       codeLink: 'https://github.com/MarceloAdan73/wsp-bot',
       featured: false,
+      metrics: { tests: 12 },
     },
     {
       id: 11,
@@ -201,7 +204,21 @@ const Projects = () => {
       demoLink: '',
       codeLink: 'https://github.com/MarceloAdan73/botShop-AI',
       featured: true,
-      metrics: { tests: 74 }
+      metrics: { tests: 88 }
+    },
+    {
+      id: 12,
+      title: 'PyStreamflow AI',
+      description: 'Gestor de finanzas personales con asistente IA. Rastrea ingresos/gastos, define presupuestos, metas de ahorro e insights inteligentes con HuggingFace.',
+      descriptionEn: 'Interactive personal finance manager with AI assistant. Track income/expenses, set budgets, savings goals, and intelligent insights powered by HuggingFace.',
+      image: '/desktop1.png',
+      icon: <FaUniversity className="text-3xl" aria-label="Finance" />,
+      iconColor: 'from-emerald-600 to-teal-600',
+      category: 'fullstack',
+      technologies: ['Python', 'Streamlit', 'HuggingFace', 'AI', 'Finance', 'Dashboard'],
+      demoLink: 'https://pystreamflow-ai-ufg7wsp8pcxpatqt3lxrsk.streamlit.app/',
+      codeLink: 'https://github.com/MarceloAdan73/pystreamflow-AI',
+      featured: true,
     },
   ];
 

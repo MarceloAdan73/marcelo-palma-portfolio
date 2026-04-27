@@ -30,6 +30,7 @@ import {
   SiEslint,
   SiPrettier,
   SiFigma,
+  SiStreamlit,
 } from "react-icons/si";
 import { VscTerminalCmd, VscVscode, VscCloud } from "react-icons/vsc";
 import {
@@ -52,11 +53,12 @@ import {
   FaCode,
   FaServer,
   FaRocket,
-  FaCrown,
   FaGraduationCap,
   FaChartPie,
   FaBolt,
   FaShieldAlt,
+  FaUniversity,
+  FaCrown,
 } from "react-icons/fa";
 import { useApp } from "@/context/AppContext";
 
@@ -371,11 +373,11 @@ const Skills: React.FC = () => {
       },
       {
         name: "Python",
-        level: 75,
+        level: 80,
         icon: <SiPython />,
         color: "from-yellow-500 to-blue-500",
-        years: 1.5,
-        projects: ["Weather App", "Django Library"],
+        years: 2,
+        projects: ["Weather App", "Django Library", "PyStreamflow AI"],
       },
       {
         name: "FastAPI",
@@ -384,6 +386,14 @@ const Skills: React.FC = () => {
         color: "from-green-600 to-teal-600",
         years: 1,
         projects: ["Modern Blog", "Weather App"],
+      },
+      {
+        name: "Streamlit",
+        level: 80,
+        icon: <SiStreamlit />,
+        color: "from-red-500 to-orange-500",
+        years: 1,
+        projects: ["PyStreamflow AI"],
       },
       {
         name: "JWT",
@@ -1042,9 +1052,9 @@ const Skills: React.FC = () => {
             transition={{ duration: 0.6, delay: 1 }}
           >
             {[
-              {
-                value: "19",
-                label: language === "es" ? "Repositorios" : "Repositories",
+{
+                value: "20",
+                label: language === 'es' ? "Repositorios" : "Repositories",
                 icon: <FaCode />,
               },
               {
@@ -1053,7 +1063,7 @@ const Skills: React.FC = () => {
                 icon: <FaChartPie />,
               },
               {
-                value: "160+",
+                value: "194+",
                 label: language === "es" ? "Tests" : "Tests",
                 icon: <SiJest />,
               },
