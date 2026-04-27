@@ -4,6 +4,7 @@
 
 [![CI](https://img.shields.io/github/actions/workflow/status/MarceloAdan73/marcelo-palma-portfolio/ci.yml?label=CI&style=for-the-badge)
 [![Tests](https://img.shields.io/badge/Tests-18%20passed-2ecc71?style=for-the-badge)
+[![Projects](https://img.shields.io/badge/Projects-12%20Showcase-9b59b6?style=for-the-badge)
 [![Build](https://img.shields.io/badge/Build-passing-3498db?style=for-the-badge)
 [![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-00c9b7?style=for-the-badge&labelColor=1e293b)](https://marcelo-palma-portfolio.vercel.app)
 
@@ -117,6 +118,8 @@ npm run lint:fix        # Fix ESLint issues
 ## 🧪 Testing & Quality
 
 ### Test Coverage
+- ✅ **18 Tests**: Portfolio components
+- ✅ **194+ Tests**: Across showcased projects
 - ✅ **Global Context**: 100% coverage
 - ✅ **Accessibility**: WCAG AA compliant
 - ✅ **Integration Tests**: All major components tested
