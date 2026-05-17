@@ -37,23 +37,11 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 
 <div align="center">
 
-**Home**  
-![Portfolio Home](./public/1.png)
-
-**Proyectos**  
-![Projects Section](./public/2.png)
-
-**Detalles**  
-![Project Details](./public/3.png)
-
-**Habilidades**  
-![Skills Section](./public/4.png)
-
-**Contacto**  
-![Contact Section](./public/5.png)
-
-**Sanity CMS**  
-![Sanity CMS Dashboard](./public/sanity%20%282%29.png)
+| | |
+|:--:|:--:|
+| ![Portfolio Home](./public/1.png) **Home** | ![Projects Section](./public/2.png) **Proyectos** |
+| ![Project Details](./public/3.png) **Detalles** | ![Skills Section](./public/4.png) **Habilidades** |
+| ![Contact Section](./public/5.png) **Contacto** | ![Sanity CMS Dashboard](./public/sanity%20%282%29.png) **Sanity CMS** |
 
 </div>
 
