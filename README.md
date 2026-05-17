@@ -37,12 +37,12 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 
 <div align="center">
 
-![Portfolio Home](./public/1.png)
-![Projects Section](./public/2.png)
-![Project Details](./public/3.png)
-![Skills Section](./public/4.png)
-![Contact Section](./public/5.png)
-![Sanity CMS Dashboard](./public/sanity%20%282%29.png)
+<img src="./public/1.png" width="400" alt="Portfolio Home">
+<img src="./public/2.png" width="400" alt="Projects Section">
+<img src="./public/3.png" width="400" alt="Project Details">
+<img src="./public/4.png" width="400" alt="Skills Section">
+<img src="./public/5.png" width="400" alt="Contact Section">
+<img src="./public/sanity%20%282%29.png" width="400" alt="Sanity CMS Dashboard">
 
 </div>
 
