@@ -1,1 +1,31 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+
+# Environment variables
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Editor
 .vscode/
+
+# Package manager
+package-lock.json
+yarn.lock
+
+# Misc
+.DS_Store
+*.pem
