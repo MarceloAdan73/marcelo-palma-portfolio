@@ -2,11 +2,12 @@
 
 <div align="center">
 
-[![CI](https://img.shields.io/github/actions/workflow/status/MarceloAdan73/marcelo-palma-portfolio/ci.yml?label=CI&style=for-the-badge)
-[![Tests](https://img.shields.io/badge/Tests-18%20passed-2ecc71?style=for-the-badge)
-[![Projects](https://img.shields.io/badge/Projects-12%20Showcase-9b59b6?style=for-the-badge)
-[![Build](https://img.shields.io/badge/Build-passing-3498db?style=for-the-badge)
+[![CI](https://img.shields.io/github/actions/workflow/status/MarceloAdan73/marcelo-palma-portfolio/ci.yml?label=CI&style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/actions)
+[![Tests](https://img.shields.io/badge/Tests-18%20passed-2ecc71?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/actions)
+[![Projects](https://img.shields.io/badge/Projects-14%20Showcase-9b59b6?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio)
+[![Build](https://img.shields.io/badge/Build-passing-3498db?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/actions)
 [![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-00c9b7?style=for-the-badge&labelColor=1e293b)](https://marcelo-palma-portfolio.vercel.app)
+[![Sanity CMS](https://img.shields.io/badge/Sanity%20CMS-Integrated-3380ff?style=for-the-badge)](https://www.sanity.io/)
 
 ---
 
@@ -24,6 +25,7 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 
 ### 🎯 What You'll Find Here
 - **Live Portfolio**: Interactive showcase of my work
+- **Sanity CMS Integration**: Dynamic content management for 14 projects
 - **Well-Structured Code**: Clean architecture and best practices
 - **Full Test Coverage**: Accessibility tests and integration tests
 - **Responsive Design**: Beautiful on all devices
@@ -39,8 +41,10 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 | **Language** | TypeScript | 5.x |
 | **Styling** | TailwindCSS | 4.x |
 | **Animations** | Framer Motion | 12.34.3 |
+| **CMS** | Sanity | 5.25.1 |
 | **Testing** | Jest + React Testing Library | Latest |
 | **Quality** | ESLint | Latest |
+| **Package Manager** | pnpm | 9.x |
 
 ---
 
@@ -55,12 +59,19 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 ├── 📂 components/                   # React components
 │   ├── 📄 Hero.tsx                  # Landing section
 │   ├── 📄 Skills.tsx                # Skills showcase
-│   ├── 📄 Projects.tsx              # Portfolio projects
+│   ├── 📄 Projects.tsx              # Portfolio projects (Sanity-powered)
 │   ├── 📄 FloatingControls.tsx      # Theme/Language switcher
 │   └── 📂 __tests__/                # Component tests
 ├── 📂 context/                      # Global state
 │   ├── 📄 AppContext.tsx            # App context (theme, language)
 │   └── 📂 __tests__/                # Context tests
+├── 📂 lib/                          # Utilities
+│   └── 📄 sanity.client.ts          # Sanity API client
+├── 📂 sanity/                       # Sanity CMS configuration
+│   ├── 📄 sanity.cli.ts             # CLI configuration
+│   ├── 📄 sanity.config.ts          # Studio configuration
+│   └── 📂 schemas/                  # Content schemas
+│       └── 📄 project.ts            # Project document schema
 ├── 📂 types/                        # TypeScript types
 ├── 📂 public/                       # Static assets
 ├── 📄 package.json                  # Dependencies
@@ -75,7 +86,7 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 
 ### Prerequisites
 - Node.js 18+ 
-- npm or yarn
+- pnpm 9+
 
 ### Installation
 
@@ -85,32 +96,49 @@ git clone https://github.com/MarceloAdan73/marcelo-palma-portfolio.git
 cd marcelo-palma-portfolio
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Sanity CMS (Optional)
+
+To run the Sanity Studio locally:
+
+```bash
+# Navigate to sanity folder
+cd sanity
+
+# Install dependencies
+pnpm install
+
+# Start Sanity Studio
+pnpm run dev
+```
+
+Open [http://localhost:3333](http://localhost:3333) to access the CMS dashboard.
 
 ### Available Scripts
 
 ```bash
 # Development
-npm run dev              # Start dev server
+pnpm run dev              # Start dev server
 
 # Production
-npm run build            # Build for production
-npm run start            # Start production server
+pnpm run build            # Build for production
+pnpm run start            # Start production server
 
 # Testing
-npm test                 # Run tests
-npm run test:watch      # Run tests in watch mode
-npm run test:coverage   # Generate coverage report
+pnpm test                 # Run tests
+pnpm run test:watch      # Run tests in watch mode
+pnpm run test:coverage   # Generate coverage report
 
 # Code Quality
-npm run lint            # Run ESLint
-npm run lint:fix        # Fix ESLint issues
+pnpm run lint            # Run ESLint
+pnpm run lint:fix        # Fix ESLint issues
 ```
 
 ---
@@ -129,16 +157,16 @@ npm run lint:fix        # Fix ESLint issues
 
 ```bash
 # All tests
-npm test
+pnpm test
 
 # Watch mode (development)
-npm run test:watch
+pnpm run test:watch
 
 # Coverage report
-npm run test:coverage
+pnpm run test:coverage
 
 # Accessibility audit
-npm test -- -t "accessibility"
+pnpm test -- -t "accessibility"
 ```
 
 ---
@@ -203,6 +231,56 @@ Global state management without external dependencies.
 // App context with theme and language
 const { theme, setTheme, language, setLanguage } = useAppContext();
 ```
+
+---
+
+## 📦 Sanity CMS Integration
+
+This portfolio uses **Sanity** as a headless CMS to manage project content dynamically.
+
+### Architecture
+
+```
+┌─────────────────┐       ┌─────────────────┐
+│   Next.js App   │◄──────│   Sanity API    │
+│  (localhost:3000)│  GROQ │  (sanity.io)    │
+└─────────────────┘       └─────────────────┘
+                                  ▲
+                                  │
+                          ┌─────────────────┐
+                          │  Sanity Studio  │
+                          │ (localhost:3333)│
+                          └─────────────────┘
+```
+
+### Schema: Project
+
+Each project document has the following fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Project name (required) |
+| `description` | text | Project description |
+| `image` | image | Project screenshot with hotspot |
+| `techStack` | array[string] | Technologies used |
+| `liveUrl` | url | Live demo URL |
+| `githubUrl` | url | GitHub repository URL |
+| `featured` | boolean | Highlighted project flag |
+
+### How It Works
+
+1. **Content is fetched** from Sanity API using GROQ queries
+2. **Server Component** (`app/page.tsx`) fetches projects at request time
+3. **Error handling** gracefully falls back to empty array if fetch fails
+4. **Projects component** renders the dynamic content with filters and animations
+
+### Adding New Projects
+
+1. Open Sanity Studio (`cd sanity && pnpm run dev`)
+2. Go to **Projects** section
+3. Click **Create new document**
+4. Fill in the fields and publish
+5. The portfolio automatically displays the new project
 
 ---
 
