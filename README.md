@@ -33,6 +33,21 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 
 ---
 
+## 📸 Portfolio Preview
+
+<div align="center">
+
+![Portfolio Home](./public/1.png)
+![Projects Section](./public/2.png)
+![Project Details](./public/3.png)
+![Skills Section](./public/4.png)
+![Contact Section](./public/5.png)
+![Sanity CMS Dashboard](./public/sanity%20%282%29.png)
+
+</div>
+
+---
+
 ## 🛠️ Tech Stack
 
 | Category | Technology | Version |
