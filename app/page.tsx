@@ -7,6 +7,8 @@ import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import client from '@/lib/sanity.client';
 
+export const dynamic = 'force-dynamic';
+
 export interface SanityProject {
   _id: string;
   title: string;
@@ -29,7 +31,11 @@ async function getProjects(): Promise<SanityProject[]> {
     githubUrl,
     featured
   }`;
-  return client.fetch(query);
+  try {
+    return await client.fetch(query);
+  } catch {
+    return [];
+  }
 }
 
 export default async function Home() {
