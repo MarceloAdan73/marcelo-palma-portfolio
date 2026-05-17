@@ -12,6 +12,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@sanity/client": "^7.22.0",
     "framer-motion": "^12.34.3",
     "next": "^16.0.7",
     "react": "^19.0.1",

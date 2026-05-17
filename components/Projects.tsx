@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from 'framer-motion';
 import { 
   FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaPython, FaAngular, FaVuejs,
@@ -14,11 +14,12 @@ import {
 import { FaUniversity } from 'react-icons/fa';
 import { TbTestPipe } from 'react-icons/tb';
 import { useApp } from '@/context/AppContext';
+import type { SanityProject } from '@/app/page';
 
 type ProjectCategory = 'all' | 'frontend' | 'backend' | 'fullstack';
 
 interface Project {
-  id: number;
+  id: string;
   title: string;
   description: string;
   descriptionEn: string;
@@ -37,6 +38,42 @@ interface Project {
   };
 }
 
+const iconColors = [
+  'from-blue-600 to-purple-600',
+  'from-purple-600 to-blue-600',
+  'from-red-600 to-red-400',
+  'from-cyan-600 to-blue-600',
+  'from-gray-700 to-gray-900',
+  'from-green-600 to-emerald-600',
+  'from-green-800 to-green-600',
+  'from-yellow-600 to-blue-600',
+  'from-orange-600 to-red-600',
+  'from-green-500 to-green-700',
+  'from-blue-500 to-purple-600',
+  'from-emerald-600 to-teal-600',
+  'from-indigo-600 to-cyan-600',
+  'from-amber-600 to-yellow-600',
+];
+
+const defaultIcon = <FaCode className="text-3xl" aria-label="Project" />;
+
+function mapSanityToProject(sanity: SanityProject, index: number): Project {
+  return {
+    id: sanity._id,
+    title: sanity.title,
+    description: sanity.description,
+    descriptionEn: sanity.description,
+    image: sanity.imageUrl || '/placeholder.png',
+    icon: defaultIcon,
+    iconColor: iconColors[index % iconColors.length],
+    category: 'fullstack',
+    technologies: sanity.techStack || [],
+    demoLink: sanity.liveUrl || '',
+    codeLink: sanity.githubUrl || '',
+    featured: sanity.featured,
+  };
+}
+
 interface Category {
   id: ProjectCategory;
   name: string;
@@ -44,211 +81,14 @@ interface Category {
   count: number;
 }
 
-const Projects = () => {
+const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
   const [filter, setFilter] = useState<ProjectCategory>('all');
   const { t, theme, language } = useApp();
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: 'Task Manager Pro',
-      description: 'Gestión de tareas full-stack con autenticación JWT, PostgreSQL y 86 tests automatizados.',
-      descriptionEn: 'Full-stack task management with JWT authentication, PostgreSQL and 86 automated tests.',
-      image: '/taskScreenshot.png',
-      icon: <SiNextdotjs className="text-3xl" aria-label="Next.js" />,
-      iconColor: 'from-blue-600 to-purple-600',
-      category: 'fullstack',
-      technologies: ['Next.js', 'TypeScript', 'Express', 'PostgreSQL', 'Prisma', 'JWT', 'Docker', 'Jest'],
-      demoLink: 'https://task-manager-pro-psi.vercel.app/',
-      codeLink: 'https://github.com/MarceloAdan73/task-manager-pro',
-      featured: true,
-      metrics: { tests: 94, docker: true, jwt: true }
-    },
-    {
-      id: 9,
-      title: 'CodeMp-AI',
-      description: 'Herramienta de análisis de código con ESLint + IA local (Ollama). Sugerencias inteligentes.',
-      descriptionEn: 'Code analysis tool with ESLint + local AI (Ollama). Intelligent suggestions to improve your code.',
-      image: '/codeAI.png',
-      icon: <FaCode className="text-3xl" aria-label="AI Code" />,
-      iconColor: 'from-purple-600 to-blue-600',
-      category: 'fullstack',
-      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'CodeMirror', 'ESLint', 'Ollama', 'Framer Motion'],
-      demoLink: 'https://code-mp-ai.vercel.app',
-      codeLink: 'https://github.com/MarceloAdan73/CodeMp-AI',
-      featured: true,
-    },
-    {
-      id: 2,
-      title: 'Angular Music Player',
-      description: 'Reproductor de música con Angular, RxJS y SCSS.',
-      descriptionEn: 'Music player with Angular, RxJS and SCSS.',
-      image: '/angularScreen.png',
-      icon: <FaAngular className="text-3xl" aria-label="Angular" />,
-      iconColor: 'from-red-600 to-red-400',
-      category: 'frontend',
-      technologies: ['Angular', 'TypeScript', 'RxJS', 'SCSS'],
-      demoLink: 'https://music-player-roan-eight.vercel.app/',
-      codeLink: 'https://github.com/MarceloAdan73/Angular-Music-Player',
-      featured: true,
-    },
-    {
-      id: 3,
-      title: 'Markdown Converter',
-      description: 'Conversor de Markdown a PDF/HTML. PWA y Electron.',
-      descriptionEn: 'Markdown to PDF/HTML converter. PWA and Electron.',
-      image: '/markdownScreen.png',
-      icon: <SiElectron className="text-3xl" aria-label="Electron" />,
-      iconColor: 'from-cyan-600 to-blue-600',
-      category: 'frontend',
-      technologies: ['React', 'Electron', 'PWA', 'TypeScript'],
-      demoLink: 'https://markdown-converter-six.vercel.app/',
-      codeLink: 'https://github.com/MarceloAdan73/markdown-converter',
-      featured: false,
-    },
-    {
-      id: 4,
-      title: 'DevNotes',
-      description: 'Aplicación de notas PWA con Next.js y sincronización offline.',
-      descriptionEn: 'PWA notes app with Next.js and offline sync.',
-      image: '/devnotScreen.png',
-      icon: <SiNextdotjs className="text-3xl" aria-label="Next.js" />,
-      iconColor: 'from-gray-700 to-gray-900',
-      category: 'frontend',
-      technologies: ['Next.js', 'PWA', 'Tailwind'],
-      demoLink: 'https://dev-notes-ruby.vercel.app/',
-      codeLink: 'https://github.com/MarceloAdan73/DevNotes-Next.js',
-      featured: false,
-    },
-    {
-      id: 5,
-      title: 'Modern Blog',
-      description: 'Blog con Vue.js + FastAPI. JWT y PostgreSQL.',
-      descriptionEn: 'Blog with Vue.js + FastAPI. JWT and PostgreSQL.',
-      image: '/modernScreen.png',
-      icon: <FaVuejs className="text-3xl" aria-label="Vue.js" />,
-      iconColor: 'from-green-600 to-emerald-600',
-      category: 'fullstack',
-      technologies: ['Vue.js', 'FastAPI', 'Python', 'PostgreSQL', 'JWT'],
-      demoLink: 'https://modern-blog-tkzl.onrender.com/',
-      codeLink: 'https://github.com/MarceloAdan73/Modern-Blog',
-      featured: false,
-    },
-    {
-      id: 6,
-      title: 'Django Library',
-      description: 'Gestión de bibliotecas con Django y Tailwind.',
-      descriptionEn: 'Library management with Django and Tailwind.',
-      image: '/librosScreen.png',
-      icon: <SiDjango className="text-3xl" aria-label="Django" />,
-      iconColor: 'from-green-800 to-green-600',
-      category: 'backend',
-      technologies: ['Django', 'Python', 'Tailwind'],
-      demoLink: 'https://biblioteca-django-5dbk.onrender.com/',
-      codeLink: 'https://github.com/MarceloAdan73/Django-Library',
-      featured: false,
-    },
-    {
-      id: 7,
-      title: 'Weather App',
-      description: 'App del clima con Vue.js + FastAPI.',
-      descriptionEn: 'Weather app with Vue.js + FastAPI.',
-      image: '/Weather.png',
-      icon: <FaPython className="text-3xl" aria-label="Python" />,
-      iconColor: 'from-yellow-600 to-blue-600',
-      category: 'fullstack',
-      technologies: ['Vue.js', 'FastAPI', 'Python'],
-      demoLink: 'https://app-clima-python.onrender.com/',
-      codeLink: 'https://github.com/MarceloAdan73/Weather-App-Python',
-      featured: false,
-    },
-    {
-      id: 8,
-      title: 'Frontend Mini Projects',
-      description: 'Colección de 6 proyectos pequeños de frontend.',
-      descriptionEn: 'Collection of 6 small frontend projects.',
-      image: '/frontScreen.png',
-      icon: <FaCode className="text-3xl" aria-label="Código" />,
-      iconColor: 'from-orange-600 to-red-600',
-      category: 'frontend',
-      technologies: ['HTML/CSS', 'JavaScript', 'React'],
-      demoLink: 'https://marceloadan73.github.io/mini-frontend-proyects/',
-      codeLink: 'https://github.com/MarceloAdan73/frontend-proyects',
-      featured: false,
-    },
-    {
-      id: 10,
-      title: 'BotWsp Store',
-      description: 'Bot de WhatsApp para e-commerce con panel admin, API REST, notificaciones en tiempo real y gestión de productos.',
-      descriptionEn: 'WhatsApp bot for e-commerce with admin panel, REST API, real-time notifications and product management.',
-      image: '/bot1.png',
-      icon: <FaWhatsapp className="text-3xl" aria-label="WhatsApp" />,
-      iconColor: 'from-green-500 to-green-700',
-      category: 'fullstack',
-      technologies: ['Node.js', 'Express', 'Next.js', 'Baileys', 'SQLite', 'JWT', 'SSE'],
-      demoLink: '',
-      codeLink: 'https://github.com/MarceloAdan73/wsp-bot',
-      featured: false,
-      metrics: { tests: 12 },
-    },
-    {
-      id: 11,
-      title: 'ShopBot AI',
-      description: 'Asistente virtual con IA (Google Gemini) para tiendas de ropa. Chatbot, CRUD, reservas y ventas.',
-      descriptionEn: 'AI-powered virtual assistant (Google Gemini) for clothing stores. Chatbot, CRUD, reservations & sales.',
-      image: '/bot2.png',
-      icon: <SiGooglegemini className="text-3xl" aria-label="Google Gemini" />,
-      iconColor: 'from-blue-500 to-purple-600',
-      category: 'fullstack',
-      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'Gemini', 'SQLite', 'React'],
-      demoLink: '',
-      codeLink: 'https://github.com/MarceloAdan73/botShop-AI',
-      featured: true,
-      metrics: { tests: 88 }
-    },
-    {
-      id: 12,
-      title: 'PyStreamflow AI',
-      description: 'Gestor de finanzas personales con asistente IA. Rastrea ingresos/gastos, define presupuestos, metas de ahorro e insights inteligentes con HuggingFace.',
-      descriptionEn: 'Interactive personal finance manager with AI assistant. Track income/expenses, set budgets, savings goals, and intelligent insights powered by HuggingFace.',
-      image: '/desktop1.png',
-      icon: <FaUniversity className="text-3xl" aria-label="Finance" />,
-      iconColor: 'from-emerald-600 to-teal-600',
-      category: 'fullstack',
-      technologies: ['Python', 'Streamlit', 'HuggingFace', 'AI', 'Finance', 'Dashboard'],
-      demoLink: 'https://pystreamflow-ai-ufg7wsp8pcxpatqt3lxrsk.streamlit.app/',
-      codeLink: 'https://github.com/MarceloAdan73/pystreamflow-AI',
-      featured: true,
-    },
-    {
-      id: 13,
-      title: 'Programming Study Apps',
-      description: 'Monorepo con 3 apps educativas: Matemáticas T, SO Study App y Python Interactivo.',
-      descriptionEn: 'Monorepo with 3 educational apps: Matemáticas T, SO Study App and Python Interactivo.',
-      image: '/mate-t.png',
-      icon: <FaUniversity className="text-3xl" aria-label="Education" />,
-      iconColor: 'from-indigo-600 to-cyan-600',
-      category: 'frontend',
-      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'JavaScript', 'HTML/CSS'],
-      demoLink: 'https://matematicas-t.vercel.app/',
-      codeLink: 'https://github.com/MarceloAdan73/programming-study-apps',
-      featured: false,
-    },
-    {
-      id: 14,
-      title: 'Web Vault',
-      description: 'Gestor de marcadores con Next.js, MongoDB y modo oscuro. Guarda y organiza sitios favoritos por categorías.',
-      descriptionEn: 'Bookmark manager with Next.js, MongoDB and dark mode. Save and organize favorite sites by categories.',
-      image: '/webvault.png',
-      icon: <SiNextdotjs className="text-3xl" aria-label="Next.js" />,
-      iconColor: 'from-amber-600 to-yellow-600',
-      category: 'fullstack',
-      technologies: ['Next.js', 'TypeScript', 'Tailwind', 'MongoDB', 'Mongoose'],
-      demoLink: 'https://web-vault-tawny.vercel.app/',
-      codeLink: 'https://github.com/MarceloAdan73/web-vault',
-      featured: false,
-    },
-  ];
+  const projects = useMemo(
+    () => rawProjects.map(mapSanityToProject),
+    [rawProjects],
+  );
 
   const categories: Category[] = [
     { id: 'all', name: t('projects.all'), icon: <FaLayerGroup />, count: projects.length },
@@ -334,7 +174,15 @@ const Projects = () => {
 
           {/* Grid de proyectos */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.length === 0 ? (
+              <div className="col-span-full flex flex-col items-center justify-center py-16">
+                <FaCode className={`text-6xl mb-4 ${theme === 'dark' ? 'text-gray-600' : 'text-gray-300'}`} />
+                <p className={`text-lg font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {t('projects.noProjects')}
+                </p>
+              </div>
+            ) : (
+              filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -368,28 +216,6 @@ const Projects = () => {
                           <FaCrown className="text-sm" />
                           {t('projects.featured')}
                         </span>
-                      </div>
-                    )}
-
-                    {/* Métricas */}
-                    {project.metrics && (
-                      <div className="absolute top-3 right-3 flex gap-2">
-                        {project.metrics.tests && (
-                          <span className="flex items-center gap-1 px-2 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg">
-                            <TbTestPipe className="text-sm" aria-label="Tests" />
-                            {project.metrics.tests}
-                          </span>
-                        )}
-                        {project.metrics.docker && (
-                          <span className="w-8 h-8 rounded-full bg-blue-500/20 backdrop-blur-sm flex items-center justify-center text-blue-400 border border-blue-500/30">
-                            <FaDocker aria-label="Docker" />
-                          </span>
-                        )}
-                        {project.metrics.jwt && (
-                          <span className="w-8 h-8 rounded-full bg-purple-500/20 backdrop-blur-sm flex items-center justify-center text-purple-400 border border-purple-500/30">
-                            <FaLock aria-label="JWT" />
-                          </span>
-                        )}
                       </div>
                     )}
 
@@ -491,7 +317,8 @@ const Projects = () => {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            ))
+          )}
           </div>
         </div>
       </div>

@@ -1,41 +1,50 @@
-// porfolio-next/app/page.tsx
-
-// Importaciones de los componentes ya creados y adaptados
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
-import About from '@/components/About';     
+import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
-import Contact from '@/components/Contact'; 
+import Contact from '@/components/Contact';
+import client from '@/lib/sanity.client';
 
-export default function Home() {
+export interface SanityProject {
+  _id: string;
+  title: string;
+  description: string;
+  imageUrl: string | null;
+  techStack: string[];
+  liveUrl: string | null;
+  githubUrl: string | null;
+  featured: boolean;
+}
+
+async function getProjects(): Promise<SanityProject[]> {
+  const query = `*[_type == "project"] | order(featured desc, _createdAt desc) {
+    _id,
+    title,
+    description,
+    "imageUrl": image.asset->url,
+    techStack,
+    liveUrl,
+    githubUrl,
+    featured
+  }`;
+  return client.fetch(query);
+}
+
+export default async function Home() {
+  const projects = await getProjects();
+
   return (
     <>
       <Header />
-      
-      {/* El contenido principal de tu portafolio */}
-      <main className="flex min-h-screen flex-col"> 
-        
-        {/* 1. Sección Principal (Hero) */}
+      <main className="flex min-h-screen flex-col">
         <Hero />
-        
-        {/* 2. Sección Sobre Mí (About) */}
         <About />
-        
-        {/* 3. Sección Habilidades (Skills) */}
-        <Skills /> 
-        
-        {/* 4. Sección Proyectos (Projects) */}
-        <Projects /> 
-        
-        {/* --- Placeholders restantes para scroll y estructura --- */}
-
-        {/* ÚLTIMO PLACEHOLDER: Contacto */}
+        <Skills />
+        <Projects projects={projects} />
         <Contact />
-        
       </main>
-      
       <Footer />
     </>
   );
