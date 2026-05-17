@@ -39,8 +39,8 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 
 | | |
 |:--:|:--:|
-| ![Projects Section](./public/1.png) **Projects** | ![Project Details](./public/2.png) **Detalles** |
-| ![Skills Section](./public/3.png) **Habilidades** | ![Contact Section](./public/4.png) **Tech Stack** |
+| ![Projects Section](./public/1.png) **Projects** | ![Project Details](./public/2.png) **Project Details** |
+| ![Skills Section](./public/3.png) **Tech Stack** | ![Contact Section](./public/4.png) **Radar View** |
 | ![Portfolio Home](./public/5.png) **Home** | ![Sanity CMS Dashboard](./public/sanity%20%282%29.png) **Sanity CMS** |
 
 </div>
