@@ -13,11 +13,20 @@ export interface SanityProject {
   _id: string;
   title: string;
   description: string;
+  descriptionEn: string | null;
   imageUrl: string | null;
+  icon: string | null;
+  iconColor: string | null;
   techStack: string[];
   liveUrl: string | null;
   githubUrl: string | null;
   featured: boolean;
+  category: string;
+  metrics: {
+    tests: number | null;
+    docker: boolean | null;
+    jwt: boolean | null;
+  } | null;
 }
 
 async function getProjects(): Promise<SanityProject[]> {
@@ -25,11 +34,16 @@ async function getProjects(): Promise<SanityProject[]> {
     _id,
     title,
     description,
+    descriptionEn,
     "imageUrl": image.asset->url,
+    icon,
+    iconColor,
     techStack,
     liveUrl,
     githubUrl,
-    featured
+    featured,
+    category,
+    metrics
   }`;
   try {
     return await client.fetch(query);
