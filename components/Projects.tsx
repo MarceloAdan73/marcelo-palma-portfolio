@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import { motion } from 'framer-motion';
 import { 
   FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaPython, FaAngular, FaVuejs,
-  FaCode, FaServer, FaLayerGroup, FaCrown, FaDocker, FaLock, FaRobot, FaWhatsapp
+  FaCode, FaServer, FaLayerGroup, FaCrown, FaDocker, FaLock, FaRobot, FaWhatsapp,
+  FaDatabase
 } from 'react-icons/fa';
 import { 
   SiNextdotjs, SiTypescript, SiExpress, SiPostgresql, SiPrisma, SiJest, 
@@ -55,22 +56,47 @@ const iconColors = [
   'from-amber-600 to-yellow-600',
 ];
 
+const iconMap: Record<string, React.ReactNode> = {
+  FaCode: <FaCode className="text-3xl" aria-label="Code" />,
+  FaReact: <FaReact className="text-3xl" aria-label="React" />,
+  FaNodeJs: <FaNodeJs className="text-3xl" aria-label="Node.js" />,
+  FaPython: <FaPython className="text-3xl" aria-label="Python" />,
+  FaAngular: <FaAngular className="text-3xl" aria-label="Angular" />,
+  FaServer: <FaServer className="text-3xl" aria-label="Server" />,
+  FaDatabase: <FaDatabase className="text-3xl" aria-label="Database" />,
+  FaCrown: <FaCrown className="text-3xl" aria-label="Crown" />,
+  FaRobot: <FaRobot className="text-3xl" aria-label="Robot" />,
+  FaWhatsapp: <FaWhatsapp className="text-3xl" aria-label="WhatsApp" />,
+};
+
 const defaultIcon = <FaCode className="text-3xl" aria-label="Project" />;
+
+function getProjectIcon(iconName: string | null, index: number): React.ReactNode {
+  if (iconName && iconMap[iconName]) {
+    return iconMap[iconName];
+  }
+  return defaultIcon;
+}
 
 function mapSanityToProject(sanity: SanityProject, index: number): Project {
   return {
     id: sanity._id,
     title: sanity.title,
-    description: sanity.description,
-    descriptionEn: sanity.description,
+    description: sanity.description || '',
+    descriptionEn: sanity.descriptionEn || sanity.description || '',
     image: sanity.imageUrl || '/placeholder.png',
-    icon: defaultIcon,
-    iconColor: iconColors[index % iconColors.length],
-    category: 'fullstack',
+    icon: getProjectIcon(sanity.icon, index),
+    iconColor: sanity.iconColor || iconColors[index % iconColors.length],
+    category: sanity.category || 'fullstack',
     technologies: sanity.techStack || [],
     demoLink: sanity.liveUrl || '',
     codeLink: sanity.githubUrl || '',
     featured: sanity.featured,
+    metrics: sanity.metrics ? {
+      tests: sanity.metrics.tests || undefined,
+      docker: sanity.metrics.docker || undefined,
+      jwt: sanity.metrics.jwt || undefined,
+    } : undefined,
   };
 }
 
@@ -272,6 +298,30 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                         </span>
                       )}
                     </div>
+
+                    {/* Metrics badges */}
+                    {project.metrics && (Object.keys(project.metrics).length > 0) && (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.metrics.tests && (
+                          <span className="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-blue-600/20 text-blue-400">
+                            <TbTestPipe className="text-xs" />
+                            {project.metrics.tests} tests
+                          </span>
+                        )}
+                        {project.metrics.docker && (
+                          <span className="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-blue-600/20 text-blue-400">
+                            <FaDocker className="text-xs" />
+                            Docker
+                          </span>
+                        )}
+                        {project.metrics.jwt && (
+                          <span className="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-blue-600/20 text-blue-400">
+                            <FaLock className="text-xs" />
+                            JWT
+                          </span>
+                        )}
+                      </div>
+                    )}
 
                     {/* Botones */}
                     <div className="flex gap-3">
