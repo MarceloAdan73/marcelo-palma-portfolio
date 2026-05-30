@@ -223,7 +223,7 @@ const Footer: React.FC = () => {
                   <FaLinkedin className="text-sm" />
                 </a>
                 <a
-                  href="mailto:marcelo024@gmail.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=marcelo024@gmail.com"
                   className={`
                     p-2 rounded-lg transition-all duration-300 hover:scale-110
                     ${theme === 'dark'
