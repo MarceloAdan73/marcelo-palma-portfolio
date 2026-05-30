@@ -43,7 +43,7 @@ const Contact: React.FC = () => {
           {/* Métodos de contacto */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <motion.a
-              href="mailto:marcelo-palma@live.com"
+              href="mailto:marcelo024@gmail.com"
               className={`
                 flex items-center gap-4 p-4 rounded-xl border transition-all group
                 ${theme === 'dark'
@@ -74,7 +74,7 @@ const Contact: React.FC = () => {
                 <p className={`text-xs ${
                   theme === 'dark' ? 'text-gray-500' : 'text-gray-500'
                 }`}>
-                  marcelo-palma@live.com
+                  marcelo024@gmail.com
                 </p>
               </div>
             </motion.a>
@@ -187,7 +187,7 @@ const Contact: React.FC = () => {
                 <FaGithub className="text-xl" aria-label="GitHub" />
               </a>
               <a
-                href="https://linkedin.com/in/marcelo-palma"
+                href="https://linkedin.com/in/marcelo-adan-palma"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`
@@ -204,7 +204,7 @@ const Contact: React.FC = () => {
             </div>
             
             <a
-              href="mailto:marcelo-palma@live.com"
+              href="mailto:marcelo024@gmail.com"
               className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
             >
               {language === 'es' ? 'Escríbeme' : 'Write me'}

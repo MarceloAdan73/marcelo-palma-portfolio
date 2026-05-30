@@ -65,7 +65,7 @@ describe('Components Rendering', () => {
       return (
         <section id="contact">
           <h2>{t('contact.title')}</h2>
-          <a href="mailto:marcelo-palma@live.com">{t('contact.email')}</a>
+          <a href="mailto:marcelo024@gmail.com">{t('contact.email')}</a>
           <a href="tel:0291-4657839">{t('contact.phone')}</a>
         </section>
       );
@@ -78,7 +78,7 @@ describe('Components Rendering', () => {
 
     it('renders email link', () => {
       render(<AppProvider><ContactMock /></AppProvider>);
-      expect(screen.getByRole('link', { name: 'Email' })).toHaveAttribute('href', 'mailto:marcelo-palma@live.com');
+      expect(screen.getByRole('link', { name: 'Email' })).toHaveAttribute('href', 'mailto:marcelo024@gmail.com');
     });
 
     it('renders phone link', () => {

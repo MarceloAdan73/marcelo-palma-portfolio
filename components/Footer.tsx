@@ -208,7 +208,7 @@ const Footer: React.FC = () => {
                   <FaGithub className="text-sm" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/marcelo-palma"
+                  href="https://linkedin.com/in/marcelo-adan-palma"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`
@@ -223,7 +223,7 @@ const Footer: React.FC = () => {
                   <FaLinkedin className="text-sm" />
                 </a>
                 <a
-                  href="mailto:marcelo-palma@live.com"
+                  href="mailto:marcelo024@gmail.com"
                   className={`
                     p-2 rounded-lg transition-all duration-300 hover:scale-110
                     ${theme === 'dark'

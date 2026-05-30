@@ -359,8 +359,8 @@ Interested in collaborating? Let's connect!
 
 <div align="center">
 
-[![Email](https://img.shields.io/badge/Email-marcelo--palma@live.com-00c9b7?style=flat-square&logo=gmail)](mailto:marcelo-palma@live.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Marcelo%20Palma-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/marcelo-palma-083b69352/)
+[![Email](https://img.shields.io/badge/Email-marcelo024@gmail.com-00c9b7?style=flat-square&logo=gmail)](mailto:marcelo024@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Marcelo%20Palma-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/marcelo-adan-palma/)
 [![GitHub](https://img.shields.io/badge/GitHub-@MarceloAdan73-181717?style=flat-square&logo=github)](https://github.com/MarceloAdan73)
 
 **Available for**: Freelance projects • Full-time opportunities • Collaborations

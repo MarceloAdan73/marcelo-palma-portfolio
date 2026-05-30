@@ -395,7 +395,7 @@ const Hero: React.FC = () => {
                 
                 <motion.a
                   whileHover={{ scale: 1.1, rotate: -5 }}
-                  href="https://linkedin.com/in/marcelo-palma"
+                  href="https://linkedin.com/in/marcelo-adan-palma"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`
