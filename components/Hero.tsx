@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaDocker, FaArrowDown } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaDocker, FaArrowDown, FaGlobe } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import { useApp } from '@/context/AppContext';
 
@@ -208,25 +208,11 @@ const Hero: React.FC = () => {
               </p>
 
               <p className={`
-                text-sm md:text-base mb-2 leading-relaxed max-w-md mx-auto md:mx-0
+                text-sm md:text-base mb-8 leading-relaxed max-w-md mx-auto md:mx-0
                 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
               `}>
                 {t('hero.description')}
               </p>
-
-              <a
-                href="https://nodoweb.digital"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`
-                  inline-flex items-center gap-1.5 text-xs mb-8 px-3 py-1 rounded-full transition-all hover:scale-105
-                  ${theme === 'dark'
-                    ? 'text-blue-400 bg-blue-600/10 border border-blue-600/20 hover:bg-blue-600/20'
-                    : 'text-blue-600 bg-blue-50 border border-blue-200 hover:bg-blue-100'}
-                `}
-              >
-                @NodoWeb · nodoweb.digital
-              </a>
 
               {/* Botones CTA */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8">
@@ -425,6 +411,25 @@ const Hero: React.FC = () => {
                     initial={false}
                   />
                   <FaLinkedin className="text-xl relative z-10 group-hover:text-white transition-colors duration-300" />
+                </motion.a>
+
+                <motion.a
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  href="https://nodoweb.digital"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`
+                    p-3 rounded-lg transition-all relative group overflow-hidden
+                    ${theme === 'dark'
+                      ? 'bg-gray-800 text-gray-300'
+                      : 'bg-gray-100 text-gray-600'}
+                  `}
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={false}
+                  />
+                  <FaGlobe className="text-xl relative z-10 group-hover:text-white transition-colors duration-300" />
                 </motion.a>
               </motion.div>
             </motion.div>

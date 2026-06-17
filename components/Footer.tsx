@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FaGithub, FaLinkedin, FaEnvelope, FaHeart, FaArrowUp, FaCompass } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaHeart, FaArrowUp, FaCompass, FaGlobe } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss } from 'react-icons/si';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { MdWork } from 'react-icons/md';
@@ -107,19 +107,6 @@ const Footer: React.FC = () => {
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse ml-1"></span>
               </div>
 
-              <a
-                href="https://nodoweb.digital"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`
-                  inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono transition-all hover:scale-105
-                  ${theme === 'dark'
-                    ? 'bg-blue-600/10 text-blue-400 border border-blue-600/20 hover:bg-blue-600/20'
-                    : 'bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100'}
-                `}
-              >
-                @NodoWeb
-              </a>
             </div>
 
             {/* Links rápidos */}
@@ -248,6 +235,21 @@ const Footer: React.FC = () => {
                   aria-label="Email"
                 >
                   <FaEnvelope className="text-sm" />
+                </a>
+                <a
+                  href="https://nodoweb.digital"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`
+                    p-2 rounded-lg transition-all duration-300 hover:scale-110
+                    ${theme === 'dark'
+                      ? 'bg-gray-800 text-gray-400 hover:bg-purple-600 hover:text-white border border-gray-700'
+                      : 'bg-gray-200 text-gray-600 hover:bg-purple-600 hover:text-white border border-gray-300'
+                    }
+                  `}
+                  aria-label="NodoWeb"
+                >
+                  <FaGlobe className="text-sm" />
                 </a>
               </div>
 
