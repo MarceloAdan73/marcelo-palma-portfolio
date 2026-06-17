@@ -316,14 +316,14 @@ const About: React.FC = () => {
                     <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                       {language === 'es' ? 'Proyectos completados' : 'Completed projects'}
                     </span>
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={isInView ? { scale: 1 } : {}}
-                      transition={{ type: "spring", stiffness: 300, delay: 0.5 }}
-                      className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                    >
-                      16
-                    </motion.span>
+                      <motion.span
+                          initial={{ scale: 0 }}
+                          animate={isInView ? { scale: 1 } : {}}
+                          transition={{ type: "spring", stiffness: 300, delay: 0.5 }}
+                          className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                        >
+                          15
+                        </motion.span>
                   </motion.div>
                   
                   <motion.div 

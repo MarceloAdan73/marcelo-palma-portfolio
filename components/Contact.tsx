@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaGlobe } from 'react-icons/fa';
 import { useApp } from '@/context/AppContext';
 
 const Contact: React.FC = () => {
@@ -200,6 +200,21 @@ const Contact: React.FC = () => {
                 aria-label="LinkedIn"
               >
                 <FaLinkedin className="text-xl" aria-label="LinkedIn" />
+              </a>
+              <a
+                href="https://nodoweb.digital"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`
+                  p-2 rounded-lg transition-all
+                  ${theme === 'dark'
+                    ? 'bg-gray-800 text-gray-300 hover:bg-purple-600 hover:text-white'
+                    : 'bg-white text-gray-600 hover:bg-purple-600 hover:text-white'
+                  }
+                `}
+                aria-label="NodoWeb"
+              >
+                <FaGlobe className="text-xl" aria-label="Website" />
               </a>
             </div>
             

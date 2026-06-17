@@ -1052,8 +1052,8 @@ const Skills: React.FC = () => {
             transition={{ duration: 0.6, delay: 1 }}
           >
             {[
-{
-                value: "20",
+              {
+                value: "24",
                 label: language === 'es' ? "Repositorios" : "Repositories",
                 icon: <FaCode />,
               },
@@ -1063,7 +1063,7 @@ const Skills: React.FC = () => {
                 icon: <FaChartPie />,
               },
               {
-                value: "194+",
+                value: "270+",
                 label: language === "es" ? "Tests" : "Tests",
                 icon: <SiJest />,
               },

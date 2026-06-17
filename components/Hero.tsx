@@ -204,15 +204,29 @@ const Hero: React.FC = () => {
                 text-lg md:text-xl mb-6
                 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
               `}>
-                {t('hero.role')} · 11 {t('hero.projects')}
+                {t('hero.role')} · 15 {t('hero.projects')}
               </p>
 
               <p className={`
-                text-sm md:text-base mb-8 leading-relaxed max-w-md mx-auto md:mx-0
+                text-sm md:text-base mb-2 leading-relaxed max-w-md mx-auto md:mx-0
                 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
               `}>
                 {t('hero.description')}
               </p>
+
+              <a
+                href="https://nodoweb.digital"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`
+                  inline-flex items-center gap-1.5 text-xs mb-8 px-3 py-1 rounded-full transition-all hover:scale-105
+                  ${theme === 'dark'
+                    ? 'text-blue-400 bg-blue-600/10 border border-blue-600/20 hover:bg-blue-600/20'
+                    : 'text-blue-600 bg-blue-50 border border-blue-200 hover:bg-blue-100'}
+                `}
+              >
+                @NodoWeb · nodoweb.digital
+              </a>
 
               {/* Botones CTA */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8">
@@ -257,7 +271,7 @@ const Hero: React.FC = () => {
               {/* Stats rápidas */}
               <div className="flex gap-6 justify-center md:justify-start">
                 <Counter value={270} label="Tests" />
-                <Counter value={16} label="Proyectos" />
+                <Counter value={15} label="Proyectos" />
                 <Counter value={7} label="Stacks" />
               </div>
             </motion.div>

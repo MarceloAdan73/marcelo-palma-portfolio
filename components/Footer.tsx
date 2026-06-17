@@ -106,6 +106,20 @@ const Footer: React.FC = () => {
                 <span>{t('footer.location')}</span>
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse ml-1"></span>
               </div>
+
+              <a
+                href="https://nodoweb.digital"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`
+                  inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono transition-all hover:scale-105
+                  ${theme === 'dark'
+                    ? 'bg-blue-600/10 text-blue-400 border border-blue-600/20 hover:bg-blue-600/20'
+                    : 'bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100'}
+                `}
+              >
+                @NodoWeb
+              </a>
             </div>
 
             {/* Links rápidos */}
