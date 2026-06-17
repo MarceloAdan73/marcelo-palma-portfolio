@@ -219,7 +219,7 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                 className="group"
               >
                 <div className={`
-                  relative h-full rounded-2xl overflow-hidden
+                  relative h-full rounded-2xl overflow-hidden flex flex-col
                   ${theme === 'dark' 
                     ? 'bg-gray-800 border border-gray-700' 
                     : 'bg-white border border-gray-200'}
@@ -257,7 +257,7 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                   </div>
 
                   {/* Contenido */}
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <h3 className={`text-xl font-bold mb-2 ${
                       theme === 'dark' ? 'text-white' : 'text-gray-900'
                     }`}>
@@ -322,6 +322,9 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                         )}
                       </div>
                     )}
+
+                    {/* Spacer para empujar botones al fondo */}
+                    <div className="flex-1" />
 
                     {/* Botones */}
                     <div className="flex gap-3">

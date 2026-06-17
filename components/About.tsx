@@ -58,19 +58,19 @@ const About: React.FC = () => {
     {
       year: '2026',
       title: 'AI Bots & Full-Stack Tools',
-      description: 'Desarrollo de herramientas con IA (WhatsApp Bot + ShopBot Gemini), arquitectura limpia, 160 tests, Docker y JWT.',
-      descriptionEn: 'AI-powered tools (WhatsApp Bot + ShopBot Gemini), clean architecture, 160 tests, Docker and JWT.',
+      description: 'Desarrollo de herramientas con IA (WhatsApp Bot + ShopBot Gemini), arquitectura limpia, 270+ tests, Docker y JWT.',
+      descriptionEn: 'AI-powered tools (WhatsApp Bot + ShopBot Gemini), clean architecture, 270+ tests, Docker and JWT.',
       icon: <MdTask className="text-2xl" />,
       color: 'from-purple-600 to-blue-600',
       technologies: ['Next.js', 'TypeScript', 'Tailwind', 'Baileys', 'Gemini', 'Node.js', 'Express', 'SQLite', 'JWT', 'Docker'],
       achievements: [
         language === 'es' ? 'IA con Google Gemini' : 'AI with Google Gemini',
         language === 'es' ? 'Bots conversacionales' : 'Conversational bots',
-        language === 'es' ? '160 tests automatizados' : '160 automated tests'
+        language === 'es' ? '270+ tests automatizados' : '270+ automated tests'
       ],
       metrics: {
         projects: 4,
-        tests: 160,
+        tests: 270,
         satisfaction: 100
       }
     },
@@ -322,7 +322,7 @@ const About: React.FC = () => {
                       transition={{ type: "spring", stiffness: 300, delay: 0.5 }}
                       className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                     >
-                      11
+                      16
                     </motion.span>
                   </motion.div>
                   
@@ -341,7 +341,7 @@ const About: React.FC = () => {
                       transition={{ type: "spring", stiffness: 300, delay: 0.6 }}
                       className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                     >
-                      160+
+                      270+
                     </motion.span>
                   </motion.div>
                   
@@ -360,7 +360,7 @@ const About: React.FC = () => {
                       transition={{ type: "spring", stiffness: 300, delay: 0.7 }}
                       className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                     >
-                      19
+                      24
                     </motion.span>
                   </motion.div>
                 </div>
