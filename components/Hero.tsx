@@ -8,7 +8,7 @@ import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaDocker, FaArrowDown, FaGlobe
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import { useApp } from '@/context/AppContext';
 
-const Hero: React.FC = () => {
+const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
   const { t, theme, language } = useApp();
   const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -204,7 +204,7 @@ const Hero: React.FC = () => {
                 text-lg md:text-xl mb-6
                 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
               `}>
-                {t('hero.role')} · 15 {t('hero.projects')}
+                {t('hero.role')} · {projectCount} {t('hero.projects')}
               </p>
 
               <p className={`
@@ -257,7 +257,7 @@ const Hero: React.FC = () => {
               {/* Stats rápidas */}
               <div className="flex gap-6 justify-center md:justify-start">
                 <Counter value={270} label="Tests" />
-                <Counter value={15} label="Proyectos" />
+                <Counter value={projectCount} label="Proyectos" />
                 <Counter value={7} label="Stacks" />
               </div>
             </motion.div>

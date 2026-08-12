@@ -45,6 +45,7 @@ export default defineType({
           { title: 'Crown', value: 'FaCrown' },
           { title: 'Robot', value: 'FaRobot' },
           { title: 'WhatsApp', value: 'FaWhatsapp' },
+          { title: 'Terminal', value: 'FaTerminal' },
         ],
       },
     }),

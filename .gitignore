@@ -30,3 +30,6 @@ yarn.lock
 .DS_Store
 *.pem
 .vercel
+
+# Config local de opencode (agente + plan del proyecto - NO se pushea)
+.opencode/

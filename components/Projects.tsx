@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { 
   FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaPython, FaAngular, FaVuejs,
   FaCode, FaServer, FaLayerGroup, FaCrown, FaDocker, FaLock, FaRobot, FaWhatsapp,
-  FaDatabase
+  FaDatabase, FaTerminal
 } from 'react-icons/fa';
 import { 
   SiNextdotjs, SiTypescript, SiExpress, SiPostgresql, SiPrisma, SiJest, 
@@ -67,6 +67,7 @@ const iconMap: Record<string, React.ReactNode> = {
   FaCrown: <FaCrown className="text-3xl" aria-label="Crown" />,
   FaRobot: <FaRobot className="text-3xl" aria-label="Robot" />,
   FaWhatsapp: <FaWhatsapp className="text-3xl" aria-label="WhatsApp" />,
+  FaTerminal: <FaTerminal className="text-3xl" aria-label="Terminal" />,
 };
 
 const defaultIcon = <FaCode className="text-3xl" aria-label="Project" />;
