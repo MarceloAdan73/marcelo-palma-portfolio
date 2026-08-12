@@ -59,7 +59,7 @@ export default async function Home() {
     <>
       <Header />
       <main className="flex min-h-screen flex-col">
-        <Hero />
+        <Hero projectCount={projects.length} />
         <About />
         <Skills />
         <Projects projects={projects} />
