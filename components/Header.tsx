@@ -100,11 +100,11 @@ const Header = () => {
   }, []);
 
   const navItems: NavItem[] = [
-    { name: t('nav.home'), href: '#hero', key: 'home' },
-    { name: t('nav.about'), href: '#about', key: 'about' },
-    { name: t('nav.skills'), href: '#skills', key: 'skills' },
-    { name: t('nav.projects'), href: '#projects', key: 'projects' },
-    { name: t('nav.contact'), href: '#contact', key: 'contact' },
+    { name: t('nav.home'), href: '/#hero', key: 'home' },
+    { name: t('nav.about'), href: '/#about', key: 'about' },
+    { name: t('nav.skills'), href: '/#skills', key: 'skills' },
+    { name: t('nav.projects'), href: '/#projects', key: 'projects' },
+    { name: t('nav.contact'), href: '/#contact', key: 'contact' },
   ];
 
   // Variantes de animación para el menú móvil
@@ -127,11 +127,13 @@ const mobileMenuVariants = {
   }
 };
 
-  // Función segura para cerrar menú
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    document.body.style.overflow = 'unset';
-  };
+// Función segura para cerrar menú
+const closeMenu = () => {
+  setIsMenuOpen(false);
+  document.body.style.overflow = 'unset';
+};
+
+const getSection = (href: string) => href.split('#')[1] ?? '';
 
   return (
     <motion.header
@@ -172,7 +174,7 @@ const mobileMenuVariants = {
         <div className="flex justify-between items-center">
           
           {/* Logo con animación 3D */}
-          <Link href="#hero" className="relative group" onClick={closeMenu}>
+          <Link href="/" className="relative group" onClick={closeMenu}>
             <motion.div
               className="flex items-center gap-2"
               whileHover="hover"
@@ -221,7 +223,7 @@ const mobileMenuVariants = {
                   href={item.href}
                   className={`
                     px-4 py-2 rounded-lg text-sm font-medium transition-colors relative z-10
-                    ${activeSection === item.href.substring(1)
+                    ${activeSection === getSection(item.href)
                       ? theme === 'dark'
                         ? 'text-white'
                         : 'text-gray-900'
@@ -236,7 +238,7 @@ const mobileMenuVariants = {
                 </Link>
                 
                 {/* Indicador de sección activa (underline animado) */}
-                {activeSection === item.href.substring(1) && (
+                {activeSection === getSection(item.href) && (
                   <motion.div
                     className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
                     layoutId="activeSection"
@@ -245,7 +247,7 @@ const mobileMenuVariants = {
                 )}
                 
                 {/* Efecto de hover para el fondo */}
-                {hoveredItem === item.key && activeSection !== item.href.substring(1) && (
+                {hoveredItem === item.key && activeSection !== getSection(item.href) && (
                   <motion.div
                     className={`
                       absolute inset-0 rounded-lg -z-0
@@ -390,7 +392,7 @@ const mobileMenuVariants = {
                     href={item.href}
                     className={`
                       block px-4 py-3 text-base rounded-lg transition-all
-                      ${activeSection === item.href.substring(1)
+                      ${activeSection === getSection(item.href)
                         ? theme === 'dark'
                           ? 'bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-white border-l-4 border-blue-500'
                           : 'bg-gradient-to-r from-blue-50 to-purple-50 text-gray-900 border-l-4 border-blue-500'

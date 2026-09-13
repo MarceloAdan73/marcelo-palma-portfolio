@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { 
   FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaPython, FaAngular, FaVuejs,
@@ -227,6 +229,7 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
             ) : (
               filteredProjects.map((project, index) => {
               const highlight = getHighlightMetric(project, t);
+              const detailHref = project.showcase && project.slug ? `/projects/${project.slug}` : null;
               return (
               <motion.div
                 key={project.id}
@@ -250,14 +253,31 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                   shadow-lg hover:shadow-2xl transition-all duration-300
                 `}>
                   
-                  {/* Imagen */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img
+                  <div className={`
+                  relative h-48 overflow-hidden
+                `}>
+                  {detailHref ? (
+                    <Link href={detailHref} aria-label={project.title} className="block h-full w-full relative">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        loading="lazy"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </Link>
+                  ) : (
+                    <Image
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      loading="lazy"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     
                     {/* Badge de featured */}
                     {project.featured && (
@@ -289,11 +309,21 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                       </span>
                     )}
 
-                    <h3 className={`text-xl font-bold mb-2 ${
-                      theme === 'dark' ? 'text-white' : 'text-gray-900'
-                    }`}>
-                      {project.title}
-                    </h3>
+                    {detailHref ? (
+                      <Link href={detailHref} className="hover:opacity-80 transition-opacity">
+                        <h3 className={`text-xl font-bold mb-2 ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>
+                          {project.title}
+                        </h3>
+                      </Link>
+                    ) : (
+                      <h3 className={`text-xl font-bold mb-2 ${
+                        theme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}>
+                        {project.title}
+                      </h3>
+                    )}
 
                     {/* Problema como tagline */}
                     <p className={`text-sm mb-3 line-clamp-2 ${

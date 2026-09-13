@@ -217,6 +217,25 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
 
+### SESIÓN 2026-09-13e (con Marcelo — SESIÓN 4 EN CURSO: páginas de detalle + next/image)
+1. `next.config.ts`: `images.remotePatterns` para `cdn.sanity.io` (habilita next/image).
+2. `app/projects/[slug]/page.tsx`: server component con fetch por slug, `generateStaticParams`
+   (de los slugs existentes en Sanity), `generateMetadata` (title/description/OG) y `revalidate`
+   de 1h. Si no existe el slug → `notFound()`.
+3. `components/ProjectDetail.tsx`: layout case study bilingüe (ES/EN): volver, badges,
+   título + icono, métricas (tests/Docker/JWT), imagen principal, resumen, problema/solución,
+   resultado + "decisiones técnicas" (highlights), diagrama de arquitectura (architectureImage),
+   stack y CTAs Demo/Código.
+4. `context/AppContext.tsx`: traducciones nuevas de la página de detalle (ES/EN) +
+   notFound.
+5. Navegación consistente en páginas de detalle: Header (logo → `/`, nav → `/#sección`) y
+   Footer (links → `/#sección`) ahora funcionan desde cualquier ruta.
+6. `Projects.tsx`: tarjetas `showcase` linkean al detalle (imagen + título) e imágenes
+   migradas de `<img>` a `next/image` (fill, sizes, loading lazy).
+7. Verificado: lint sin errores nuevos (los 23 errores son preexistentes y ya documentados),
+   tests 18/18, build OK → 6 páginas de detalle SSG (revalidate 1h). PRÓXIMO: probar en
+   localhost:3000 y aprobar visualmente → marcar [x] Sesión 4.
+
 ### SESIÓN 2026-09-13d (con Marcelo — SESIÓN 3 COMPLETADA: About/Hero "cómo trabajo" + SEO)
 1. `About.tsx`: nueva sección "Cómo trabajo" (ES/EN) con 4 pasos: Análisis → Arquitectura →
    Implementación → Calidad (iconos FaSearch/FaProjectDiagram/FaCode/FaShieldAlt).

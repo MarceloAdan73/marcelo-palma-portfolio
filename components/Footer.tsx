@@ -126,7 +126,7 @@ const Footer: React.FC = () => {
               
               <div className="grid grid-cols-2 gap-1.5 text-center">
                 <Link 
-                  href="#hero" 
+                  href="/#hero" 
                   className={`
                     px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all duration-300
                     ${theme === 'dark' 
@@ -138,7 +138,7 @@ const Footer: React.FC = () => {
                   {t('nav.home')}
                 </Link>
                 <Link 
-                  href="#about" 
+                  href="/#about" 
                   className={`
                     px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all duration-300
                     ${theme === 'dark' 
@@ -150,7 +150,7 @@ const Footer: React.FC = () => {
                   {t('nav.about')}
                 </Link>
                 <Link 
-                  href="#skills" 
+                  href="/#skills" 
                   className={`
                     px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all duration-300
                     ${theme === 'dark' 
@@ -162,7 +162,7 @@ const Footer: React.FC = () => {
                   {t('nav.skills')}
                 </Link>
                 <Link 
-                  href="#projects" 
+                  href="/#projects" 
                   className={`
                     px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all duration-300
                     ${theme === 'dark' 
