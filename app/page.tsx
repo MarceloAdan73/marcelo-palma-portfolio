@@ -12,16 +12,26 @@ export const dynamic = 'force-dynamic';
 export interface SanityProject {
   _id: string;
   title: string;
+  slug: string | null;
   description: string;
   descriptionEn: string | null;
   imageUrl: string | null;
+  architectureImageUrl: string | null;
   icon: string | null;
   iconColor: string | null;
   techStack: string[];
   liveUrl: string | null;
   githubUrl: string | null;
   featured: boolean;
+  showcase: boolean;
   category: string;
+  problem: string | null;
+  problemEn: string | null;
+  solution: string | null;
+  solutionEn: string | null;
+  result: string | null;
+  resultEn: string | null;
+  highlights: string[];
   metrics: {
     tests: number | null;
     docker: boolean | null;
@@ -33,16 +43,26 @@ async function getProjects(): Promise<SanityProject[]> {
   const query = `*[_type == "project"] | order(featured desc, _createdAt desc) {
     _id,
     title,
+    slug,
     description,
     descriptionEn,
     "imageUrl": image.asset->url,
+    "architectureImageUrl": architectureImage.asset->url,
     icon,
     iconColor,
     techStack,
     liveUrl,
     githubUrl,
     featured,
+    showcase,
     category,
+    problem,
+    problemEn,
+    solution,
+    solutionEn,
+    result,
+    resultEn,
+    highlights,
     metrics
   }`;
   try {

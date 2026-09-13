@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import { 
   FaReact, FaNodeJs, FaDocker, FaRocket, FaCode, 
   FaChartLine, FaMedal, FaAward,
-  FaCrown
+  FaCrown, FaSearch, FaProjectDiagram, FaShieldAlt
 } from 'react-icons/fa';
 import { 
   SiNextdotjs, SiTypescript, SiJest, SiPostgresql, SiPrisma, SiExpress, 
@@ -270,6 +270,82 @@ const About: React.FC = () => {
             >
               {t('about.subtitle')}
             </motion.p>
+          </motion.div>
+
+          {/* Método de trabajo: cómo encara y resuelve problemas reales */}
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <div className="text-center mb-8">
+              <h3 className={`text-2xl md:text-3xl font-bold mb-3 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
+                {t('about.method.title')}
+              </h3>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  icon: <FaSearch className="text-lg" aria-label={t('about.method.1.title')} />,
+                  title: t('about.method.1.title'),
+                  desc: t('about.method.1.desc'),
+                },
+                {
+                  icon: <FaProjectDiagram className="text-lg" aria-label={t('about.method.2.title')} />,
+                  title: t('about.method.2.title'),
+                  desc: t('about.method.2.desc'),
+                },
+                {
+                  icon: <FaCode className="text-lg" aria-label={t('about.method.3.title')} />,
+                  title: t('about.method.3.title'),
+                  desc: t('about.method.3.desc'),
+                },
+                {
+                  icon: <FaShieldAlt className="text-lg" aria-label={t('about.method.4.title')} />,
+                  title: t('about.method.4.title'),
+                  desc: t('about.method.4.desc'),
+                },
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
+                  whileHover={{ y: -5 }}
+                  className={`
+                    rounded-2xl p-6 backdrop-blur-lg
+                    ${theme === 'dark'
+                      ? 'bg-gray-900/50 border border-gray-700/50'
+                      : 'bg-white/50 border border-gray-200/50'}
+                    shadow-xl hover:shadow-2xl transition-all
+                  `}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white shadow-lg">
+                      {step.icon}
+                    </div>
+                    <span className="text-xs font-bold text-blue-500">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h4 className={`font-semibold mb-2 ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    {step.title}
+                  </h4>
+                  <p className={`text-xs leading-relaxed ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                    {step.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
           {/* Grid principal */}

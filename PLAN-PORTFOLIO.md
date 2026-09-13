@@ -115,8 +115,8 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 ## MEJORAS POR SESIONES (ejecutar en orden, una por encuentro)
 
 ### Sesión 1 — Modelo de datos: ampliar schema de Sanity
-- [ ] **Objetivo:** equipar cada proyecto con narrativa de caso de estudio.
-- [ ] **Pasos:**
+- [x] **Objetivo:** equipar cada proyecto con narrativa de caso de estudio. (2026-09-13)
+- [x] **Pasos:**
       1. `sanity/schemas/project.ts`: agregar campos `slug` (único),
          `problem`/`problemEn`, `solution`/`solutionEn`, `result`/`resultEn`,
          `highlights[]`, `showcase` (bool, "proyectos clave").
@@ -124,22 +124,30 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
       3. `types/index.ts`: reflejar los campos.
       4. Completar contenido en 4-6 proyectos clave (ai-agent-toolkit, Task Manager Pro,
          ShopBot AI, PyStreamflow AI, CodeMp-AI y uno más).
-- [ ] **Criterio de aceptación:** studio muestra campos nuevos; narrativa completa ES/EN
-      en los proyectos clave; build OK; probado en local.
+      > Ampliado con `architectureImage` (diagrama, se usa en Sesión 4). Además se instaló el
+      > estudio local reproducible (ver bitácora 2026-09-13b): `sanity`, `@sanity/vision`,
+      > `styled-components`, `allowBuilds` (esbuild/sharp/unrs-resolver). Script
+      > `backfill-case-studies.mjs` para rellenar/re-aplicar narrativa.
+- [x] **Criterio de aceptación:** studio muestra campos nuevos; narrativa completa ES/EN
+      en los proyectos clave; build OK; probado en local. (2026-09-13 — aprobado por Marcelo)
 
 ### Sesión 2 — Narrativa en la grilla: tarjetas como mini case study
-- [ ] **Objetivo:** que la home deje de listar techs y muestre problema → solución → resultado.
-- [ ] **Pasos:**
+- [x] **Objetivo:** que la home deje de listar techs y muestre problema → solución → resultado. (2026-09-13)
+- [x] **Pasos:**
       1. `Projects.tsx`: la tarjeta muestra `problem` como tagline (line-clamp), un badge del
          resultado (métrica destacada) y menos chips de techs.
       2. `mapSanityToProject()` con los campos nuevos.
       3. Mantener filtros existentes; destacar los `showcase`.
       4. Textos ES/EN con el patrón actual (language/t).
-- [ ] **Criterio:** al abrir la home, se entiende "qué problema resuelve" cada proyecto en 5 segundos.
+      > Badge "Caso de estudio" (ES/EN) + ring violeta en los showcase. Métrica destacada:
+      > tests → Docker → JWT (badge gradiente). Chips recortados a 3 (+N).
+      > Completadas métricas reales de los 3 que faltaban (verificado en los repos):
+      > ShopBot AI 88 tests, Django Library 42 tests, CodeMp-AI 21 tests.
+- [x] **Criterio:** al abrir la home, se entiende "qué problema resuelve" cada proyecto en 5 segundos. (2026-09-13 — aprobado por Marcelo en localhost:3000)
 
 ### Sesión 3 — Sobre mí + Hero: "cómo trabajo" (+ pulido frontend de valor)
-- [ ] **Objetivo:** el About muestre método de trabajo y tipo de problemas que resuelve Marcelo.
-- [ ] **Pasos:**
+- [x] **Objetivo:** el About muestre método de trabajo y tipo de problemas que resuelve Marcelo. (2026-09-13)
+- [x] **Pasos:**
       1. `About.tsx`: complementar/reemplazar la timeline de stacks por una sección de método:
          análisis → arquitectura → implementación → calidad (Docker, JWT, 270+ tests).
       2. `Hero.tsx`: cambiar mensaje de "muchas tecnologías" a "construyo soluciones completas".
@@ -153,8 +161,10 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
          (Hero, About, Skills).
       7. `<html lang>` dinámico según idioma del contexto + hreflang ES/EN (SEO bilingüe;
          hoy está fijo en "es").
-- [ ] **Criterio:** un visitante lee About y sabe cómo encara y resuelve problemas reales;
+- [x] **Criterio:** un visitante lee About y sabe cómo encara y resuelve problemas reales;
       SEO/share de links correctos; sin flash de tema; animaciones respetan el sistema.
+      (2026-09-13 — aprobado por Marcelo en localhost:3000; favicon y líneas de stack encadenadas
+      con el método dentro del mismo commit)
 
 ### Sesión 4 — Páginas de detalle de proyectos (case studies completos)
 - [ ] **Objetivo:** evidencia técnica profunda para proyectos clave.
@@ -206,6 +216,62 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 ---
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
+
+### SESIÓN 2026-09-13d (con Marcelo — SESIÓN 3 COMPLETADA: About/Hero "cómo trabajo" + SEO)
+1. `About.tsx`: nueva sección "Cómo trabajo" (ES/EN) con 4 pasos: Análisis → Arquitectura →
+   Implementación → Calidad (iconos FaSearch/FaProjectDiagram/FaCode/FaShieldAlt).
+2. `Hero.tsx`: mensaje cambiado a "construyo soluciones completas" (de la idea al despliegue);
+   contadores de stats con labels traducidos (tests/proyectos/stacks).
+3. `app/layout.tsx`: `metadataBase` corregido (marcelo-palma-portfolio.vercel.app), title
+   template %s, description ampliada, OpenGraph + Twitter con /me.jpg (512x640), JSON-LD
+   schema.org/Person (sameAs GitHub + LinkedIn), alternates canonical + hreflang ES/EN.
+4. Dark mode sin flash: script inline `beforeInteractive` en el `<head>` que aplica la clase
+   `dark` (y colorScheme) desde localStorage antes de hidratar. `suppressHydrationWarning` en `<html>`.
+5. Accesibilidad: `MotionConfig reducedMotion="user"` envuelve toda la app (AppContext) para
+   respetar `prefers-reduced-motion` en las animaciones de framer-motion.
+6. `<html lang>` dinámico: useEffect en AppContext sincroniza `document.documentElement.lang`
+   con el idioma del contexto (base "es" en SSR).
+7. Verificado: tests 18/18, build OK, lint solo con los errores preexistentes ya documentados.
+   Aprobado por Marcelo en localhost:3000 (ES/EN + dark, sin flash).
+8. Commit en `test-cambios`: sesiones 1+2+3 (schema + tarjetas case study + About/Hero/SEO).
+9. PRÓXIMO: **Sesión 4** — páginas de detalle `app/projects/[slug]` + migración a `next/image`
+   (remotePatterns de `cdn.sanity.io`). Pendiente también: definir slug de los 4 proyectos restantes
+   (Modern Blog, BotWsp Store, BlackBox Monitor, Angular Music Player).
+
+### SESIÓN 2026-09-13c (con Marcelo — SESIÓN 2 COMPLETADA: tarjetas = mini case study)
+1. `Projects.tsx`: tarjeta ahora muestra el `problem` como tagline (line-clamp, fallback a
+   description), badge "Caso de estudio" (ES/EN) + ring violeta en los `showcase`, badge único
+   con gradiente para la métrica destacada (tests → Docker → JWT) y chips recortados a 3 (+N).
+   Filtros intactos. `mapSanityToProject()` con los campos nuevos.
+2. Completadas las métricas reales que faltaban (extraídas de los repos vía gh api):
+   ShopBot AI 88 tests, Django Library 42 tests, CodeMp-AI 21 tests (los 6 showcase ya tienen
+   métricas; Docker/JWT apagados donde no corresponden).
+3. Verificado: lint sin errores nuevos, tests 18/18, build OK. Aprobado por Marcelo en
+   localhost:3000 (incluye EN y dark).
+4. PRÓXIMO: **Sesión 3** — Sobre mí + Hero ("cómo trabajo") + pulido frontend
+   (metadataBase, OG, JSON-LD, dark sin flash, reduced-motion, `<html lang>` dinámico).
+   También Sevilla: **Sesión 4** — páginas de detalle `app/projects/[slug]` + next/image.
+
+### SESIÓN 2026-09-13b (con Marcelo — SESIÓN 1 COMPLETADA: schema + contenido)
+1. Ampliado `sanity/schemas/project.ts` con `slug` (único: validación de formato y
+   contra duplicados vía API), `showcase`, `problem/problemEn`, `solution/solutionEn`,
+   `result/resultEn`, `highlights[]` y `architectureImage` (para Sesión 4).
+   Corregido un duplicado accidental de `description`/`descriptionEn` que rompía el studio.
+2. `app/page.tsx`: `SanityProject` + query GROQ con los campos nuevos (incluye
+   `architectureImageUrl`). `types/index.ts` reflejado. Verificado: tests 18/18, build OK,
+   lint solo con errores preexistentes (Hero/About/AppContext/jest, no tocados).
+3. Setup del estudio local REPRODUCIBLE: instalados `sanity`, `@sanity/vision@6.13.2` y
+   `styled-components` (los pedía el CLI), `allowBuilds` (esbuild, sharp, unrs-resolver) en
+   `pnpm-workspace.yaml`. El estudio se levanta desde `sanity/`: `npx sanity dev` (localhost:3333).
+4. Creado `backfill-case-studies.mjs` (modos `--list`, dry-run default, `--apply`).
+   APLICADO con aprobación de Marcelo a 6 proyectos clave: ai-agent-toolkit, Task Manager Pro
+   (además se completó su `metrics`: 86 tests + docker + jwt), ShopBot AI, PyFinFlow AI,
+   CodeMp-AI y Django Library → `slug` + `showcase:true` + narrativa completa ES/EN +
+   highlights. Verificado en Sanity (--list).
+5. PENDIENTE PARA OTRA SESIÓN: definir slug (y opcionalmente narrativa) de los 4 restantes:
+   Modern Blog, BotWsp Store, BlackBox Monitor, Angular Music Player.
+6. PRÓXIMO: **Sesión 2** — tarjetas de la home como mini case study (Projects.tsx usa
+   `problem` como tagline, badge con métrica destacada, destacar `showcase`).
 
 ### SESIÓN 2026-09-13 (con Marcelo — NUEVA MIRADA Y UNIFICACIÓN DEL PLAN)
 1. Marcelo compartió su estrategia (2 notas de una IA): Nota 1 = narrativa/case studies;

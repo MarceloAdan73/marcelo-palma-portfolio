@@ -14,6 +14,12 @@ export interface Project {
     docker?: boolean;
     jwt?: boolean;
   };
+  slug?: string;
+  problem?: string;
+  solution?: string;
+  result?: string;
+  highlights?: string[];
+  showcase?: boolean;
 }
 
 export type Language = 'es' | 'en';

@@ -256,9 +256,9 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
 
               {/* Stats rápidas */}
               <div className="flex gap-6 justify-center md:justify-start">
-                <Counter value={270} label="Tests" />
-                <Counter value={projectCount} label="Proyectos" />
-                <Counter value={7} label="Stacks" />
+                <Counter value={270} label={t('hero.stats.tests')} />
+                <Counter value={projectCount} label={t('hero.stats.projects')} />
+                <Counter value={7} label={t('hero.stats.stacks')} />
               </div>
             </motion.div>
 

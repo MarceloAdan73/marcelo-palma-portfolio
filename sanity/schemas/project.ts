@@ -1,4 +1,11 @@
 import {defineType, defineField} from 'sanity'
+import {createClient} from '@sanity/client'
+
+const client = createClient({
+  projectId: 'x8oaorjf',
+  dataset: 'production',
+  apiVersion: '2024-01-01',
+})
 
 export default defineType({
   name: 'project',
@@ -12,6 +19,30 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug (URL)',
+      description: 'Identificador único para la URL del case study. Ej: ai-agent-toolkit',
+      type: 'string',
+      validation: (Rule) => [
+        Rule.required().error('El slug es obligatorio'),
+        Rule.custom((slug) => {
+          if (!slug) return true
+          if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+            return 'Solo minúsculas, números y guiones medios (ej: ai-agent-toolkit)'
+          }
+          return true
+        }),
+        Rule.custom(async (slug, context) => {
+          if (!slug) return true
+          const existing = await client.fetch(
+            `*[_type == "project" && slug == $slug && _id != $currentId][0] {_id}`,
+            {slug, currentId: context.document?._id ?? ''},
+          )
+          return existing ? 'Ya existe otro proyecto con este slug' : true
+        }),
+      ],
+    }),
+    defineField({
       name: 'description',
       title: 'Description (Spanish)',
       type: 'text',
@@ -22,8 +53,61 @@ export default defineType({
       type: 'text',
     }),
     defineField({
+      name: 'showcase',
+      title: 'Showcase (case study destacado)',
+      description: 'Los proyectos showcase tienen página de detalle propia',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'problem',
+      title: 'Problem (Spanish) — caso de estudio',
+      type: 'text',
+    }),
+    defineField({
+      name: 'problemEn',
+      title: 'Problem (English)',
+      type: 'text',
+    }),
+    defineField({
+      name: 'solution',
+      title: 'Solution (Spanish)',
+      type: 'text',
+    }),
+    defineField({
+      name: 'solutionEn',
+      title: 'Solution (English)',
+      type: 'text',
+    }),
+    defineField({
+      name: 'result',
+      title: 'Result (Spanish)',
+      type: 'text',
+    }),
+    defineField({
+      name: 'resultEn',
+      title: 'Result (English)',
+      type: 'text',
+    }),
+    defineField({
+      name: 'highlights',
+      title: 'Highlights',
+      description: 'Logros puntuales o métricas destacadas (ej: "API con JWT y rate limiting")',
+      type: 'array',
+      of: [{type: 'string'}],
+    }),
+    defineField({
       name: 'image',
       title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'architectureImage',
+      title: 'Architecture Image (diagrama del case study)',
+      description: 'Diagrama de arquitectura que se muestra en la página de detalle',
       type: 'image',
       options: {
         hotspot: true,

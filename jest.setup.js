@@ -38,6 +38,7 @@ jest.mock('framer-motion', () => {
     useMotionValueEvent: jest.fn(),
     useInView: jest.fn(() => false),
     AnimatePresence: ({ children }) => children,
+    MotionConfig: ({ children }) => children,
     createRef: () => ({}),
   };
 });
@@ -69,6 +70,9 @@ jest.mock('react-icons/fa', () => {
     FaLock: mockIcon('FaLock'),
     FaRobot: mockIcon('FaRobot'),
     FaWhatsapp: mockIcon('FaWhatsapp'),
+    FaSearch: mockIcon('FaSearch'),
+    FaProjectDiagram: mockIcon('FaProjectDiagram'),
+    FaShieldAlt: mockIcon('FaShieldAlt'),
   };
 });
 

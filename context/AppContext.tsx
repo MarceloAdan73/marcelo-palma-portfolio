@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 
 type Language = 'es' | 'en';
 type Theme = 'light' | 'dark';
@@ -26,15 +27,27 @@ const translations = {
     'nav.contact': 'Contacto',
     'hero.role': 'Desarrollador Full-Stack',
     'hero.projects': 'proyectos completados',
-    'hero.description': 'incluyendo Task Manager Pro, CodeMp-AI, BlackBox Monitor y más.',
+    'hero.description': 'Construyo soluciones completas: de la idea al despliegue, con arquitectura, testing y calidad real.',
     'hero.viewProjects': 'Ver proyectos',
     'hero.contact': 'Contactar',
     'hero.available': 'Disponible para trabajar',
+    'hero.stats.projects': 'Proyectos',
+    'hero.stats.tests': 'Tests',
+    'hero.stats.stacks': 'Stacks',
     'about.title': 'Trayectoria',
     'about.subtitle': 'Aprendizaje continuo basado en proyectos',
     'about.featured': 'Proyecto insignia',
     'about.mainStack': 'Stack principal',
     'about.appliedIn': 'aplicados en proyectos reales',
+    'about.method.title': 'Cómo trabajo',
+    'about.method.1.title': 'Análisis',
+    'about.method.1.desc': 'Entiendo el problema real antes de escribir una sola línea de código.',
+    'about.method.2.title': 'Arquitectura',
+    'about.method.2.desc': 'Defino la estructura: frontend, API, base de datos y despliegue.',
+    'about.method.3.title': 'Implementación',
+    'about.method.3.desc': 'Código limpio y tipado con TypeScript, Node.js y APIs seguras (JWT).',
+    'about.method.4.title': 'Calidad',
+    'about.method.4.desc': 'Testing continuo, Docker y revisión. Resultado verificado hasta producción.',
     
     // Skills - Descripciones (NUEVAS)
     'skills.desc.frontend': 'Construyendo interfaces modernas y reactivas',
@@ -53,6 +66,7 @@ const translations = {
     'projects.backend': 'Backend',
     'projects.fullstack': 'Full Stack',
     'projects.featured': 'Destacado',
+    'projects.caseStudy': 'Caso de estudio',
     'projects.main': 'Principal',
     'projects.tests': 'tests',
     'projects.demo': 'Demo',
@@ -83,15 +97,27 @@ const translations = {
     'nav.contact': 'Contact',
     'hero.role': 'Full-Stack Developer',
     'hero.projects': 'completed projects',
-    'hero.description': 'including Task Manager Pro, CodeMp-AI, BlackBox Monitor and more.',
+    'hero.description': 'I build complete solutions: from idea to deploy, with architecture, real testing and quality.',
     'hero.viewProjects': 'View projects',
     'hero.contact': 'Contact me',
     'hero.available': 'Available for work',
+    'hero.stats.projects': 'Projects',
+    'hero.stats.tests': 'Tests',
+    'hero.stats.stacks': 'Stacks',
     'about.title': 'About',
     'about.subtitle': 'Continuous project-based learning',
     'about.featured': 'Featured project',
     'about.mainStack': 'Main stack',
     'about.appliedIn': 'applied in real projects',
+    'about.method.title': 'How I work',
+    'about.method.1.title': 'Analysis',
+    'about.method.1.desc': 'I understand the real problem before writing a single line of code.',
+    'about.method.2.title': 'Architecture',
+    'about.method.2.desc': 'I define the structure: frontend, API, database and deployment.',
+    'about.method.3.title': 'Implementation',
+    'about.method.3.desc': 'Clean, typed code with TypeScript, Node.js and secure APIs (JWT).',
+    'about.method.4.title': 'Quality',
+    'about.method.4.desc': 'Continuous testing, Docker and review. Verified results all the way to production.',
     
     // Skills - Descripciones (NUEVAS)
     'skills.desc.frontend': 'Building modern and reactive interfaces',
@@ -110,6 +136,7 @@ const translations = {
     'projects.backend': 'Backend',
     'projects.fullstack': 'Full Stack',
     'projects.featured': 'Featured',
+    'projects.caseStudy': 'Case study',
     'projects.main': 'Main',
     'projects.tests': 'tests',
     'projects.demo': 'Demo',
@@ -177,6 +204,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('language', language);
   }, [language, isClient]);
 
+  // Sincronizar el atributo lang del <html> con el idioma (SEO bilingüe)
+  useEffect(() => {
+    if (!isClient) return;
+    document.documentElement.lang = language;
+  }, [language, isClient]);
+
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'es' ? 'en' : 'es');
   };
@@ -198,7 +231,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setTheme,
       t
     }}>
-      {children}
+      <MotionConfig reducedMotion="user">
+        {children}
+      </MotionConfig>
     </AppContext.Provider>
   );
 }
