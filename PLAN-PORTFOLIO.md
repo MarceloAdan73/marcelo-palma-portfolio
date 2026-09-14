@@ -254,6 +254,20 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
 
+### SESIÓN 2026-09-13k (FIX DE CI + VERIFICACIÓN — GitHub Actions en verde)
+1. El CI rompía tras el merge: `ERROR packages field missing or empty` en
+   `pnpm install --frozen-lockfile` — el `pnpm-workspace.yaml` (agregado en Sesión 1 con
+   `allowBuilds`) hacía que pnpm 9 del action tratara el repo como workspace sin `packages`.
+2. Fix (commits en `main`): CI alineada al pnpm LOCAL (vía campo `packageManager:
+   pnpm@11.11.0` en `package.json`, source of truth), `node 22`, cache de pnpm, orden
+   `pnpm/action-setup` ANTES de `setup-node` (para que encuentre pnpm al cachear) y
+   `pnpm-workspace.yaml` con `allowBuilds` (formato válido para pnpm 10/11). El campo
+   `pnpm.*` en package.json NO se lee en pnpm 11 (vive en el workspace yaml).
+3. Verificado local: install limpio, lint (sin errores nuevos), tests 21/21, build OK.
+4. CI: ✓ success (run 34795344199). Vercel ya había desplegado OK el merge anterior.
+5. Nota: el CI ejecuta `pnpm test` + `pnpm run build` (sin lint por los 9 errores
+   preexistentes documentados).
+
 ### SESIÓN 2026-09-13j (MERGE A MAIN + PUSH — Sesiones 6, 7 y 8 en producción)
 1. Marcelo aprobó visualmente en localhost:3000 (Sesión 8) y pidió el merge.
 2. `main` estaba atrás 18 commits y sin divergir → merge `--no-ff` de `test-cambios`
