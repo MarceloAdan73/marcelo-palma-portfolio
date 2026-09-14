@@ -127,13 +127,13 @@ const TerminalCard: React.FC = () => {
         <span className="w-2 h-2 rounded-full bg-green-500" />
       </span>
       <span className={`shrink-0 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>marcelo@dev:~$</span>
-      <span className="text-green-600">
-        <span className={dark ? 'text-green-400' : 'text-green-600'}>whoami</span>
-        <span className={`ml-2 ${dark ? 'text-gray-500' : 'text-gray-400'}`}>→</span>
+      <span className={dark ? 'text-green-400' : 'text-green-600'}>whoami</span>
+      <span className={`ml-2 ${dark ? 'text-gray-500' : 'text-gray-400'}`}>→</span>
+      <span className={dark ? 'text-gray-300' : 'text-gray-700'}>
+        <span className="lg:hidden">{language === 'es' ? 'full-stack · IA' : 'full-stack · AI'}</span>
+        <span className="hidden lg:inline">{language === 'es' ? 'full-stack · productos con IA' : 'full-stack · AI-powered products'}</span>
       </span>
-      <span className={`hidden lg:inline ${dark ? 'text-gray-300' : 'text-gray-700'}`}>
-        {language === 'es' ? 'full-stack · productos con IA' : 'full-stack · AI-powered products'}
-      </span>
+      <span className="sm:hidden ml-auto text-emerald-500 shrink-0">✔ live</span>
       <span className={`hidden sm:block mx-2 h-4 w-px shrink-0 ${dark ? 'bg-gray-700' : 'bg-gray-200'}`} />
       <span className={`hidden sm:flex items-center gap-3 ml-auto ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
         <span className="hidden lg:inline">npm run test</span>

@@ -257,6 +257,13 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
    backdrop-blur, sin negro forzado), en grilla `1/2/4` columnas. Columnas rebalanceadas
    (texto | foto+redes), H1 `md:text-5xl lg:text-6xl`, márgenes compactados y contenedor con
    `pt/pb` para que nada choque con header fijo ni con el indicador de scroll.
+5. **Terminal como barra de UNA línea** a lo ancho (feedback de Marcelo): `marcelo@dev:~$ whoami →
+   full-stack · IA`, derecha con `test ✔ 270 · deploy ✔ live` y cursor parpadeante; en mobile se
+   compacta a `whoami → full-stack · IA` + `✔ live` (sin truncados).
+6. **Sección hero con margen superior** `pt-20 lg:pt-24` para despegarla del header fijo.
+7. **Fix responsive mobile** (feedback de Marcelo): barra-terminal ya no queda cortada; Evolución
+   (About) pasa de timeline horizontal forzado a VERTICAL en mobile (línea `left-1/2`, dots
+   centrados) y mantiene la horizontal en `md+`.
 
 ### SESIÓN 2026-09-13h (SEO completo — SESIÓN 7 COMPLETADA en código)
 1. Nuevas rutas de metadatos en `app/`:

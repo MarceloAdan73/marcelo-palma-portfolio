@@ -456,8 +456,17 @@ const About: React.FC = () => {
             </div>
 
             <div className="relative max-w-4xl mx-auto">
-              {/* Línea de tiempo horizontal */}
-              <div className="absolute top-10 left-0 right-0 h-0.5">
+              {/* Línea de tiempo vertical en mobile */}
+              <div className="absolute top-10 bottom-0 left-1/2 w-0.5 -translate-x-1/2 md:hidden">
+                <div className={`
+                  w-full h-full
+                  ${theme === 'dark'
+                    ? 'bg-gradient-to-b from-gray-700 via-gray-600 to-gray-700'
+                    : 'bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300'}
+                `} />
+              </div>
+              {/* Línea de tiempo horizontal en desktop */}
+              <div className="absolute top-10 left-0 right-0 h-0.5 hidden md:block">
                 <div className={`
                   w-full h-full
                   ${theme === 'dark'
@@ -466,7 +475,7 @@ const About: React.FC = () => {
                 `} />
               </div>
 
-              <div className="relative flex justify-between items-stretch">
+              <div className="relative flex flex-col items-center md:flex-row md:justify-between md:items-stretch space-y-10 md:space-y-0">
                 {[
                   {
                     version: 'v1',
