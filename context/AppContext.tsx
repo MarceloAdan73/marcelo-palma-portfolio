@@ -61,7 +61,7 @@ const translations = {
     
     // Evolution section (NUEVAS - Sesión 5)
     'about.evolution.title': 'Evolución',
-    'about.evolution.subtitle': 'Cómo crecen los proyectos: Task Manager Pro',
+    'about.evolution.subtitle': 'Evolución de un proyecto insignia: Task Manager Pro',
     'about.evolution.v1.title': 'v1 — Fundamentos',
     'about.evolution.v1.desc': 'CRUD básico, autenticación simple, SQLite',
     'about.evolution.v2.title': 'v2 — Arquitectura',
@@ -164,7 +164,7 @@ const translations = {
     
     // Evolution section (NEW - Session 5)
     'about.evolution.title': 'Evolution',
-    'about.evolution.subtitle': 'How projects grow: Task Manager Pro',
+    'about.evolution.subtitle': 'Evolution of a flagship project: Task Manager Pro',
     'about.evolution.v1.title': 'v1 — Foundations',
     'about.evolution.v1.desc': 'Basic CRUD, simple auth, SQLite',
     'about.evolution.v2.title': 'v2 — Architecture',
