@@ -254,6 +254,16 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
 
+### SESIÓN 2026-09-13l (CIERRE — ajustes finales y verificación en producción)
+1. Fix scroll del Hero: el indicador "Scroll" pasó de `absolute` (lo recortaba el
+   `overflow-hidden` de la sección cuando el contenido excedía la pantalla) a flujo normal
+   debajo de la terminal, centrado, con padding inferior ajustado (`pb-12/16`). Commit
+   `fc8e2ca` → push y deploy OK.
+2. CI verificado en verde (GitHub Actions: `pnpm test` + `pnpm run build`).
+3. Vercel sirviendo el estado final correctamente (merge Sesiones 6-8 + fix scroll).
+4. Pendientes intactos para próximas sesiones: demo 30s (opcional) y validación de rutas
+   SEO en producción (/sitemap.xml, /robots.txt, /opengraph-image) sin 404s.
+
 ### SESIÓN 2026-09-13k (FIX DE CI + VERIFICACIÓN — GitHub Actions en verde)
 1. El CI rompía tras el merge: `ERROR packages field missing or empty` en
    `pnpm install --frozen-lockfile` — el `pnpm-workspace.yaml` (agregado en Sesión 1 con
