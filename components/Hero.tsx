@@ -3,10 +3,150 @@
 import { useState, useEffect, useRef } from "react";
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaDocker, FaArrowDown, FaGlobe } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import { useApp } from '@/context/AppContext';
+
+// Contador animado (definido a nivel de módulo para no re-montarse en cada re-render)
+const Counter: React.FC<{ value: number; label: string; start: boolean }> = ({ value, label, start }) => {
+  const { theme } = useApp();
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!start) return;
+
+    const duration = 2000;
+    const steps = 60;
+    const increment = value / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [value, start]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        {count}+
+      </div>
+      <div className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}`}>
+        {label}
+      </div>
+    </motion.div>
+  );
+};
+
+// Rol rotativo (typing/rotación)
+const RotatingRole: React.FC = () => {
+  const { language } = useApp();
+  const roles =
+    language === 'es'
+      ? ['Desarrollador Full-Stack', 'Backend Developer', 'Ingeniería con tests', 'Automatización con IA']
+      : ['Full-Stack Developer', 'Backend Developer', 'Test-Driven Engineering', 'AI Automation'];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % roles.length), 3000);
+    return () => clearInterval(id);
+  }, [roles.length]);
+
+  return (
+    <span className="inline-flex overflow-hidden h-8 items-center align-bottom">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={roles[index]}
+          initial={{ y: '100%', opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: '-100%', opacity: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+        >
+          {roles[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+};
+
+// Botón magnético
+const Magnetic: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 180, damping: 15 });
+  const sy = useSpring(y, { stiffness: 180, damping: 15 });
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ x: sx, y: sy }}
+      onMouseMove={(e) => {
+        if (ref.current) {
+          const rect = ref.current.getBoundingClientRect();
+          x.set((e.clientX - rect.left - rect.width / 2) * 0.3);
+          y.set((e.clientY - rect.top - rect.height / 2) * 0.3);
+        }
+      }}
+      onMouseLeave={() => {
+        x.set(0);
+        y.set(0);
+      }}
+      className="flex-1 sm:flex-none"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+// Terminal mockup (franja inferior integrada al tema)
+const TerminalCard: React.FC = () => {
+  const { language, theme } = useApp();
+  const dark = theme === 'dark';
+
+  return (
+    <div className={`w-full flex flex-nowrap items-center gap-2 md:gap-3 px-3 md:px-4 py-2 font-mono text-[11px] md:text-xs rounded-xl border overflow-hidden shadow-lg backdrop-blur-sm ${
+      dark ? 'bg-gray-950/70 border-gray-700/70' : 'bg-white/80 border-gray-200'
+    }`}>
+      <span className="hidden sm:flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+        <span className="w-2 h-2 rounded-full bg-red-500" />
+        <span className="w-2 h-2 rounded-full bg-yellow-500" />
+        <span className="w-2 h-2 rounded-full bg-green-500" />
+      </span>
+      <span className={`shrink-0 whitespace-nowrap ${dark ? 'text-gray-400' : 'text-gray-500'}`}>marcelo@dev:~$</span>
+      <span className={`shrink-0 whitespace-nowrap ${dark ? 'text-green-400' : 'text-green-600'}`}>whoami</span>
+      <span className={`shrink-0 whitespace-nowrap ${dark ? 'text-gray-500' : 'text-gray-400'}`}>→</span>
+      <span className={`flex-1 min-w-0 truncate ${dark ? 'text-gray-300' : 'text-gray-700'}`}>
+        <span className="lg:hidden">{language === 'es' ? 'full-stack · IA' : 'full-stack · AI'}</span>
+        <span className="hidden lg:inline">{language === 'es' ? 'full-stack · productos con IA' : 'full-stack · AI-powered products'}</span>
+      </span>
+      <span className="sm:hidden ml-auto shrink-0 whitespace-nowrap text-emerald-500">✔ live</span>
+      <span className={`hidden sm:block mx-2 h-4 w-px shrink-0 ${dark ? 'bg-gray-700' : 'bg-gray-200'}`} />
+      <span className={`hidden sm:flex ml-auto items-center gap-2 shrink-0 whitespace-nowrap ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
+        <span className="hidden lg:inline">npm run test</span>
+        <span className="text-emerald-500">✔ 270</span>
+      </span>
+      <span className={`hidden sm:flex items-center gap-2 shrink-0 whitespace-nowrap ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
+        <span className="hidden lg:inline">deploy</span>
+        <span className="text-emerald-500">✔ live</span>
+      </span>
+      <span className="inline-block w-2 h-3.5 bg-gray-400 animate-pulse shrink-0 whitespace-nowrap" />
+    </div>
+  );
+};
 
 const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
   const { t, theme, language } = useApp();
@@ -55,54 +195,13 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
     }
   };
 
-  // Contador animado para stats
-  const Counter = ({ value, label }: { value: number; label: string }) => {
-    const [count, setCount] = useState(0);
-    
-    useEffect(() => {
-      if (!mounted) return;
-      
-      const duration = 2000;
-      const steps = 60;
-      const increment = value / steps;
-      let current = 0;
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= value) {
-          setCount(value);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(current));
-        }
-      }, duration / steps);
-      
-      return () => clearInterval(timer);
-    }, [value, mounted]);
-    
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          {count}+
-        </div>
-        <div className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}`}>
-          {label}
-        </div>
-      </motion.div>
-    );
-  };
-
   if (!mounted) return null;
 
   return (
     <section 
       id="hero" 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-12 lg:pt-24 lg:pb-16"
     >
       {/* Fondo con gradiente dinámico y partículas */}
       <div className="absolute inset-0 -z-10">
@@ -127,38 +226,67 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
           `}
         />
         
-        {/* Círculos de luz que siguen al mouse */}
+        {/* Aurora animada que sigue al mouse */}
         <motion.div
           animate={{
-            x: mousePosition.x * 50,
-            y: mousePosition.y * 50,
+            x: mousePosition.x * 60,
+            y: mousePosition.y * 60,
           }}
-          transition={{ type: "spring", damping: 50 }}
-          className={`
-            absolute -top-40 -right-40 w-96 h-96 rounded-full 
-            ${theme === 'dark' 
-              ? 'bg-purple-600/20' 
-              : 'bg-purple-300/30'}
-            blur-3xl
-          `}
-        />
+          transition={{ type: "spring", damping: 40 }}
+          className="absolute -top-40 -right-40"
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.25, 1],
+              opacity: [0.8, 1, 0.8],
+            }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            className={`w-96 h-96 rounded-full blur-3xl ${
+              theme === 'dark' ? 'bg-purple-600/25' : 'bg-purple-300/40'
+            }`}
+          />
+        </motion.div>
         <motion.div
           animate={{
-            x: mousePosition.x * -50,
-            y: mousePosition.y * -50,
+            x: mousePosition.x * -60,
+            y: mousePosition.y * -60,
           }}
-          transition={{ type: "spring", damping: 50 }}
-          className={`
-            absolute -bottom-40 -left-40 w-96 h-96 rounded-full 
-            ${theme === 'dark' 
-              ? 'bg-blue-600/20' 
-              : 'bg-blue-300/30'}
-            blur-3xl
-          `}
-        />
+          transition={{ type: "spring", damping: 40 }}
+          className="absolute -bottom-40 -left-40"
+        >
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.7, 1, 0.7],
+            }}
+            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+            className={`w-96 h-96 rounded-full blur-3xl ${
+              theme === 'dark' ? 'bg-blue-600/25' : 'bg-blue-300/40'
+            }`}
+          />
+        </motion.div>
+        <motion.div
+          animate={{
+            x: mousePosition.x * 30,
+            y: mousePosition.y * -30,
+          }}
+          transition={{ type: "spring", damping: 40 }}
+          className="absolute top-1/3 left-1/3"
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.15, 1],
+              opacity: [0.5, 0.8, 0.5],
+            }}
+            transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+            className={`w-72 h-72 rounded-full blur-3xl ${
+              theme === 'dark' ? 'bg-cyan-600/20' : 'bg-cyan-300/30'
+            }`}
+          />
+        </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 pt-6 pb-28 lg:pt-8 lg:pb-32">
         <motion.div 
           className="max-w-5xl mx-auto"
           variants={staggerContainer}
@@ -191,7 +319,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               className="text-center md:text-left"
             >
               <h1 className={`
-                text-4xl md:text-6xl font-bold mb-4
+                text-4xl md:text-5xl lg:text-6xl font-bold mb-3
                 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}
               `}>
                 Marcelo{' '}
@@ -201,64 +329,67 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               </h1>
               
               <p className={`
-                text-lg md:text-xl mb-6
+                text-lg md:text-xl mb-5 flex flex-wrap items-center justify-center md:justify-start gap-x-2
                 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
               `}>
-                {t('hero.role')} · {projectCount} {t('hero.projects')}
+                <RotatingRole />
+                <span>· {projectCount} {t('hero.projects')}</span>
               </p>
 
               <p className={`
-                text-sm md:text-base mb-8 leading-relaxed max-w-md mx-auto md:mx-0
+                text-sm md:text-base mb-6 leading-relaxed max-w-md mx-auto md:mx-0
                 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
               `}>
                 {t('hero.description')}
               </p>
 
               {/* Botones CTA */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 sm:flex-none"
-                >
-                  <Link
-                    href="#projects"
-                    className="relative group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium overflow-hidden"
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-6">
+                <Magnetic>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <span className="relative z-10">{t('hero.viewProjects')}</span>
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600"
-                      initial={{ x: '100%' }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </motion.div>
-                
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 sm:flex-none"
-                >
-                  <Link
-                    href="#contact"
-                    className={`
-                      inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 rounded-lg font-medium transition-all
-                      ${theme === 'dark'
-                        ? 'border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10'
-                        : 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50'}
-                    `}
+                    <Link
+                      href="#projects"
+                      className="relative group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium overflow-hidden"
+                    >
+                      <span className="relative z-10">{t('hero.viewProjects')}</span>
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600"
+                        initial={{ x: '100%' }}
+                        whileHover={{ x: 0 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </Link>
+                  </motion.div>
+                </Magnetic>
+
+                <Magnetic>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {t('hero.contact')}
-                  </Link>
-                </motion.div>
+                    <Link
+                      href="#contact"
+                      className={`
+                        inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 rounded-lg font-medium transition-all
+                        ${theme === 'dark'
+                          ? 'border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10'
+                          : 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50'}
+                      `}
+                    >
+                      {t('hero.contact')}
+                    </Link>
+                  </motion.div>
+                </Magnetic>
               </div>
 
               {/* Stats rápidas */}
-              <div className="flex gap-6 justify-center md:justify-start">
-                <Counter value={270} label="Tests" />
-                <Counter value={projectCount} label="Proyectos" />
-                <Counter value={7} label="Stacks" />
+              <div className="flex gap-5 justify-center md:justify-start">
+                <Counter value={270} label={t('hero.stats.tests')} start={mounted} />
+                <Counter value={projectCount} label={t('hero.stats.projects')} start={mounted} />
+                <Counter value={7} label={t('hero.stats.stacks')} start={mounted} />
               </div>
             </motion.div>
 
@@ -269,6 +400,19 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
             >
               {/* Foto con marco animado */}
               <div className="relative w-72 h-72 mx-auto">
+                {/* Spotlight que sigue al mouse sobre la foto */}
+                <motion.div
+                  animate={{
+                    x: mousePosition.x * 24,
+                    y: mousePosition.y * 24,
+                  }}
+                  transition={{ type: "spring", damping: 30 }}
+                  className="absolute -inset-6 rounded-full pointer-events-none z-10"
+                  style={{
+                    background: 'radial-gradient(circle at center, rgba(168,85,247,0.25), transparent 65%)',
+                    mixBlendMode: theme === 'dark' ? 'screen' : 'multiply',
+                  }}
+                />
                 {/* Anillos rotatorios */}
                 <motion.div
                   animate={{ rotate: 360 }}
@@ -371,13 +515,15 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               {/* Redes sociales - MISMO COLOR HOVER para ambos */}
               <motion.div 
                 variants={fadeInUp}
-                className="flex justify-center gap-4 mt-8"
+                className="flex justify-center gap-4 mt-6"
               >
                 <motion.a
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   href="https://github.com/MarceloAdan73"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="GitHub (nueva pestaña)"
+                  title="GitHub"
                   className={`
                     p-3 rounded-lg transition-all relative group overflow-hidden
                     ${theme === 'dark'
@@ -398,6 +544,8 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
                   href="https://linkedin.com/in/marcelo-adan-palma"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="LinkedIn (nueva pestaña)"
+                  title="LinkedIn"
                   className={`
                     p-3 rounded-lg transition-all relative group overflow-hidden
                     ${theme === 'dark'
@@ -418,6 +566,8 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
                   href="https://nodoweb.digital"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Nodoweb Digital (nueva pestaña)"
+                  title="Nodoweb Digital"
                   className={`
                     p-3 rounded-lg transition-all relative group overflow-hidden
                     ${theme === 'dark'
@@ -435,12 +585,17 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
             </motion.div>
           </div>
 
+          {/* Terminal mockup — franja de una línea a lo ancho */}
+          <div className="mt-6 lg:mt-8">
+            <TerminalCard />
+          </div>
+
           {/* Scroll indicator */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
           >
             <Link
               href="#about"

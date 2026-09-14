@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 
 type Language = 'es' | 'en';
 type Theme = 'light' | 'dark';
@@ -26,15 +27,47 @@ const translations = {
     'nav.contact': 'Contacto',
     'hero.role': 'Desarrollador Full-Stack',
     'hero.projects': 'proyectos completados',
-    'hero.description': 'incluyendo Task Manager Pro, CodeMp-AI, BlackBox Monitor y más.',
+    'hero.description': 'Construyo soluciones completas: de la idea al despliegue, con arquitectura, testing y calidad real.',
     'hero.viewProjects': 'Ver proyectos',
     'hero.contact': 'Contactar',
     'hero.available': 'Disponible para trabajar',
+    'hero.stats.projects': 'Proyectos',
+    'hero.stats.tests': 'Tests',
+    'hero.stats.stacks': 'Stacks',
     'about.title': 'Trayectoria',
     'about.subtitle': 'Aprendizaje continuo basado en proyectos',
     'about.featured': 'Proyecto insignia',
     'about.mainStack': 'Stack principal',
     'about.appliedIn': 'aplicados en proyectos reales',
+    'about.method.title': 'Cómo trabajo',
+    'about.method.1.title': 'Análisis',
+    'about.method.1.desc': 'Entiendo el problema real antes de escribir una sola línea de código.',
+    'about.method.2.title': 'Arquitectura',
+    'about.method.2.desc': 'Defino la estructura: frontend, API, base de datos y despliegue.',
+    'about.method.3.title': 'Implementación',
+    'about.method.3.desc': 'Código limpio y tipado con TypeScript, Node.js y APIs seguras (JWT).',
+    'about.method.4.title': 'Calidad',
+    'about.method.4.desc': 'Testing continuo, Docker y revisión. Resultado verificado hasta producción.',
+    
+    // Engineering section (NUEVAS - Sesión 5)
+    'about.engineering.title': 'Ingeniería',
+    'about.engineering.subtitle': 'Stack real de trabajo diario',
+    'about.engineering.frontend': 'Frontend',
+    'about.engineering.frontend.desc': 'Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion',
+    'about.engineering.backend': 'Backend',
+    'about.engineering.backend.desc': 'Node.js, Express, Prisma ORM, PostgreSQL, REST APIs',
+    'about.engineering.quality': 'Calidad & DevOps',
+    'about.engineering.quality.desc': 'Jest + RTL, Docker, JWT Auth, CI/CD, ESLint, Prettier',
+    
+    // Evolution section (NUEVAS - Sesión 5)
+    'about.evolution.title': 'Evolución',
+    'about.evolution.subtitle': 'Evolución de un proyecto insignia: Task Manager Pro',
+    'about.evolution.v1.title': 'v1 — Fundamentos',
+    'about.evolution.v1.desc': 'CRUD básico, autenticación simple, SQLite',
+    'about.evolution.v2.title': 'v2 — Arquitectura',
+    'about.evolution.v2.desc': 'Clean Architecture, Prisma + PostgreSQL, JWT, 86 tests, Docker',
+    'about.evolution.v3.title': 'v3 — Escalabilidad',
+    'about.evolution.v3.desc': 'React Query, Redis cache, WebSockets, CI/CD, 270+ tests, despliegue prod',
     
     // Skills - Descripciones (NUEVAS)
     'skills.desc.frontend': 'Construyendo interfaces modernas y reactivas',
@@ -53,12 +86,26 @@ const translations = {
     'projects.backend': 'Backend',
     'projects.fullstack': 'Full Stack',
     'projects.featured': 'Destacado',
+    'projects.caseStudy': 'Caso de estudio',
     'projects.main': 'Principal',
     'projects.tests': 'tests',
     'projects.demo': 'Demo',
     'projects.code': 'Código',
     'projects.viewProject': 'Ver Proyecto',
     'projects.noProjects': 'No hay proyectos en esta categoría aún.',
+    'project.back': 'Volver a proyectos',
+    'project.overview': 'Resumen',
+    'project.problem': 'Problema',
+    'project.solution': 'Solución',
+    'project.highlights': 'Decisiones técnicas',
+    'project.architecture': 'Arquitectura',
+    'project.result': 'Resultado',
+    'project.metrics': 'Métricas',
+    'project.techStack': 'Stack',
+    'project.notFoundTitle': 'Proyecto no encontrado',
+    'project.notFoundDesc': 'El proyecto que buscas no existe o todavía no tiene página de detalle.',
+    'project.demo': 'Demo',
+    'project.code': 'Código',
     'contact.title': 'Contacto',
     'contact.email': 'Email',
     'contact.phone': 'Teléfono',
@@ -83,15 +130,47 @@ const translations = {
     'nav.contact': 'Contact',
     'hero.role': 'Full-Stack Developer',
     'hero.projects': 'completed projects',
-    'hero.description': 'including Task Manager Pro, CodeMp-AI, BlackBox Monitor and more.',
+    'hero.description': 'I build complete solutions: from idea to deploy, with architecture, real testing and quality.',
     'hero.viewProjects': 'View projects',
     'hero.contact': 'Contact me',
     'hero.available': 'Available for work',
+    'hero.stats.projects': 'Projects',
+    'hero.stats.tests': 'Tests',
+    'hero.stats.stacks': 'Stacks',
     'about.title': 'About',
     'about.subtitle': 'Continuous project-based learning',
     'about.featured': 'Featured project',
     'about.mainStack': 'Main stack',
     'about.appliedIn': 'applied in real projects',
+    'about.method.title': 'How I work',
+    'about.method.1.title': 'Analysis',
+    'about.method.1.desc': 'I understand the real problem before writing a single line of code.',
+    'about.method.2.title': 'Architecture',
+    'about.method.2.desc': 'I define the structure: frontend, API, database and deployment.',
+    'about.method.3.title': 'Implementation',
+    'about.method.3.desc': 'Clean, typed code with TypeScript, Node.js and secure APIs (JWT).',
+    'about.method.4.title': 'Quality',
+    'about.method.4.desc': 'Continuous testing, Docker and review. Verified results all the way to production.',
+    
+    // Engineering section (NEW - Session 5)
+    'about.engineering.title': 'Engineering',
+    'about.engineering.subtitle': 'Real daily work stack',
+    'about.engineering.frontend': 'Frontend',
+    'about.engineering.frontend.desc': 'Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion',
+    'about.engineering.backend': 'Backend',
+    'about.engineering.backend.desc': 'Node.js, Express, Prisma ORM, PostgreSQL, REST APIs',
+    'about.engineering.quality': 'Quality & DevOps',
+    'about.engineering.quality.desc': 'Jest + RTL, Docker, JWT Auth, CI/CD, ESLint, Prettier',
+    
+    // Evolution section (NEW - Session 5)
+    'about.evolution.title': 'Evolution',
+    'about.evolution.subtitle': 'Evolution of a flagship project: Task Manager Pro',
+    'about.evolution.v1.title': 'v1 — Foundations',
+    'about.evolution.v1.desc': 'Basic CRUD, simple auth, SQLite',
+    'about.evolution.v2.title': 'v2 — Architecture',
+    'about.evolution.v2.desc': 'Clean Architecture, Prisma + PostgreSQL, JWT, 86 tests, Docker',
+    'about.evolution.v3.title': 'v3 — Scalability',
+    'about.evolution.v3.desc': 'React Query, Redis cache, WebSockets, CI/CD, 270+ tests, prod deploy',
     
     // Skills - Descripciones (NUEVAS)
     'skills.desc.frontend': 'Building modern and reactive interfaces',
@@ -110,12 +189,26 @@ const translations = {
     'projects.backend': 'Backend',
     'projects.fullstack': 'Full Stack',
     'projects.featured': 'Featured',
+    'projects.caseStudy': 'Case study',
     'projects.main': 'Main',
     'projects.tests': 'tests',
     'projects.demo': 'Demo',
     'projects.code': 'Code',
     'projects.viewProject': 'View Project',
     'projects.noProjects': 'No projects in this category yet.',
+    'project.back': 'Back to projects',
+    'project.overview': 'Overview',
+    'project.problem': 'Problem',
+    'project.solution': 'Solution',
+    'project.highlights': 'Technical decisions',
+    'project.architecture': 'Architecture',
+    'project.result': 'Result',
+    'project.metrics': 'Metrics',
+    'project.techStack': 'Stack',
+    'project.notFoundTitle': 'Project not found',
+    'project.notFoundDesc': 'The project you are looking for does not exist or does not have a detail page yet.',
+    'project.demo': 'Live demo',
+    'project.code': 'Source code',
     'contact.title': 'Contact',
     'contact.email': 'Email',
     'contact.phone': 'Phone',
@@ -177,6 +270,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('language', language);
   }, [language, isClient]);
 
+  // Sincronizar el atributo lang del <html> con el idioma (SEO bilingüe)
+  useEffect(() => {
+    if (!isClient) return;
+    document.documentElement.lang = language;
+  }, [language, isClient]);
+
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'es' ? 'en' : 'es');
   };
@@ -198,7 +297,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setTheme,
       t
     }}>
-      {children}
+      <MotionConfig reducedMotion="user">
+        {children}
+      </MotionConfig>
     </AppContext.Provider>
   );
 }

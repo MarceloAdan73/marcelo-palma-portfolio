@@ -5,12 +5,12 @@ import { motion, useInView } from 'framer-motion';
 import { 
   FaReact, FaNodeJs, FaDocker, FaRocket, FaCode, 
   FaChartLine, FaMedal, FaAward,
-  FaCrown
+  FaCrown, FaSearch, FaProjectDiagram, FaShieldAlt
 } from 'react-icons/fa';
 import { 
   SiNextdotjs, SiTypescript, SiJest, SiPostgresql, SiPrisma, SiExpress, 
   SiTailwindcss, SiPython, SiAngular, SiVuedotjs, SiDjango, SiFastapi,
-  SiElectron, SiJsonwebtokens
+  SiElectron, SiJsonwebtokens, SiNodedotjs, SiDocker
 } from 'react-icons/si';
 import { MdTask } from 'react-icons/md';
 import { VscVerified } from 'react-icons/vsc';
@@ -270,6 +270,299 @@ const About: React.FC = () => {
             >
               {t('about.subtitle')}
             </motion.p>
+          </motion.div>
+
+          {/* Método de trabajo: cómo encara y resuelve problemas reales */}
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <div className="text-center mb-8">
+              <h3 className={`text-2xl md:text-3xl font-bold mb-3 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
+                {t('about.method.title')}
+              </h3>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  icon: <FaSearch className="text-lg" aria-label={t('about.method.1.title')} />,
+                  title: t('about.method.1.title'),
+                  desc: t('about.method.1.desc'),
+                },
+                {
+                  icon: <FaProjectDiagram className="text-lg" aria-label={t('about.method.2.title')} />,
+                  title: t('about.method.2.title'),
+                  desc: t('about.method.2.desc'),
+                },
+                {
+                  icon: <FaCode className="text-lg" aria-label={t('about.method.3.title')} />,
+                  title: t('about.method.3.title'),
+                  desc: t('about.method.3.desc'),
+                },
+                {
+                  icon: <FaShieldAlt className="text-lg" aria-label={t('about.method.4.title')} />,
+                  title: t('about.method.4.title'),
+                  desc: t('about.method.4.desc'),
+                },
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
+                  whileHover={{ y: -5 }}
+                  className={`
+                    rounded-2xl p-6 backdrop-blur-lg
+                    ${theme === 'dark'
+                      ? 'bg-gray-900/50 border border-gray-700/50'
+                      : 'bg-white/50 border border-gray-200/50'}
+                    shadow-xl hover:shadow-2xl transition-all
+                  `}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white shadow-lg">
+                      {step.icon}
+                    </div>
+                    <span className="text-xs font-bold text-blue-500">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h4 className={`font-semibold mb-2 ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    {step.title}
+                  </h4>
+                  <p className={`text-xs leading-relaxed ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                    {step.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Ingeniería: stack real de trabajo diario */}
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="text-center mb-8">
+              <h3 className={`text-2xl md:text-3xl font-bold mb-3 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
+                {t('about.engineering.title')}
+              </h3>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+              <p className={`mt-2 text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                {t('about.engineering.subtitle')}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: t('about.engineering.frontend'),
+                  desc: t('about.engineering.frontend.desc'),
+                  icon: <SiNextdotjs className="text-2xl" />,
+                  color: 'from-gray-700 to-gray-900',
+                  techs: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+                },
+                {
+                  title: t('about.engineering.backend'),
+                  desc: t('about.engineering.backend.desc'),
+                  icon: <SiNodedotjs className="text-2xl" />,
+                  color: 'from-green-500 to-emerald-600',
+                  techs: ['Node.js', 'Express', 'Prisma ORM', 'PostgreSQL', 'REST APIs'],
+                },
+                {
+                  title: t('about.engineering.quality'),
+                  desc: t('about.engineering.quality.desc'),
+                  icon: <SiDocker className="text-2xl" />,
+                  color: 'from-blue-500 to-cyan-500',
+                  techs: ['Jest + RTL', 'Docker', 'JWT Auth', 'CI/CD', 'ESLint/Prettier'],
+                },
+              ].map((cat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.5 + i * 0.15 }}
+                  whileHover={{ y: -5 }}
+                  className={`
+                    rounded-2xl p-6 backdrop-blur-lg
+                    ${theme === 'dark'
+                      ? 'bg-gray-900/50 border border-gray-700/50'
+                      : 'bg-white/50 border border-gray-200/50'}
+                    shadow-xl hover:shadow-2xl transition-all
+                  `}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center text-white shadow-lg`}>
+                      {cat.icon}
+                    </div>
+                  </div>
+                  <h4 className={`font-semibold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                    {cat.title}
+                  </h4>
+                  <p className={`text-sm leading-relaxed mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                    {cat.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.techs.map((tech, j) => (
+                      <span
+                        key={j}
+                        className={`
+                          px-3 py-1 text-xs rounded-lg
+                          ${theme === 'dark'
+                            ? 'bg-gray-800 text-gray-300'
+                            : 'bg-gray-100 text-gray-700'}
+                        `}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Evolución: cómo crecen los proyectos (Task Manager Pro) */}
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <div className="text-center mb-8">
+              <h3 className={`text-2xl md:text-3xl font-bold mb-3 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
+                {t('about.evolution.title')}
+              </h3>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
+              <p className={`mt-2 text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                {t('about.evolution.subtitle')}
+              </p>
+            </div>
+
+            <div className="relative max-w-4xl mx-auto">
+              {/* Línea de tiempo vertical en mobile */}
+              <div className="absolute top-10 bottom-0 left-1/2 w-0.5 -translate-x-1/2 md:hidden">
+                <div className={`
+                  w-full h-full
+                  ${theme === 'dark'
+                    ? 'bg-gradient-to-b from-gray-700 via-gray-600 to-gray-700'
+                    : 'bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300'}
+                `} />
+              </div>
+              {/* Línea de tiempo horizontal en desktop */}
+              <div className="absolute top-10 left-0 right-0 h-0.5 hidden md:block">
+                <div className={`
+                  w-full h-full
+                  ${theme === 'dark'
+                    ? 'bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700'
+                    : 'bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300'}
+                `} />
+              </div>
+
+              <div className="relative flex flex-col items-center md:flex-row md:justify-between md:items-stretch space-y-10 md:space-y-0">
+                {[
+                  {
+                    version: 'v1',
+                    title: t('about.evolution.v1.title'),
+                    desc: t('about.evolution.v1.desc'),
+                    metrics: { tests: 0, docker: false, jwt: false },
+                    color: 'from-gray-500 to-gray-600',
+                  },
+                  {
+                    version: 'v2',
+                    title: t('about.evolution.v2.title'),
+                    desc: t('about.evolution.v2.desc'),
+                    metrics: { tests: 86, docker: true, jwt: true },
+                    color: 'from-blue-500 to-purple-600',
+                  },
+                  {
+                    version: 'v3',
+                    title: t('about.evolution.v3.title'),
+                    desc: t('about.evolution.v3.desc'),
+                    metrics: { tests: 270, docker: true, jwt: true },
+                    color: 'from-purple-600 to-pink-500',
+                  },
+                ].map((stage, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.6 + i * 0.2 }}
+                    className="relative flex flex-col items-center"
+                  >
+                    {/* Punto en la línea */}
+                    <div className={`w-20 h-20 rounded-full flex items-center justify-center text-white shadow-xl relative z-10 bg-gradient-to-br ${stage.color}`}>
+                      <span className="text-2xl font-bold">{stage.version}</span>
+                    </div>
+
+                    {/* Tarjeta de contenido */}
+<motion.div
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      className={`
+                        w-full max-w-xs mt-6 p-5 rounded-2xl backdrop-blur-lg h-full flex flex-col
+                        ${theme === 'dark'
+                          ? 'bg-gray-900/50 border border-gray-700/50'
+                          : 'bg-white/50 border border-gray-200/50'}
+                        shadow-xl hover:shadow-2xl transition-all
+                      `}
+                    >
+                      <h4 className={`font-semibold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                        {stage.title}
+                      </h4>
+                      <p className={`text-sm leading-relaxed mb-4 flex-grow ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {stage.desc}
+                      </p>
+<div className="flex flex-wrap items-center gap-2 mt-auto">
+                        {stage.metrics.tests > 0 && (
+                          <span className={`
+                            px-2 py-1 text-xs rounded-full font-medium
+                            ${theme === 'dark' ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'}
+                            min-w-[60px]
+                          `}>
+                            {stage.metrics.tests} tests
+                          </span>
+                        )}
+                        {stage.metrics.docker && (
+                          <span className={`
+                            px-2 py-1 text-xs rounded-full font-medium
+                            ${theme === 'dark' ? 'bg-blue-500/20 text-blue-400' : 'bg-blue-100 text-blue-700'}
+                            min-w-[40px]
+                          `}>
+                            Docker
+                          </span>
+                        )}
+                        {stage.metrics.jwt && (
+                          <span className={`
+                            px-2 py-1 text-xs rounded-full font-medium
+                            ${theme === 'dark' ? 'bg-purple-500/20 text-purple-400' : 'bg-purple-100 text-purple-700'}
+                            min-w-[40px]
+                          `}>
+                            JWT
+                          </span>
+                        )}
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           {/* Grid principal */}

@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { 
   FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaPython, FaAngular, FaVuejs,
@@ -22,8 +24,11 @@ type ProjectCategory = 'all' | 'frontend' | 'backend' | 'fullstack';
 interface Project {
   id: string;
   title: string;
+  slug: string;
   description: string;
   descriptionEn: string;
+  problem: string;
+  problemEn: string;
   image: string;
   icon: React.ReactNode;
   iconColor: string;
@@ -32,6 +37,7 @@ interface Project {
   demoLink: string;
   codeLink: string;
   featured: boolean;
+  showcase: boolean;
   metrics?: {
     tests?: number;
     docker?: boolean;
@@ -83,8 +89,11 @@ function mapSanityToProject(sanity: SanityProject, index: number): Project {
   return {
     id: sanity._id,
     title: sanity.title,
+    slug: sanity.slug || '',
     description: sanity.description || '',
     descriptionEn: sanity.descriptionEn || sanity.description || '',
+    problem: sanity.problem || '',
+    problemEn: sanity.problemEn || sanity.problem || '',
     image: sanity.imageUrl || '/placeholder.png',
     icon: getProjectIcon(sanity.icon, index),
     iconColor: sanity.iconColor || iconColors[index % iconColors.length],
@@ -93,12 +102,21 @@ function mapSanityToProject(sanity: SanityProject, index: number): Project {
     demoLink: sanity.liveUrl || '',
     codeLink: sanity.githubUrl || '',
     featured: sanity.featured,
+    showcase: sanity.showcase || false,
     metrics: sanity.metrics ? {
       tests: sanity.metrics.tests || undefined,
       docker: sanity.metrics.docker || undefined,
       jwt: sanity.metrics.jwt || undefined,
     } : undefined,
   };
+}
+
+function getHighlightMetric(project: Project, t: (key: string) => string): { icon: React.ReactNode; label: string } | null {
+  const m = project.metrics;
+  if (m?.tests) return { icon: <TbTestPipe className="text-xs" aria-hidden="true" />, label: `${m.tests} ${t('projects.tests')}` };
+  if (m?.docker) return { icon: <FaDocker className="text-xs" aria-hidden="true" />, label: 'Docker' };
+  if (m?.jwt) return { icon: <FaLock className="text-xs" aria-hidden="true" />, label: 'JWT' };
+  return null;
 }
 
 interface Category {
@@ -209,7 +227,10 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                 </p>
               </div>
             ) : (
-              filteredProjects.map((project, index) => (
+              filteredProjects.map((project, index) => {
+              const highlight = getHighlightMetric(project, t);
+              const detailHref = project.showcase && project.slug ? `/projects/${project.slug}` : null;
+              return (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -224,17 +245,39 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                   ${theme === 'dark' 
                     ? 'bg-gray-800 border border-gray-700' 
                     : 'bg-white border border-gray-200'}
+                  ${project.showcase 
+                    ? theme === 'dark'
+                      ? 'ring-2 ring-purple-500/40 border-transparent'
+                      : 'ring-2 ring-purple-400/40 border-transparent'
+                    : ''}
                   shadow-lg hover:shadow-2xl transition-all duration-300
                 `}>
                   
-                  {/* Imagen */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img
+                  <div className={`
+                  relative h-48 overflow-hidden
+                `}>
+                  {detailHref ? (
+                    <Link href={detailHref} aria-label={project.title} className="block h-full w-full relative">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        loading="lazy"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </Link>
+                  ) : (
+                    <Image
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      loading="lazy"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     
                     {/* Badge de featured */}
                     {project.featured && (
@@ -259,21 +302,51 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
 
                   {/* Contenido */}
                   <div className="p-6 flex flex-col flex-1">
-                    <h3 className={`text-xl font-bold mb-2 ${
-                      theme === 'dark' ? 'text-white' : 'text-gray-900'
-                    }`}>
-                      {project.title}
-                    </h3>
-                    
-                    <p className={`text-sm mb-4 line-clamp-2 ${
+                    {/* Badge case study (solo showcase) */}
+                    {project.showcase && (
+                      <span className="mb-2 self-start px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+                        {t('projects.caseStudy')}
+                      </span>
+                    )}
+
+                    {detailHref ? (
+                      <Link href={detailHref} className="hover:opacity-80 transition-opacity">
+                        <h3 className={`text-xl font-bold mb-2 ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>
+                          {project.title}
+                        </h3>
+                      </Link>
+                    ) : (
+                      <h3 className={`text-xl font-bold mb-2 ${
+                        theme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}>
+                        {project.title}
+                      </h3>
+                    )}
+
+                    {/* Problema como tagline */}
+                    <p className={`text-sm mb-3 line-clamp-2 ${
                       theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                     }`}>
-                      {language === 'es' ? project.description : project.descriptionEn}
+                      {language === 'es'
+                        ? (project.problem || project.description)
+                        : (project.problemEn || project.descriptionEn)}
                     </p>
 
-                    {/* Tecnologías */}
+                    {/* Métrica destacada (resultado) */}
+                    {highlight && (
+                      <div className="mb-3">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow">
+                          <span aria-hidden="true">{highlight.icon}</span>
+                          {highlight.label}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Tecnologías (recortadas) */}
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.slice(0, 4).map((tech, i) => (
+                      {project.technologies.slice(0, 3).map((tech, i) => (
                         <span
                           key={i}
                           className={`
@@ -287,7 +360,7 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                           {tech}
                         </span>
                       ))}
-                      {project.technologies.length > 4 && (
+                      {project.technologies.length > 3 && (
                         <span className={`
                           px-2 py-1 text-xs rounded-lg
                           ${theme === 'dark'
@@ -295,34 +368,10 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                             : 'bg-gray-100 text-gray-500'
                           }
                         `}>
-                          +{project.technologies.length - 4}
+                          +{project.technologies.length - 3}
                         </span>
                       )}
                     </div>
-
-                    {/* Metrics badges */}
-                    {project.metrics && (Object.keys(project.metrics).length > 0) && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.metrics.tests && (
-                          <span className="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-blue-600/20 text-blue-400">
-                            <TbTestPipe className="text-xs" />
-                            {project.metrics.tests} tests
-                          </span>
-                        )}
-                        {project.metrics.docker && (
-                          <span className="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-blue-600/20 text-blue-400">
-                            <FaDocker className="text-xs" />
-                            Docker
-                          </span>
-                        )}
-                        {project.metrics.jwt && (
-                          <span className="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-blue-600/20 text-blue-400">
-                            <FaLock className="text-xs" />
-                            JWT
-                          </span>
-                        )}
-                      </div>
-                    )}
 
                     {/* Spacer para empujar botones al fondo */}
                     <div className="flex-1" />
@@ -371,7 +420,8 @@ const Projects = ({ projects: rawProjects }: { projects: SanityProject[] }) => {
                   </div>
                 </div>
               </motion.div>
-            ))
+              );
+            })
           )}
           </div>
         </div>

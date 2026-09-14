@@ -4,7 +4,8 @@
 
 [![CI](https://img.shields.io/github/actions/workflow/status/MarceloAdan73/marcelo-palma-portfolio/ci.yml?label=CI&style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/actions)
 [![Tests](https://img.shields.io/badge/Tests-18%20passed-2ecc71?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/actions)
-[![Projects](https://img.shields.io/badge/Projects-14%20Showcase-9b59b6?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio)
+[![Projects](https://img.shields.io/badge/Projects-10%20Live-9b59b6?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio)
+[![Case Studies](https://img.shields.io/badge/Case%20Studies-6%20Detail%20Pages-ec4899?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio)
 [![Build](https://img.shields.io/badge/Build-passing-3498db?style=for-the-badge)](https://github.com/MarceloAdan73/marcelo-palma-portfolio/actions)
 [![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-00c9b7?style=for-the-badge&labelColor=1e293b)](https://marcelo-palma-portfolio.vercel.app)
 [![Sanity CMS](https://img.shields.io/badge/Sanity%20CMS-Integrated-3380ff?style=for-the-badge)](https://www.sanity.io/)
@@ -25,11 +26,14 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 
 ### 🎯 What You'll Find Here
 - **Live Portfolio**: Interactive showcase of my work
-- **Sanity CMS Integration**: Dynamic content management for 14 projects
+- **Sanity CMS Integration**: Dynamic content management for 10 projects
+- **Mini Case Studies**: Cards show problem → solution → result on the home grid
+- **Project Detail Pages**: 6 showcase projects with full case narrative, technical decisions and architecture diagrams
+- **Engineering & Evolution**: "How I work" method + project growth timeline (v1 → v2 → v3)
 - **Well-Structured Code**: Clean architecture and best practices
 - **Full Test Coverage**: Accessibility tests and integration tests
 - **Responsive Design**: Beautiful on all devices
-- **Dark Mode**: Seamless theme switching
+- **Dark Mode**: Seamless theme switching (no flash, reduced-motion aware)
 
 ---
 
@@ -51,14 +55,14 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 
 | Category | Technology | Version |
 |----------|-----------|---------|
-| **Framework** | Next.js | 16.0.3 |
+| **Framework** | Next.js | 16.x |
 | **Language** | TypeScript | 5.x |
 | **Styling** | TailwindCSS | 4.x |
-| **Animations** | Framer Motion | 12.34.3 |
-| **CMS** | Sanity | 5.25.1 |
-| **Testing** | Jest + React Testing Library | Latest |
-| **Quality** | ESLint | Latest |
-| **Package Manager** | pnpm | 9.x |
+| **Animations** | Framer Motion | 12.x |
+| **CMS** | Sanity | 6.x |
+| **Testing** | Jest + React Testing Library | 30.x |
+| **Quality** | ESLint | 9.x |
+| **Package Manager** | pnpm | 9+ |
 
 ---
 
@@ -67,17 +71,21 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 ```
 📦 marcelo-palma-portfolio
 ├── 📂 app/                          # Next.js App Router
-│   ├── 📄 layout.tsx                # Root layout with providers
+│   ├── 📁 projects/[slug]/          # Project detail pages (SSG, case studies)
+│   │   └── 📄 page.tsx              # generateStaticParams + generateMetadata
+│   ├── 📄 layout.tsx                # Root layout with providers (SEO, JSON-LD, no-flash theme)
 │   ├── 📄 page.tsx                  # Home page (Server Component)
 │   └── 📄 globals.css               # Global styles
 ├── 📂 components/                   # React components
 │   ├── 📄 Hero.tsx                  # Landing section
-│   ├── 📄 Skills.tsx                # Skills showcase
-│   ├── 📄 Projects.tsx              # Portfolio projects (Sanity-powered)
+│   ├── 📄 About.tsx                 # Method ("how I work") + Engineering + Evolution
+│   ├── 📄 Skills.tsx                # Skills showcase (grid + radar)
+│   ├── 📄 Projects.tsx              # Projects grid as mini case studies (Sanity-powered)
+│   ├── 📄 ProjectDetail.tsx         # Bilingual case study layout (client)
 │   ├── 📄 FloatingControls.tsx      # Theme/Language switcher
 │   └── 📂 __tests__/                # Component tests
 ├── 📂 context/                      # Global state
-│   ├── 📄 AppContext.tsx            # App context (theme, language)
+│   ├── 📄 AppContext.tsx            # App context (theme, language, translations)
 │   └── 📂 __tests__/                # Context tests
 ├── 📂 lib/                          # Utilities
 │   └── 📄 sanity.client.ts          # Sanity API client
@@ -85,12 +93,13 @@ This is my **professional portfolio** – a showcase of my skills in modern web 
 │   ├── 📄 sanity.cli.ts             # CLI configuration
 │   ├── 📄 sanity.config.ts          # Studio configuration
 │   └── 📂 schemas/                  # Content schemas
-│       └── 📄 project.ts            # Project document schema
+│       └── 📄 project.ts            # Project document schema (case study fields)
 ├── 📂 types/                        # TypeScript types
 ├── 📂 public/                       # Static assets
 ├── 📄 package.json                  # Dependencies
 ├── 📄 tsconfig.json                 # TypeScript config
 ├── 📄 jest.config.js                # Jest configuration
+├── 📄 next.config.ts                # next/image remotePatterns (cdn.sanity.io)
 └── 📄 README.md                     # This file
 ```
 
@@ -209,11 +218,20 @@ Framer Motion animations that enhance UX without overwhelming.
 ### 📱 Responsive Design
 Mobile-first approach - looks great on all screen sizes.
 
+### 🧭 Case Study Pages
+Showcase projects have dedicated **detail pages** (`/projects/[slug]`) with bilingual narrative:
+problem → solution → technical decisions → architecture diagram → result + metrics.
+
+### 🧑‍💻 Engineering & Evolution
+The About section presents the **method** (Analysis → Architecture → Implementation → Quality),
+the **real daily stack** (Next.js, TypeScript, Node, Prisma/Postgres, Jest, Docker, JWT) and a
+**project evolution timeline** (v1 → v2 → v3) showing how a project grows over time.
+
 ### ⚡ Performance
-- Optimized images
+- Optimized images with `next/image` + Sanity CDN
 - Code splitting
 - Server Components where possible
-- Minimal JavaScript
+- SSG detail pages with revalidation
 
 ### 🌍 i18n Ready
 Context setup for multiple language support.
@@ -274,19 +292,33 @@ Each project document has the following fields:
 | Field | Type | Description |
 |-------|------|-------------|
 | `title` | string | Project name (required) |
-| `description` | text | Project description |
-| `image` | image | Project screenshot with hotspot |
+| `slug` | string | Unique URL identifier for the detail page |
+| `description` | text | Project description (ES) |
+| `descriptionEn` | text | Project description (EN) |
+| `showcase` | boolean | Has its own detail page (case study) |
+| `problem` / `problemEn` | text | Problem narrative (ES/EN) |
+| `solution` / `solutionEn` | text | Solution narrative (ES/EN) |
+| `result` / `resultEn` | text | Result metrics (ES/EN) |
+| `highlights` | array[string] | Technical decisions / key achievements |
+| `image` | image | Project card image with hotspot |
+| `architectureImage` | image | Architecture diagram for detail page |
 | `techStack` | array[string] | Technologies used |
 | `liveUrl` | url | Live demo URL |
 | `githubUrl` | url | GitHub repository URL |
 | `featured` | boolean | Highlighted project flag |
+| `metrics` | object | tests count, docker flag, jwt flag |
 
 ### How It Works
 
 1. **Content is fetched** from Sanity API using GROQ queries
 2. **Server Component** (`app/page.tsx`) fetches projects at request time
-3. **Error handling** gracefully falls back to empty array if fetch fails
-4. **Projects component** renders the dynamic content with filters and animations
+3. **Home cards** render problem → solution → result as mini case studies with filters
+4. **Showcase projects** link to detail pages generated via `generateStaticParams` (SSG, revalidate 1h)
+5. **Detail pages** (`app/projects/[slug]`) show problem, solution, technical decisions, architecture diagram, result + metrics and CTAs
+6. **Error handling** gracefully falls back to empty array if fetch fails
+7. **Bilingual** (ES/EN) via context translations and dynamic `<html lang>`
+8. **SEO completo**: sitemap.xml (home + proyectos), robots.txt, PWA manifest, favicon e ícono
+   apple generados con `next/og`, OpenGraph image global y dinámica por proyecto desde Sanity
 
 ### Adding New Projects
 
