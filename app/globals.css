@@ -123,3 +123,25 @@ html {
 .dark .border-subtle {
     border-color: #374151;
 }
+
+/* ---------------------------------------------------- */
+/* Micro-QA de UX accesible */
+/* ---------------------------------------------------- */
+
+/* Compensar el header fijo al navegar por anclas */
+section[id], footer[id] {
+    scroll-margin-top: 5rem;
+}
+
+/* Focus visible claro para navegación con teclado */
+:focus-visible {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Color de selección acorde a la marca */
+::selection {
+    background: rgba(99, 102, 241, 0.25);
+    color: inherit;
+}

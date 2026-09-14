@@ -236,6 +236,23 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
 
+### SESIÓN 2026-09-13i (UPGRADE DE DISEÑO — Hero + frontend general, con Marcelo)
+1. `components/Hero.tsx`:
+   - **Rol animado (rotación)**: reemplaza `t('hero.role')` estático por `RotatingRole`
+     (rota Desarrollador Full-Stack / Backend / Ingeniería con tests / Automatización con IA, bilingüe).
+   - **Terminal mockup** (`TerminalCard`) debajo del CTA: `marcelo@dev:~$ whoami`, `ls stack/`,
+     `npm run test` ✔ 270, `npm run deploy` ✔ (bilingüe).
+   - **Aurora animada**: 3 blobs gradient (purple/blue/cyan) con breathing keyframes + mouse.
+   - **Spotlight** radial sobre la foto que sigue al mouse.
+   - **Botones magnéticos** (`Magnetic` con useMotionValue/useSpring) en ambos CTAs.
+   - **Fix latente**: `Counter` se movió a nivel de módulo (antes se re-montaba en cada
+     mousemove y reiniciaba la cuenta). Ahora recibe prop `start`.
+   - **a11y**: `aria-label` + `title` en links sociales (GitHub/LinkedIn/Nodoweb).
+2. `app/globals.css`: `scroll-margin-top: 5rem` en secciones con id (anclas no se esconden
+   bajo el header fijo), `:focus-visible` ring indigo y `::selection` con color de marca.
+3. Impacto en lint: 12 → 9 errores (el aviso de `setState` en efecto es preexistente, no se tocó).
+   Tests 21/21, build OK.
+
 ### SESIÓN 2026-09-13h (SEO completo — SESIÓN 7 COMPLETADA en código)
 1. Nuevas rutas de metadatos en `app/`:
    - `sitemap.ts`: genera `/sitemap.xml` (revalidate 1h) con la home + todos los slugs de Sanity.

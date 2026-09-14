@@ -3,10 +3,166 @@
 import { useState, useEffect, useRef } from "react";
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaDocker, FaArrowDown, FaGlobe } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import { useApp } from '@/context/AppContext';
+
+// Contador animado (definido a nivel de módulo para no re-montarse en cada re-render)
+const Counter: React.FC<{ value: number; label: string; start: boolean }> = ({ value, label, start }) => {
+  const { theme } = useApp();
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!start) return;
+
+    const duration = 2000;
+    const steps = 60;
+    const increment = value / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [value, start]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        {count}+
+      </div>
+      <div className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}`}>
+        {label}
+      </div>
+    </motion.div>
+  );
+};
+
+// Rol rotativo (typing/rotación)
+const RotatingRole: React.FC = () => {
+  const { language } = useApp();
+  const roles =
+    language === 'es'
+      ? ['Desarrollador Full-Stack', 'Backend Developer', 'Ingeniería con tests', 'Automatización con IA']
+      : ['Full-Stack Developer', 'Backend Developer', 'Test-Driven Engineering', 'AI Automation'];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % roles.length), 3000);
+    return () => clearInterval(id);
+  }, [roles.length]);
+
+  return (
+    <span className="inline-flex overflow-hidden h-8 items-center align-bottom">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={roles[index]}
+          initial={{ y: '100%', opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: '-100%', opacity: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+        >
+          {roles[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+};
+
+// Botón magnético
+const Magnetic: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 180, damping: 15 });
+  const sy = useSpring(y, { stiffness: 180, damping: 15 });
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ x: sx, y: sy }}
+      onMouseMove={(e) => {
+        if (ref.current) {
+          const rect = ref.current.getBoundingClientRect();
+          x.set((e.clientX - rect.left - rect.width / 2) * 0.3);
+          y.set((e.clientY - rect.top - rect.height / 2) * 0.3);
+        }
+      }}
+      onMouseLeave={() => {
+        x.set(0);
+        y.set(0);
+      }}
+      className="flex-1 sm:flex-none"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+// Terminal mockup
+const TerminalCard: React.FC = () => {
+  const { language } = useApp();
+  const lines =
+    language === 'es'
+      ? [
+          ['$', 'whoami'],
+          ['marcelo@dev', 'Backend full-stack, especializado en productos con IA'],
+          ['$', 'ls stack/'],
+          ['nextjs  typescript  node  docker  tailwind  postgres'],
+          ['$', 'npm run test'],
+          ['✔', '270 tests aprobados'],
+          ['$', 'npm run deploy'],
+          ['✔', 'build OK · CI green · prod live'],
+        ]
+      : [
+          ['$', 'whoami'],
+          ['marcelo@dev', 'Full-stack backend, focused on AI-powered products'],
+          ['$', 'ls stack/'],
+          ['nextjs  typescript  node  docker  tailwind  postgres'],
+          ['$', 'npm run test'],
+          ['✔', '270 tests passed'],
+          ['$', 'npm run deploy'],
+          ['✔', 'build OK · CI green · prod live'],
+        ];
+
+  return (
+    <div className="mt-8 mx-auto md:mx-0 max-w-md text-left font-mono text-xs rounded-xl overflow-hidden border border-gray-700 bg-gray-950 shadow-xl">
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-900 border-b border-gray-800">
+        <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
+        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+        <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+        <span className="ml-2 text-gray-400">marcelo@dev: ~</span>
+      </div>
+      <div className="p-3 space-y-1">
+        {lines.map(([prefix, text], i) => (
+          <div key={i} className="flex flex-wrap gap-2">
+            <span className={prefix === '$' ? 'text-green-400' : 'text-blue-400'}>
+              {prefix}
+            </span>
+            <span className={prefix === '✔' ? 'text-gray-300' : 'text-gray-400'}>{text}</span>
+          </div>
+        ))}
+        <div className="flex gap-2">
+          <span className="text-green-400">$</span>
+          <span className="w-2 h-3.5 bg-gray-300 animate-pulse" />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
   const { t, theme, language } = useApp();
@@ -55,47 +211,6 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
     }
   };
 
-  // Contador animado para stats
-  const Counter = ({ value, label }: { value: number; label: string }) => {
-    const [count, setCount] = useState(0);
-    
-    useEffect(() => {
-      if (!mounted) return;
-      
-      const duration = 2000;
-      const steps = 60;
-      const increment = value / steps;
-      let current = 0;
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= value) {
-          setCount(value);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(current));
-        }
-      }, duration / steps);
-      
-      return () => clearInterval(timer);
-    }, [value, mounted]);
-    
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          {count}+
-        </div>
-        <div className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}`}>
-          {label}
-        </div>
-      </motion.div>
-    );
-  };
-
   if (!mounted) return null;
 
   return (
@@ -127,35 +242,64 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
           `}
         />
         
-        {/* Círculos de luz que siguen al mouse */}
+        {/* Aurora animada que sigue al mouse */}
         <motion.div
           animate={{
-            x: mousePosition.x * 50,
-            y: mousePosition.y * 50,
+            x: mousePosition.x * 60,
+            y: mousePosition.y * 60,
           }}
-          transition={{ type: "spring", damping: 50 }}
-          className={`
-            absolute -top-40 -right-40 w-96 h-96 rounded-full 
-            ${theme === 'dark' 
-              ? 'bg-purple-600/20' 
-              : 'bg-purple-300/30'}
-            blur-3xl
-          `}
-        />
+          transition={{ type: "spring", damping: 40 }}
+          className="absolute -top-40 -right-40"
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.25, 1],
+              opacity: [0.8, 1, 0.8],
+            }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            className={`w-96 h-96 rounded-full blur-3xl ${
+              theme === 'dark' ? 'bg-purple-600/25' : 'bg-purple-300/40'
+            }`}
+          />
+        </motion.div>
         <motion.div
           animate={{
-            x: mousePosition.x * -50,
-            y: mousePosition.y * -50,
+            x: mousePosition.x * -60,
+            y: mousePosition.y * -60,
           }}
-          transition={{ type: "spring", damping: 50 }}
-          className={`
-            absolute -bottom-40 -left-40 w-96 h-96 rounded-full 
-            ${theme === 'dark' 
-              ? 'bg-blue-600/20' 
-              : 'bg-blue-300/30'}
-            blur-3xl
-          `}
-        />
+          transition={{ type: "spring", damping: 40 }}
+          className="absolute -bottom-40 -left-40"
+        >
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.7, 1, 0.7],
+            }}
+            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+            className={`w-96 h-96 rounded-full blur-3xl ${
+              theme === 'dark' ? 'bg-blue-600/25' : 'bg-blue-300/40'
+            }`}
+          />
+        </motion.div>
+        <motion.div
+          animate={{
+            x: mousePosition.x * 30,
+            y: mousePosition.y * -30,
+          }}
+          transition={{ type: "spring", damping: 40 }}
+          className="absolute top-1/3 left-1/3"
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.15, 1],
+              opacity: [0.5, 0.8, 0.5],
+            }}
+            transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+            className={`w-72 h-72 rounded-full blur-3xl ${
+              theme === 'dark' ? 'bg-cyan-600/20' : 'bg-cyan-300/30'
+            }`}
+          />
+        </motion.div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -201,10 +345,11 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               </h1>
               
               <p className={`
-                text-lg md:text-xl mb-6
+                text-lg md:text-xl mb-6 flex flex-wrap items-center justify-center md:justify-start gap-x-2
                 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
               `}>
-                {t('hero.role')} · {projectCount} {t('hero.projects')}
+                <RotatingRole />
+                <span>· {projectCount} {t('hero.projects')}</span>
               </p>
 
               <p className={`
@@ -216,50 +361,55 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
 
               {/* Botones CTA */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 sm:flex-none"
-                >
-                  <Link
-                    href="#projects"
-                    className="relative group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium overflow-hidden"
+                <Magnetic>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <span className="relative z-10">{t('hero.viewProjects')}</span>
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600"
-                      initial={{ x: '100%' }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </motion.div>
-                
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 sm:flex-none"
-                >
-                  <Link
-                    href="#contact"
-                    className={`
-                      inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 rounded-lg font-medium transition-all
-                      ${theme === 'dark'
-                        ? 'border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10'
-                        : 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50'}
-                    `}
+                    <Link
+                      href="#projects"
+                      className="relative group inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium overflow-hidden"
+                    >
+                      <span className="relative z-10">{t('hero.viewProjects')}</span>
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600"
+                        initial={{ x: '100%' }}
+                        whileHover={{ x: 0 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </Link>
+                  </motion.div>
+                </Magnetic>
+
+                <Magnetic>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {t('hero.contact')}
-                  </Link>
-                </motion.div>
+                    <Link
+                      href="#contact"
+                      className={`
+                        inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 rounded-lg font-medium transition-all
+                        ${theme === 'dark'
+                          ? 'border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10'
+                          : 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50'}
+                      `}
+                    >
+                      {t('hero.contact')}
+                    </Link>
+                  </motion.div>
+                </Magnetic>
               </div>
 
               {/* Stats rápidas */}
               <div className="flex gap-6 justify-center md:justify-start">
-                <Counter value={270} label={t('hero.stats.tests')} />
-                <Counter value={projectCount} label={t('hero.stats.projects')} />
-                <Counter value={7} label={t('hero.stats.stacks')} />
+                <Counter value={270} label={t('hero.stats.tests')} start={mounted} />
+                <Counter value={projectCount} label={t('hero.stats.projects')} start={mounted} />
+                <Counter value={7} label={t('hero.stats.stacks')} start={mounted} />
               </div>
+
+              {/* Terminal mockup */}
+              <TerminalCard />
             </motion.div>
 
             {/* Columna derecha - Foto y tecnologías flotantes */}
@@ -269,6 +419,19 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
             >
               {/* Foto con marco animado */}
               <div className="relative w-72 h-72 mx-auto">
+                {/* Spotlight que sigue al mouse sobre la foto */}
+                <motion.div
+                  animate={{
+                    x: mousePosition.x * 24,
+                    y: mousePosition.y * 24,
+                  }}
+                  transition={{ type: "spring", damping: 30 }}
+                  className="absolute -inset-6 rounded-full pointer-events-none z-10"
+                  style={{
+                    background: 'radial-gradient(circle at center, rgba(168,85,247,0.25), transparent 65%)',
+                    mixBlendMode: theme === 'dark' ? 'screen' : 'multiply',
+                  }}
+                />
                 {/* Anillos rotatorios */}
                 <motion.div
                   animate={{ rotate: 360 }}
@@ -378,6 +541,8 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
                   href="https://github.com/MarceloAdan73"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="GitHub (nueva pestaña)"
+                  title="GitHub"
                   className={`
                     p-3 rounded-lg transition-all relative group overflow-hidden
                     ${theme === 'dark'
@@ -398,6 +563,8 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
                   href="https://linkedin.com/in/marcelo-adan-palma"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="LinkedIn (nueva pestaña)"
+                  title="LinkedIn"
                   className={`
                     p-3 rounded-lg transition-all relative group overflow-hidden
                     ${theme === 'dark'
@@ -418,6 +585,8 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
                   href="https://nodoweb.digital"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Nodoweb Digital (nueva pestaña)"
+                  title="Nodoweb Digital"
                   className={`
                     p-3 rounded-lg transition-all relative group overflow-hidden
                     ${theme === 'dark'
