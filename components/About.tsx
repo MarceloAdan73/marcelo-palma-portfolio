@@ -520,14 +520,16 @@ const About: React.FC = () => {
                       <p className={`text-sm leading-relaxed mb-4 flex-grow ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                         {stage.desc}
                       </p>
-                      <div className="flex flex-wrap items-center gap-2 mt-auto">
-                        <span className={`
-                          px-2 py-1 text-xs rounded-full font-medium
-                          ${theme === 'dark' ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'}
-                          min-w-[60px]
-                        `}>
-                          {stage.metrics.tests} tests
-                        </span>
+<div className="flex flex-wrap items-center gap-2 mt-auto">
+                        {stage.metrics.tests > 0 && (
+                          <span className={`
+                            px-2 py-1 text-xs rounded-full font-medium
+                            ${theme === 'dark' ? 'bg-green-500/20 text-green-400' : 'bg-green-100 text-green-700'}
+                            min-w-[60px]
+                          `}>
+                            {stage.metrics.tests} tests
+                          </span>
+                        )}
                         {stage.metrics.docker && (
                           <span className={`
                             px-2 py-1 text-xs rounded-full font-medium
