@@ -317,6 +317,8 @@ Each project document has the following fields:
 5. **Detail pages** (`app/projects/[slug]`) show problem, solution, technical decisions, architecture diagram, result + metrics and CTAs
 6. **Error handling** gracefully falls back to empty array if fetch fails
 7. **Bilingual** (ES/EN) via context translations and dynamic `<html lang>`
+8. **SEO completo**: sitemap.xml (home + proyectos), robots.txt, PWA manifest, favicon e ícono
+   apple generados con `next/og`, OpenGraph image global y dinámica por proyecto desde Sanity
 
 ### Adding New Projects
 

@@ -200,6 +200,20 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
       5. Actualizar README y este plan; pasar a otro repositorio (meta final).
 - [ ] **Criterio:** todo verde + aprobación visual en local + producción OK.
 
+### Sesión 7 — SEO completo (escalado post-Sesión 6, decisión de Marcelo 2026-09-13)
+- [x] **Objetivo:** visibilidad en buscadores y redes sin tocar la UI. (2026-09-13)
+- [x] **Pasos:**
+      1. `app/sitemap.ts`: sitemap con `/` + todos los proyectos de Sanity (revalidate 1h).
+      2. `app/robots.ts`: permite todo; apunta al sitemap.
+      3. `app/manifest.ts`: PWA webmanifest (name, theme_color, icons).
+      4. `app/icon.tsx` + `app/apple-icon.tsx`: favicon PNG generado con `next/og` (gradiente + "MP").
+      5. `app/opengraph-image.tsx`: OG image default 1200x630 (nombre + stack).
+      6. `app/projects/[slug]/opengraph-image.tsx`: OG dinámica por proyecto (título, tech stack,
+         descripción desde Sanity).
+      7. Verificación: lint sin nuevos errores, tests 21/21, build OK (nuevas rutas:
+         /sitemap.xml, /robots.txt, /manifest.webmanifest, /icon, /apple-icon, /opengraph-image).
+- [x] **Criterio:** rutas SEO presentes en build. (2026-09-13 — falta validar en producción Vercel)
+
 ---
 
 ## REGLAS DE TRABAJO
@@ -221,6 +235,22 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 ---
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
+
+### SESIÓN 2026-09-13h (SEO completo — SESIÓN 7 COMPLETADA en código)
+1. Nuevas rutas de metadatos en `app/`:
+   - `sitemap.ts`: genera `/sitemap.xml` (revalidate 1h) con la home + todos los slugs de Sanity.
+   - `robots.ts`: `/robots.txt` que permite todo y referencia el sitemap.
+   - `manifest.ts`: `/manifest.webmanifest` (PWA standalone, theme_color #111827).
+   - `icon.tsx` y `apple-icon.tsx`: favicon generado con `next/og` (ImageResponse, gradiente MP).
+   - `opengraph-image.tsx`: OG default 1200x630 (stack real, sin red).
+   - `app/projects/[slug]/opengraph-image.tsx`: OG dinámica por proyecto con Sanity
+     (título, descripción, tech stack) — se sirve on-demand (ƒ).
+2. Verificación: lint sin errores nuevos (12 preexistentes), tests 21/21, build OK
+   con las 6 rutas nuevas (+ sitemap 1h).
+3. PENDIENTE: validar en producción (Vercel) que /sitemap.xml, /robots.txt y las OG
+   funcionen sin 404, y chequear en Open Graph debugger / Search Console cuando mergee.
+4. Recordar: `metadataBase` y canonical ya estaban en layout.tsx; la OG default anterior
+   usaba `/me.jpg` (se mantiene en metadata, la nueva /opengraph-image es complementaria).
 
 ### SESIÓN 2026-09-13g (QA — SESIÓN 6 PARCIALMENTE COMPLETADA: lint/test/build/a11y/README)
 1. README.md actualizado: badges (Projects 10 Live, Case Studies 6 Detail Pages), features
