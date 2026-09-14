@@ -49,6 +49,26 @@ const translations = {
     'about.method.4.title': 'Calidad',
     'about.method.4.desc': 'Testing continuo, Docker y revisión. Resultado verificado hasta producción.',
     
+    // Engineering section (NUEVAS - Sesión 5)
+    'about.engineering.title': 'Ingeniería',
+    'about.engineering.subtitle': 'Stack real de trabajo diario',
+    'about.engineering.frontend': 'Frontend',
+    'about.engineering.frontend.desc': 'Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion',
+    'about.engineering.backend': 'Backend',
+    'about.engineering.backend.desc': 'Node.js, Express, Prisma ORM, PostgreSQL, REST APIs',
+    'about.engineering.quality': 'Calidad & DevOps',
+    'about.engineering.quality.desc': 'Jest + RTL, Docker, JWT Auth, CI/CD, ESLint, Prettier',
+    
+    // Evolution section (NUEVAS - Sesión 5)
+    'about.evolution.title': 'Evolución',
+    'about.evolution.subtitle': 'Cómo crecen los proyectos: Task Manager Pro',
+    'about.evolution.v1.title': 'v1 — Fundamentos',
+    'about.evolution.v1.desc': 'CRUD básico, autenticación simple, SQLite, 0 tests',
+    'about.evolution.v2.title': 'v2 — Arquitectura',
+    'about.evolution.v2.desc': 'Clean Architecture, Prisma + PostgreSQL, JWT, 86 tests, Docker',
+    'about.evolution.v3.title': 'v3 — Escalabilidad',
+    'about.evolution.v3.desc': 'React Query, Redis cache, WebSockets, CI/CD, 270+ tests, despliegue prod',
+    
     // Skills - Descripciones (NUEVAS)
     'skills.desc.frontend': 'Construyendo interfaces modernas y reactivas',
     'skills.desc.backend': 'APIs robustas y escalables',
@@ -131,6 +151,26 @@ const translations = {
     'about.method.3.desc': 'Clean, typed code with TypeScript, Node.js and secure APIs (JWT).',
     'about.method.4.title': 'Quality',
     'about.method.4.desc': 'Continuous testing, Docker and review. Verified results all the way to production.',
+    
+    // Engineering section (NEW - Session 5)
+    'about.engineering.title': 'Engineering',
+    'about.engineering.subtitle': 'Real daily work stack',
+    'about.engineering.frontend': 'Frontend',
+    'about.engineering.frontend.desc': 'Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion',
+    'about.engineering.backend': 'Backend',
+    'about.engineering.backend.desc': 'Node.js, Express, Prisma ORM, PostgreSQL, REST APIs',
+    'about.engineering.quality': 'Quality & DevOps',
+    'about.engineering.quality.desc': 'Jest + RTL, Docker, JWT Auth, CI/CD, ESLint, Prettier',
+    
+    // Evolution section (NEW - Session 5)
+    'about.evolution.title': 'Evolution',
+    'about.evolution.subtitle': 'How projects grow: Task Manager Pro',
+    'about.evolution.v1.title': 'v1 — Foundations',
+    'about.evolution.v1.desc': 'Basic CRUD, simple auth, SQLite, 0 tests',
+    'about.evolution.v2.title': 'v2 — Architecture',
+    'about.evolution.v2.desc': 'Clean Architecture, Prisma + PostgreSQL, JWT, 86 tests, Docker',
+    'about.evolution.v3.title': 'v3 — Scalability',
+    'about.evolution.v3.desc': 'React Query, Redis cache, WebSockets, CI/CD, 270+ tests, prod deploy',
     
     // Skills - Descripciones (NUEVAS)
     'skills.desc.frontend': 'Building modern and reactive interfaces',

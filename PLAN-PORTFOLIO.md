@@ -167,28 +167,26 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
       con el método dentro del mismo commit)
 
 ### Sesión 4 — Páginas de detalle de proyectos (case studies completos)
-- [ ] **Objetivo:** evidencia técnica profunda para proyectos clave.
-- [ ] **Pasos:**
-      1. Nueva ruta `app/projects/[slug]/page.tsx` (server component, fetch por slug,
-         `generateStaticParams`).
-      2. Layout case study: resumen, problema, solución, decisiones técnicas, diagrama de
-         arquitectura (imagen subida a Sanity), resultado + métricas, links (demo/código).
-      3. Schema: agregar campo `architectureImage` (image) en la Sesión 1.
-      4. Tarjetas `showcase` de la home linkean al detalle.
-      5. Navegación consistente (Header/Footer/volver).
-      6. Rendimiento: migrar las imágenes de proyectos a `next/image` (hoy `Projects.tsx`
-         usa `<img>` crudo) con `loading="lazy"` y `sizes`; agregar el CDN de Sanity
-         (`cdn.sanity.io`) a `next.config.ts` (remotePatterns). Aplica a grilla + detalle.
-- [ ] **Criterio:** proyectos clave tienen página propia con decisiones técnicas; navegación OK.
+- [x] **Objetivo:** evidencia técnica profunda para proyectos clave. (2026-09-13)
+- [x] **Pasos:**
+       1. Nueva ruta `app/projects/[slug]/page.tsx` (server component, fetch por slug, `generateStaticParams`, `generateMetadata`, `notFound`).
+       2. Layout case study: resumen, problema, solución, decisiones técnicas, diagrama de arquitectura (`architectureImage`), resultado + métricas, links (demo/código).
+       3. Component `ProjectDetail.tsx` (client): layout bilingüe ES/EN con navegación interna.
+       4. Tarjetas `showcase` de la home linkean al detalle (`Projects.tsx`); migración a `next/image` (fill, sizes, lazy) + `next.config.ts` con `cdn.sanity.io`.
+       5. Navegación consistente: Header (logo → `/`, nav → `/#sección`) y Footer (`/#sección`) funcionan desde cualquier ruta.
+       6. SEO: `generateMetadata` dinámico por slug.
+- [x] **Criterio:** proyectos clave tienen página propia con decisiones técnicas; navegación OK; build SSG OK. (2026-09-13 — aprobado por Marcelo en localhost:3000)
+- [x] **Commit:** `d53fe8f` en `test-cambios`.
 
 ### Sesión 5 — Sección de ingeniería + evolución
-- [ ] **Objetivo:** sección corta de método + cómo crecen los proyectos.
-- [ ] **Pasos:**
+- [x] **Objetivo:** sección corta de método + cómo crecen los proyectos. (2026-09-13)
+- [x] **Pasos:**
       1. Nueva sección (o bloque en About): "Ingeniería" = método + stack real de trabajo
          (Next.js, TypeScript, Node, Prisma/Postgres, Jest, Docker, JWT).
       2. Bloque "Evolución": v1 → v2 → v3 de un proyecto representativo (ej. Task Manager Pro).
-      3. Navegación intuitiva: anclas y filtros pulidos.
-- [ ] **Criterio:** la sección presenta método + evidencia de crecimiento sin inflar el sitio.
+      3. Navegación intuitiva: anclas y filtros pulidos (ya funcionaban en Header/Footer).
+- [x] **Criterio:** la sección presenta método + evidencia de crecimiento sin inflar el sitio.
+  (2026-09-13 — completado: tests 18/18, build OK, lint solo errores preexistentes)
 
 ### Sesión 6 — Pulido final (QA) y cierre
 - [ ] **Objetivo:** calidad y cierre del ciclo.
@@ -206,16 +204,30 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 
 1. UNA sola rama de prueba permanente: `test-cambios` (decisión de Marcelo
    2026-09-13). Se trabaja SIEMPRE sobre esa rama; NUNCA main directo sin que
-   Marcelo pruebe en local y apruebe.
+   Marcelo pruebe en local y aprueba.
 2. Cambios de CONTENIDO → Sanity Studio (web). Cambios de CÓDIGO → repo (rama → local → merge).
 3. Repo público: nunca commitear secretos (.env.local tiene el token de Sanity, gitignoreado,
    NUNCA pushearlo). `.opencode/` gitignoreado.
 4. Mantener el portfolio bilingüe (ES + EN en cada proyecto).
 5. Al completar una tarea: marcar [x] + fecha acá. SIEMPRE documentar la sesión en la bitácora.
+6. **Liviano para compartir:** cuando otro agente necesita contexto rápido del proyecto,
+   se puede solicitar una "copia liviana" (`<documento>_LIGHT.md`) que reduzca el archivo a
+   ~5% del original con solo lo esencial (estado, comandos, roadmap). El agente debe crear
+   la copia en la raíz con ese nombre y mencionar en la primera línea que es versión liviana
+   y dónde está el detalle completo. El original queda intacto.
 
 ---
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
+
+### SESIÓN 2026-09-13f (con Marcelo — SESIÓN 5 COMPLETADA: Ingeniería + Evolución)
+1. `context/AppContext.tsx`: traducciones nuevas para sección "Ingeniería" (stack real: Frontend/Backend/Calidad) y "Evolución" (v1→v2→v3 de Task Manager Pro) en ES/EN.
+2. `components/About.tsx`: 
+   - Nueva sección "Ingeniería" con 3 tarjetas: Frontend (Next.js 15, React 19, TS, Tailwind, Framer), Backend (Node, Express, Prisma, PostgreSQL, REST), Calidad & DevOps (Jest+RTL, Docker, JWT, CI/CD, ESLint/Prettier).
+   - Nuevo bloque "Evolución" con timeline horizontal: v1 (fundamentos, 0 tests), v2 (arquitectura limpia, 86 tests, Docker, JWT), v3 (escalabilidad, 270+ tests, Redis, WebSockets, CI/CD, prod).
+   - Animaciones framer-motion coherentes con el resto (hover, stagger, reduced-motion respetado).
+3. Navegación: anclas existentes en Header/Footer ya funcionaban correctamente (/#hero, /#about, /#skills, /#projects, /#contact).
+4. Verificado: tests 18/18, build OK (9 rutas SSG), lint solo con los 23 errores preexistentes ya documentados.
 
 ### SESIÓN 2026-09-13e (con Marcelo — SESIÓN 4 EN CURSO: páginas de detalle + next/image)
 1. `next.config.ts`: `images.remotePatterns` para `cdn.sanity.io` (habilita next/image).
