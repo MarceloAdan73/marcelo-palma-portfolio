@@ -118,32 +118,32 @@ const TerminalCard: React.FC = () => {
   const dark = theme === 'dark';
 
   return (
-    <div className={`w-full flex items-center gap-3 md:gap-4 px-4 md:px-5 py-2.5 font-mono text-[11px] md:text-xs rounded-xl border overflow-hidden shadow-lg backdrop-blur-sm ${
+    <div className={`w-full flex flex-nowrap items-center gap-2 md:gap-3 px-3 md:px-4 py-2 font-mono text-[11px] md:text-xs rounded-xl border overflow-hidden shadow-lg backdrop-blur-sm ${
       dark ? 'bg-gray-950/70 border-gray-700/70' : 'bg-white/80 border-gray-200'
     }`}>
-      <span className="hidden sm:flex items-center gap-1.5 shrink-0">
+      <span className="hidden sm:flex items-center gap-1.5 shrink-0 whitespace-nowrap">
         <span className="w-2 h-2 rounded-full bg-red-500" />
         <span className="w-2 h-2 rounded-full bg-yellow-500" />
         <span className="w-2 h-2 rounded-full bg-green-500" />
       </span>
-      <span className={`shrink-0 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>marcelo@dev:~$</span>
-      <span className={dark ? 'text-green-400' : 'text-green-600'}>whoami</span>
-      <span className={`ml-2 ${dark ? 'text-gray-500' : 'text-gray-400'}`}>→</span>
-      <span className={dark ? 'text-gray-300' : 'text-gray-700'}>
+      <span className={`shrink-0 whitespace-nowrap ${dark ? 'text-gray-400' : 'text-gray-500'}`}>marcelo@dev:~$</span>
+      <span className={`shrink-0 whitespace-nowrap ${dark ? 'text-green-400' : 'text-green-600'}`}>whoami</span>
+      <span className={`shrink-0 whitespace-nowrap ${dark ? 'text-gray-500' : 'text-gray-400'}`}>→</span>
+      <span className={`flex-1 min-w-0 truncate ${dark ? 'text-gray-300' : 'text-gray-700'}`}>
         <span className="lg:hidden">{language === 'es' ? 'full-stack · IA' : 'full-stack · AI'}</span>
         <span className="hidden lg:inline">{language === 'es' ? 'full-stack · productos con IA' : 'full-stack · AI-powered products'}</span>
       </span>
-      <span className="sm:hidden ml-auto text-emerald-500 shrink-0">✔ live</span>
+      <span className="sm:hidden ml-auto shrink-0 whitespace-nowrap text-emerald-500">✔ live</span>
       <span className={`hidden sm:block mx-2 h-4 w-px shrink-0 ${dark ? 'bg-gray-700' : 'bg-gray-200'}`} />
-      <span className={`hidden sm:flex items-center gap-3 ml-auto ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
+      <span className={`hidden sm:flex ml-auto items-center gap-2 shrink-0 whitespace-nowrap ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
         <span className="hidden lg:inline">npm run test</span>
         <span className="text-emerald-500">✔ 270</span>
       </span>
-      <span className={`hidden sm:flex items-center gap-3 shrink-0 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
+      <span className={`hidden sm:flex items-center gap-2 shrink-0 whitespace-nowrap ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
         <span className="hidden lg:inline">deploy</span>
         <span className="text-emerald-500">✔ live</span>
       </span>
-      <span className="inline-block w-2 h-3.5 bg-gray-400 animate-pulse shrink-0" />
+      <span className="inline-block w-2 h-3.5 bg-gray-400 animate-pulse shrink-0 whitespace-nowrap" />
     </div>
   );
 };
@@ -286,7 +286,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 pt-6 pb-16 lg:pt-8 lg:pb-20">
+      <div className="container mx-auto px-4 relative z-10 pt-6 pb-28 lg:pt-8 lg:pb-32">
         <motion.div 
           className="max-w-5xl mx-auto"
           variants={staggerContainer}
@@ -595,7 +595,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
           >
             <Link
               href="#about"
