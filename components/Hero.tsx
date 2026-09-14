@@ -286,7 +286,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 pt-6 pb-28 lg:pt-8 lg:pb-32">
+      <div className="container mx-auto px-4 relative z-10 pt-6 pb-12 lg:pt-8 lg:pb-16">
         <motion.div 
           className="max-w-5xl mx-auto"
           variants={staggerContainer}
@@ -590,12 +590,12 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
             <TerminalCard />
           </div>
 
-          {/* Scroll indicator */}
+          {/* Scroll indicator — en flujo normal para no quedar recortado */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5 }}
-            className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
+            className="mt-8 lg:mt-10 flex justify-center"
           >
             <Link
               href="#about"
