@@ -116,62 +116,34 @@ const Magnetic: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 const TerminalCard: React.FC = () => {
   const { language, theme } = useApp();
   const dark = theme === 'dark';
-  const lines =
-    language === 'es'
-      ? [
-          ['$', 'whoami'],
-          ['f:~', 'full-stack · productos con IA'],
-          ['$', 'ls stack/'],
-          ['next ts node docker tailwind pg'],
-          ['$', 'npm run test'],
-          ['✔', '270 tests aprobados'],
-          ['$', 'npm run deploy'],
-          ['✔', 'build OK · CI green · prod live'],
-        ]
-      : [
-          ['$', 'whoami'],
-          ['f:~', 'full-stack · AI-powered products'],
-          ['$', 'ls stack/'],
-          ['next ts node docker tailwind pg'],
-          ['$', 'npm run test'],
-          ['✔', '270 tests passed'],
-          ['$', 'npm run deploy'],
-          ['✔', 'build OK · CI green · prod live'],
-        ];
 
   return (
-    <div className={`w-full max-w-3xl text-left font-mono text-[11px] md:text-xs rounded-2xl overflow-hidden border shadow-2xl backdrop-blur-sm ${
+    <div className={`w-full flex items-center gap-3 md:gap-4 px-4 md:px-5 py-2.5 font-mono text-[11px] md:text-xs rounded-xl border overflow-hidden shadow-lg backdrop-blur-sm ${
       dark ? 'bg-gray-950/70 border-gray-700/70' : 'bg-white/80 border-gray-200'
     }`}>
-      <div className={`flex items-center gap-1.5 px-4 py-2 border-b ${
-        dark ? 'bg-gray-900/80 border-gray-800' : 'bg-gray-100/80 border-gray-200'
-      }`}>
-        <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-        <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
-        <span className={`ml-2 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>marcelo@dev: ~</span>
-        <span className={`ml-auto tracking-wider ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
-          bash<span className="inline-block w-2 h-3.5 bg-gray-400 animate-pulse align-middle ml-1" />
-        </span>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-1.5 px-4 py-3">
-        {lines.map(([prefix, text], i) => (
-          <div key={i} className="flex items-baseline gap-1.5 leading-tight">
-            <span className={prefix === '$'
-              ? (dark ? 'text-green-400' : 'text-green-600')
-              : (dark ? 'text-blue-400' : 'text-blue-600')}
-            >
-              {prefix}
-            </span>
-            <span className={prefix === '✔'
-              ? (dark ? 'text-emerald-400' : 'text-emerald-600')
-              : (dark ? 'text-gray-300' : 'text-gray-700')}
-            >
-              {text}
-            </span>
-          </div>
-        ))}
-      </div>
+      <span className="hidden sm:flex items-center gap-1.5 shrink-0">
+        <span className="w-2 h-2 rounded-full bg-red-500" />
+        <span className="w-2 h-2 rounded-full bg-yellow-500" />
+        <span className="w-2 h-2 rounded-full bg-green-500" />
+      </span>
+      <span className={`shrink-0 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>marcelo@dev:~$</span>
+      <span className="text-green-600">
+        <span className={dark ? 'text-green-400' : 'text-green-600'}>whoami</span>
+        <span className={`ml-2 ${dark ? 'text-gray-500' : 'text-gray-400'}`}>→</span>
+      </span>
+      <span className={`hidden lg:inline ${dark ? 'text-gray-300' : 'text-gray-700'}`}>
+        {language === 'es' ? 'full-stack · productos con IA' : 'full-stack · AI-powered products'}
+      </span>
+      <span className={`hidden sm:block mx-2 h-4 w-px shrink-0 ${dark ? 'bg-gray-700' : 'bg-gray-200'}`} />
+      <span className={`hidden sm:flex items-center gap-3 ml-auto ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
+        <span className="hidden lg:inline">npm run test</span>
+        <span className="text-emerald-500">✔ 270</span>
+      </span>
+      <span className={`hidden sm:flex items-center gap-3 shrink-0 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
+        <span className="hidden lg:inline">deploy</span>
+        <span className="text-emerald-500">✔ live</span>
+      </span>
+      <span className="inline-block w-2 h-3.5 bg-gray-400 animate-pulse shrink-0" />
     </div>
   );
 };
@@ -613,8 +585,8 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
             </motion.div>
           </div>
 
-          {/* Terminal mockup — franja inferior integrada al tema */}
-          <div className="mt-8 lg:mt-10 flex justify-center">
+          {/* Terminal mockup — franja de una línea a lo ancho */}
+          <div className="mt-6 lg:mt-8">
             <TerminalCard />
           </div>
 
