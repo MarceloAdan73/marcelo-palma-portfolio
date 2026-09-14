@@ -112,16 +112,17 @@ const Magnetic: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
-// Terminal mockup
+// Terminal mockup (franja inferior integrada al tema)
 const TerminalCard: React.FC = () => {
-  const { language } = useApp();
+  const { language, theme } = useApp();
+  const dark = theme === 'dark';
   const lines =
     language === 'es'
       ? [
           ['$', 'whoami'],
-          ['marcelo@dev', 'Backend full-stack, especializado en productos con IA'],
+          ['f:~', 'full-stack · productos con IA'],
           ['$', 'ls stack/'],
-          ['nextjs  typescript  node  docker  tailwind  postgres'],
+          ['next ts node docker tailwind pg'],
           ['$', 'npm run test'],
           ['✔', '270 tests aprobados'],
           ['$', 'npm run deploy'],
@@ -129,9 +130,9 @@ const TerminalCard: React.FC = () => {
         ]
       : [
           ['$', 'whoami'],
-          ['marcelo@dev', 'Full-stack backend, focused on AI-powered products'],
+          ['f:~', 'full-stack · AI-powered products'],
           ['$', 'ls stack/'],
-          ['nextjs  typescript  node  docker  tailwind  postgres'],
+          ['next ts node docker tailwind pg'],
           ['$', 'npm run test'],
           ['✔', '270 tests passed'],
           ['$', 'npm run deploy'],
@@ -139,26 +140,37 @@ const TerminalCard: React.FC = () => {
         ];
 
   return (
-    <div className="w-full max-w-sm mx-auto md:mx-0 text-left font-mono text-[11px] rounded-xl overflow-hidden border border-gray-700 bg-gray-950 shadow-xl">
-      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 border-b border-gray-800">
-        <span className="w-2 h-2 rounded-full bg-red-500" />
-        <span className="w-2 h-2 rounded-full bg-yellow-500" />
-        <span className="w-2 h-2 rounded-full bg-green-500" />
-        <span className="ml-2 text-gray-400">marcelo@dev: ~</span>
+    <div className={`w-full max-w-3xl text-left font-mono text-[11px] md:text-xs rounded-2xl overflow-hidden border shadow-2xl backdrop-blur-sm ${
+      dark ? 'bg-gray-950/70 border-gray-700/70' : 'bg-white/80 border-gray-200'
+    }`}>
+      <div className={`flex items-center gap-1.5 px-4 py-2 border-b ${
+        dark ? 'bg-gray-900/80 border-gray-800' : 'bg-gray-100/80 border-gray-200'
+      }`}>
+        <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
+        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+        <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+        <span className={`ml-2 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>marcelo@dev: ~</span>
+        <span className={`ml-auto tracking-wider ${dark ? 'text-gray-600' : 'text-gray-400'}`}>
+          bash<span className="inline-block w-2 h-3.5 bg-gray-400 animate-pulse align-middle ml-1" />
+        </span>
       </div>
-      <div className="p-2.5 space-y-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-1.5 px-4 py-3">
         {lines.map(([prefix, text], i) => (
-          <div key={i} className="flex flex-wrap gap-2">
-            <span className={prefix === '$' ? 'text-green-400' : 'text-blue-400'}>
+          <div key={i} className="flex items-baseline gap-1.5 leading-tight">
+            <span className={prefix === '$'
+              ? (dark ? 'text-green-400' : 'text-green-600')
+              : (dark ? 'text-blue-400' : 'text-blue-600')}
+            >
               {prefix}
             </span>
-            <span className={prefix === '✔' ? 'text-gray-300' : 'text-gray-400'}>{text}</span>
+            <span className={prefix === '✔'
+              ? (dark ? 'text-emerald-400' : 'text-emerald-600')
+              : (dark ? 'text-gray-300' : 'text-gray-700')}
+            >
+              {text}
+            </span>
           </div>
         ))}
-        <div className="flex gap-2">
-          <span className="text-green-400">$</span>
-          <span className="w-2 h-3 bg-gray-300 animate-pulse" />
-        </div>
       </div>
     </div>
   );
@@ -302,7 +314,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 pt-6 pb-16 lg:pt-8 lg:pb-20">
         <motion.div 
           className="max-w-5xl mx-auto"
           variants={staggerContainer}
@@ -598,12 +610,12 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
                   <FaGlobe className="text-xl relative z-10 group-hover:text-white transition-colors duration-300" />
                 </motion.a>
               </motion.div>
-
-              {/* Terminal mockup */}
-              <div className="mt-6">
-                <TerminalCard />
-              </div>
             </motion.div>
+          </div>
+
+          {/* Terminal mockup — franja inferior integrada al tema */}
+          <div className="mt-8 lg:mt-10 flex justify-center">
+            <TerminalCard />
           </div>
 
           {/* Scroll indicator */}

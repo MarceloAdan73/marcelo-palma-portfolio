@@ -252,6 +252,11 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
    bajo el header fijo), `:focus-visible` ring indigo y `::selection` con color de marca.
 3. Impacto en lint: 12 → 9 errores (el aviso de `setState` en efecto es preexistente, no se tocó).
    Tests 21/21, build OK.
+4. **Rediseño final de layout (aprobado por Marcelo)**: la terminal deja de vivir dentro de las
+   columnas y pasa a FRANJA inferior centrada (`max-w-3xl`), integrada al tema (clara u oscura,
+   backdrop-blur, sin negro forzado), en grilla `1/2/4` columnas. Columnas rebalanceadas
+   (texto | foto+redes), H1 `md:text-5xl lg:text-6xl`, márgenes compactados y contenedor con
+   `pt/pb` para que nada choque con header fijo ni con el indicador de scroll.
 
 ### SESIÓN 2026-09-13h (SEO completo — SESIÓN 7 COMPLETADA en código)
 1. Nuevas rutas de metadatos en `app/`:
