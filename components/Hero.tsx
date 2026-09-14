@@ -139,14 +139,14 @@ const TerminalCard: React.FC = () => {
         ];
 
   return (
-    <div className="mt-8 mx-auto md:mx-0 max-w-md text-left font-mono text-xs rounded-xl overflow-hidden border border-gray-700 bg-gray-950 shadow-xl">
-      <div className="flex items-center gap-1.5 px-3 py-2 bg-gray-900 border-b border-gray-800">
-        <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-        <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+    <div className="w-full max-w-sm mx-auto md:mx-0 text-left font-mono text-[11px] rounded-xl overflow-hidden border border-gray-700 bg-gray-950 shadow-xl">
+      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 border-b border-gray-800">
+        <span className="w-2 h-2 rounded-full bg-red-500" />
+        <span className="w-2 h-2 rounded-full bg-yellow-500" />
+        <span className="w-2 h-2 rounded-full bg-green-500" />
         <span className="ml-2 text-gray-400">marcelo@dev: ~</span>
       </div>
-      <div className="p-3 space-y-1">
+      <div className="p-2.5 space-y-1">
         {lines.map(([prefix, text], i) => (
           <div key={i} className="flex flex-wrap gap-2">
             <span className={prefix === '$' ? 'text-green-400' : 'text-blue-400'}>
@@ -157,7 +157,7 @@ const TerminalCard: React.FC = () => {
         ))}
         <div className="flex gap-2">
           <span className="text-green-400">$</span>
-          <span className="w-2 h-3.5 bg-gray-300 animate-pulse" />
+          <span className="w-2 h-3 bg-gray-300 animate-pulse" />
         </div>
       </div>
     </div>
@@ -335,7 +335,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               className="text-center md:text-left"
             >
               <h1 className={`
-                text-4xl md:text-6xl font-bold mb-4
+                text-4xl md:text-5xl lg:text-6xl font-bold mb-3
                 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}
               `}>
                 Marcelo{' '}
@@ -345,7 +345,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               </h1>
               
               <p className={`
-                text-lg md:text-xl mb-6 flex flex-wrap items-center justify-center md:justify-start gap-x-2
+                text-lg md:text-xl mb-5 flex flex-wrap items-center justify-center md:justify-start gap-x-2
                 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
               `}>
                 <RotatingRole />
@@ -353,14 +353,14 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               </p>
 
               <p className={`
-                text-sm md:text-base mb-8 leading-relaxed max-w-md mx-auto md:mx-0
+                text-sm md:text-base mb-6 leading-relaxed max-w-md mx-auto md:mx-0
                 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
               `}>
                 {t('hero.description')}
               </p>
 
               {/* Botones CTA */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-6">
                 <Magnetic>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -402,14 +402,11 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               </div>
 
               {/* Stats rápidas */}
-              <div className="flex gap-6 justify-center md:justify-start">
+              <div className="flex gap-5 justify-center md:justify-start">
                 <Counter value={270} label={t('hero.stats.tests')} start={mounted} />
                 <Counter value={projectCount} label={t('hero.stats.projects')} start={mounted} />
                 <Counter value={7} label={t('hero.stats.stacks')} start={mounted} />
               </div>
-
-              {/* Terminal mockup */}
-              <TerminalCard />
             </motion.div>
 
             {/* Columna derecha - Foto y tecnologías flotantes */}
@@ -534,7 +531,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
               {/* Redes sociales - MISMO COLOR HOVER para ambos */}
               <motion.div 
                 variants={fadeInUp}
-                className="flex justify-center gap-4 mt-8"
+                className="flex justify-center gap-4 mt-6"
               >
                 <motion.a
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -601,6 +598,11 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
                   <FaGlobe className="text-xl relative z-10 group-hover:text-white transition-colors duration-300" />
                 </motion.a>
               </motion.div>
+
+              {/* Terminal mockup */}
+              <div className="mt-6">
+                <TerminalCard />
+              </div>
             </motion.div>
           </div>
 
