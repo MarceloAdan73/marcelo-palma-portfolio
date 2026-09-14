@@ -195,7 +195,7 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
          (lint/test/build/a11y completados 2026-09-13: ver bitácora 2026-09-13g.
          Lighthouse real en browser y demo 30s: quedan como pasos manuales para Marcelo.)
       2. (Opcional) demo 30s (gif) para proyectos clave.
-      3. Merge de `test-cambios` a main con aprobación de Marcelo.
+      3. Merge de `test-cambios` a main con aprobación de Marcelo. (2026-09-13 — commit a744b51)
       4. Verificar producción (Vercel) sin 404s.
       5. Actualizar README y este plan; pasar a otro repositorio (meta final).
 - [ ] **Criterio:** todo verde + aprobación visual en local + producción OK.
@@ -253,6 +253,14 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 ---
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
+
+### SESIÓN 2026-09-13j (MERGE A MAIN + PUSH — Sesiones 6, 7 y 8 en producción)
+1. Marcelo aprobó visualmente en localhost:3000 (Sesión 8) y pidió el merge.
+2. `main` estaba atrás 18 commits y sin divergir → merge `--no-ff` de `test-cambios`
+   (commit `a744b51`, "merge: Sesiones 6-8...").
+3. Push a `origin/main` OK (`e513f33..a744b51`). Vercel debe desplegar producción.
+4. PENDIENTE: validar en producción (Vercel) — rutas SEO (`/sitemap.xml`, `/robots.txt`,
+   `/manifest.webmanifest`, `/opengraph-image`) y sin 404s.
 
 ### SESIÓN 2026-09-13i (UPGRADE DE DISEÑO — Hero + frontend general, con Marcelo)
 1. `components/Hero.tsx`:
