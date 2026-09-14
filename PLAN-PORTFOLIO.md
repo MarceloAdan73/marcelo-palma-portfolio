@@ -189,9 +189,11 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
   (2026-09-13 — completado: tests 18/18, build OK, lint solo errores preexistentes)
 
 ### Sesión 6 — Pulido final (QA) y cierre
-- [ ] **Objetivo:** calidad y cierre del ciclo.
+- [x] **Objetivo:** calidad y cierre del ciclo. (2026-09-13)
 - [ ] **Pasos:**
       1. `pnpm lint`, `pnpm test`, `pnpm build`, Lighthouse, a11y.
+         (lint/test/build/a11y completados 2026-09-13: ver bitácora 2026-09-13g.
+         Lighthouse real en browser y demo 30s: quedan como pasos manuales para Marcelo.)
       2. (Opcional) demo 30s (gif) para proyectos clave.
       3. Merge de `test-cambios` a main con aprobación de Marcelo.
       4. Verificar producción (Vercel) sin 404s.
@@ -219,6 +221,26 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
 ---
 
 ## BITÁCORA DE SESIONES (las entradas nuevas van al PRINCIPIO)
+
+### SESIÓN 2026-09-13g (QA — SESIÓN 6 PARCIALMENTE COMPLETADA: lint/test/build/a11y/README)
+1. README.md actualizado: badges (Projects 10 Live, Case Studies 6 Detail Pages), features
+   (case studies, engineering/evolution, performance), estructura de carpetas
+   (`app/projects/[slug]`, `ProjectDetail.tsx`, `next.config.ts`), tabla de schema ampliada
+   (slug, showcase, problem/solution/result, highlights, architectureImage, metrics) y
+   versiones reales (Next 16.x, TS 5.x, Tailwind 4.x, Framer 12.x, Sanity 6.x, Jest 30.x, ESLint 9.x, pnpm 9+).
+2. QA a11y real con jest-axe: nuevo `context/__tests__/Accessibility.test.tsx` valida
+   About (método + ingeniería + evolución), Header y Projects → 0 violaciones axe.
+3. Fix de infraestructura de tests en `jest.setup.js`: se eliminaron los mocks duplicados
+   (había dos `jest.mock` para react-icons/si|md|tb; el segundo devolvía strings y rompía
+   react-icons → iconos `undefined`). Ahora react-icons usa un Proxy (`mockIcons`) que
+   resuelve CUALQUIER ícono a `<svg aria-hidden>` (mismo comportamiento que react-icons real),
+   y framer-motion usa un Proxy (`motion`) que crea cualquier tag (`motion.div`, `motion.circle`,
+   `motion.h2`, ...). Esto también redujo errores de lint de 23 → 12.
+4. Verificación final: tests 21/21 OK (18 existentes + 3 a11y nuevos), build OK
+   (9 rutas SSG con revalidate 1h), lint sin regresiones (12 errores preexistentes
+   en estáticos/`.setup`/README-docs + 52 warnings; los 23 errores del baseline bajaron a 12).
+5. Pendientes para Marcelo (manuales): Lighthouse en browser, demo 30s opcional,
+   aprobación visual local, merge `test-cambios` → main, verificar Vercel sin 404s.
 
 ### SESIÓN 2026-09-13f (con Marcelo — SESIÓN 5 COMPLETADA: Ingeniería + Evolución)
 1. `context/AppContext.tsx`: traducciones nuevas para sección "Ingeniería" (stack real: Frontend/Backend/Calidad) y "Evolución" (v1→v2→v3 de Task Manager Pro) en ES/EN.
