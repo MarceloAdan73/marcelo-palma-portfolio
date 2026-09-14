@@ -201,7 +201,7 @@ const Hero: React.FC<{ projectCount?: number }> = ({ projectCount = 15 }) => {
     <section 
       id="hero" 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-12 lg:pt-24 lg:pb-16"
     >
       {/* Fondo con gradiente dinámico y partículas */}
       <div className="absolute inset-0 -z-10">
