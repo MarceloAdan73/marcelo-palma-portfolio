@@ -214,6 +214,24 @@ Forks (NO van): llm_bridge (SantanderAI), agenta (Agenta-AI). Privado (NO va): n
          /sitemap.xml, /robots.txt, /manifest.webmanifest, /icon, /apple-icon, /opengraph-image).
 - [x] **Criterio:** rutas SEO presentes en build. (2026-09-13 — falta validar en producción Vercel)
 
+### Sesión 8 — Upgrade de diseño (Hero + frontend general + responsive) [con Marcelo]
+- [x] **Objetivo:** Hero con más impacto visual y layout que entre perfecto en desktop y mobile. (2026-09-13)
+- [x] **Pasos:**
+      1. `Hero.tsx`: rol rotativo bilingüe, terminal mockup, aurora animada (3 blobs + mouse),
+         spotlight radial en la foto, botones magnéticos y stats con contador animado estable
+         (`Counter` a nivel de módulo: antes se re-montaba en cada mousemove).
+      2. `globals.css`: `scroll-margin-top` para anclas bajo el header fijo, `:focus-visible`
+         visible y `::selection` con color de marca.
+      3. Layout desktop (feedback de Marcelo): terminal como BARRA de UNA línea a lo ancho,
+         columnas balanceadas, hero con `pt-20/24` para despegarlo del header y padding inferior
+         para que la terminal no toque el indicador de Scroll.
+      4. Responsive mobile (feedback de Marcelo): barra-terminal con `nowrap+truncate`
+         (nunca cortada), y Evolución (About) con timeline VERTICAL en móvil (horizontal en md+).
+- [x] **Criterio:** aprobado por Marcelo en localhost:3000 (ES/EN, dark, desktop y mobile).
+      Tests 21/21, build OK, lint sin errores nuevos (9 preexistentes).
+      Commits en `test-cambios`: `8bcba4c`, `8af50f8`, `ffbf0e7`, `fed5d53`, `0247031`,
+      `2b7c9c7`, `7464608`.
+
 ---
 
 ## REGLAS DE TRABAJO
